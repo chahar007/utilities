@@ -1,0 +1,108 @@
+.compression {
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .imageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  /* Original Image Styling */
+  .originalImage {
+    max-width: 250px;
+    border: 2px solid #ccc; /* Light border for original image */
+    border-radius: 8px;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .originalImage:hover {
+    transform: scale(1.03);
+  }
+
+  /* Compressed Image Styling */
+  .compressedImage {
+    max-width: 250px;
+    border: 2px solid #28a745; /* Green border for compressed image */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Soft shadow to make it pop */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .compressedImage:hover {
+    transform: scale(1.03);
+  }
+
+  .imageDetails {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  .imageDetails p {
+    margin: 5px 0;
+  }
+
+  .imageDetails strong {
+    font-weight: 600;
+    color: #28a745; /* Green color for labels */
+  }
+
+  .compressionControls {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .uploadButton,
+  .downloadButton {
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #28a745;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, color 0.3s, border-color 0.3s;
+    margin: 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .uploadButton:hover,
+  .downloadButton:hover {
+    background-color: #28a745;
+    color: white;
+    border-color: #218838;
+    transform: scale(1.05);
+  }
+
+  .compressionInfo {
+    margin-top: 20px;
+    color: #ccc;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .errorMessage {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+
+  .noFileMessage {
+    color: #999;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+}

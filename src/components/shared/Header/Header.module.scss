@@ -1,0 +1,53 @@
+/* src/components/Header.module.scss */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #202020; /* Dark background for better integration with the rest of the theme */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Softer shadow for a smoother look */
+  border-bottom: 1px solid #525050;
+  height: 100%;
+  width: 100%;
+  // border-radius: 10px; /* Rounded corners for modern look */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #fff; /* White color for logo */
+  font-weight: bold;
+}
+
+.logo i {
+  margin-right: 10px;
+  color: #ff0044; /* Accent color for the logo icon */
+}
+
+nav a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #d1d1d1; /* Light text color for inactive links */
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff6a00; /* Orange hover effect for links */
+}
+
+nav .active {
+  color: #ff0044; /* Red color for active tab */
+  border-bottom: 2px solid #ff0044; /* Red underline for active tab */
+  padding-bottom: 5px; /* Slight padding to add space under active tab */
+}
+
+nav a:hover {
+  // background-color: rgba(255, 255, 255, 0.1); /* Slight background change on hover for better contrast */
+  border-radius: 5px; /* Rounded corners on hover */
+}
+
