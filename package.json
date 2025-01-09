@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "PORT=4200 react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build .env.development.local",
+    "build:prod": "react-scripts build .env.production.local",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
