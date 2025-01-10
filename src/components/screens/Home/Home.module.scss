@@ -38,7 +38,7 @@
 .tab {
   background: transparent;
   border: none;
-  color: #b1b1b1; /* Softer gray for inactive state, easy on the eyes */
+  color: #fff; /* Softer gray for inactive state, easy on the eyes */
   font-size: 16px;
   padding: 10px 20px;
   border-radius: 8px;
@@ -75,7 +75,7 @@
 }
 
 .tab.active::after {
-  background-color: #ff0044; /* Soft orange underline for active tab */
+  background-color: #f25c05; /* Soft orange underline for active tab */
 }
 
 .tab:hover::after {
