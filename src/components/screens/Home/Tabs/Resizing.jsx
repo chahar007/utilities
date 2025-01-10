@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './styles/Resizing.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
 import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
+import { ResizingHelment } from '../seo/TabsHelment';
 
 const Resizing = () => {
   const [error, setError] = useState(null);
@@ -116,6 +117,9 @@ const Resizing = () => {
 
   return (
     <div className={styles.resizing}>
+
+   
+      <ResizingHelment />
 
       <UploadFileHandling onFileUpload={handleFileUpload} />
 

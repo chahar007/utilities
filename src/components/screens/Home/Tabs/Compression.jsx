@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './styles/Compression.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
 import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
+import { CompressionHelmet } from '../seo/TabsHelment';
 
 const Compression = () => {
   const [error, setError] = useState(null);
@@ -87,108 +88,56 @@ const Compression = () => {
   };
 
   return (
-    // <div className={styles.compression}>
-
-    //   {/* Error Message */}
-    //   {error && <div className={styles.errorMessage}>{error}</div>}
-
-    //   {/* File Upload Component */}
-    //   <UploadFileHandling onFileUpload={handleFileUpload} />
-
-    //   {/* No File Uploaded */}
-    //   {!previewUrl && <div className={styles.noFileMessage}>No image uploaded yet. Please upload an image to compress.</div>}
-
-    //   <div className={styles.imageContainer}>
-    //     {/* Original Image Section */}
-    //     {previewUrl && (
-    //       <div>
-    //         <img src={previewUrl} alt="Original" />
-    //         <div className={styles.imageDetails}>
-    //           <p><strong>Name:</strong> {imageDetails.name}</p>
-    //           <p><strong>Dimensions:</strong> {imageDetails.dimensions}</p>
-    //           <p><strong>Size:</strong> {originalSize} KB</p>
-    //         </div>
-    //       </div>
-    //     )}
-
-    //     {/* Compressed Image Section */}
-    //     {compressedPreviewUrl && (
-    //       <div>
-    //         <img src={compressedPreviewUrl} alt="Compressed" />
-    //         <div className={styles.imageDetails}>
-    //           <p><strong>Size:</strong> {compressedSize} KB</p>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </div>
-
-    //   {/* Compression Info */}
-    //   {compressedPreviewUrl && (
-    //     <div className={styles.compressionInfo}>
-    //       <p>Compression Successful!</p>
-    //       <p>Original Size: {originalSize} KB</p>
-    //       <p>Compressed Size: {compressedSize} KB</p>
-    //     </div>
-    //   )}
-
-    //   {/* Compression Controls */}
-    //   <div className={styles.compressionControls}>
-    //     <button onClick={handleCompression} className={styles.uploadButton}>
-    //       Compress Image
-    //     </button>
-    //     {compressedPreviewUrl && (
-    //       <button onClick={handleDownloadCompressedImage} className={styles.downloadButton}>
-    //         Download Compressed Image
-    //       </button>
-    //     )}
-    //   </div>
-    // </div>
-
+  
     <div className={styles.compression}>
 
-  {/* Error Message */}
-  {error && <div className={styles.errorMessage}>{error}</div>}
+    
+    <CompressionHelmet />
+      
 
-  {/* File Upload Component */}
-  <UploadFileHandling onFileUpload={handleFileUpload} />
+      {/* File Upload Component */}
+      <UploadFileHandling onFileUpload={handleFileUpload} />
 
-  {/* No File Uploaded */}
-  {!previewUrl && <div className={styles.noFileMessage}>No image uploaded yet. Please upload an image to compress.</div>}
+      {/* No File Uploaded */}
+      {!previewUrl && <div className={styles.noFileMessage}>No image uploaded yet. Please upload an image to compress.</div>}
 
-  <div className={styles.imageContainer}>
-    {/* Original Image Section */}
-    {previewUrl && (
-      <div className={styles.originalImage}>
-        <img src={previewUrl} alt="Original" />
-        <div className={styles.imageDetails}>
-          <p><strong>Original Size:</strong> {originalSize} KB</p>
-        </div>
+      <div className={styles.imageContainer}>
+        {/* Original Image Section */}
+        {previewUrl && (
+          <div className={styles.originalImage}>
+            <img src={previewUrl} alt="Original" />
+            <div className={styles.imageDetails}>
+              <p><strong>Original Size:</strong> {originalSize} KB</p>
+            </div>
+          </div>
+        )}
+
+        {/* Compressed Image Section */}
+        {compressedPreviewUrl && (
+          <div className={styles.compressedImage}>
+            <img src={compressedPreviewUrl} alt="Compressed" />
+            <div className={styles.imageDetails}>
+              <p><strong>Compressed Size:</strong> {compressedSize} KB</p>
+            </div>
+          </div>
+        )}
       </div>
-    )}
 
-    {/* Compressed Image Section */}
-    {compressedPreviewUrl && (
-      <div className={styles.compressedImage}>
-        <img src={compressedPreviewUrl} alt="Compressed" />
-        <div className={styles.imageDetails}>
-          <p><strong>Compressed Size:</strong> {compressedSize} KB</p>
-        </div>
+      {/* Error Message */}
+      {error && <div className={styles.errorMessage}>{error}</div>}
+
+      {/* Compression Controls */}
+      <div className={styles.compressionControls}>
+        <button onClick={handleCompression} className={styles.uploadButton}>
+          Compress Image
+        </button>
+        {compressedPreviewUrl && (
+          <button onClick={handleDownloadCompressedImage} className={styles.downloadButton}>
+            Download Compressed Image
+          </button>
+        )}
       </div>
-    )}
-  </div>
-
-  {/* Compression Controls */}
-  <div className={styles.compressionControls}>
-    <button onClick={handleCompression} className={styles.uploadButton}>
-      Compress Image
-    </button>
-    {compressedPreviewUrl && (
-      <button onClick={handleDownloadCompressedImage} className={styles.downloadButton}>
-        Download Compressed Image
-      </button>
-    )}
-  </div>
-</div>
+    </div>
 
   );
 };

@@ -1,0 +1,4 @@
+https://utilities-vpc2.onrender.com
+https://utilities-vpc2.onrender.com/imageResizer
+https://utilities-vpc2.onrender.com/imageCompression
+https://utilities-vpc2.onrender.com/imageOptimisation

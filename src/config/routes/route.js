@@ -3,10 +3,20 @@ import pages from '../../components/screens';
 import React, { Children } from 'react';
 import './route.scss';
 import AuthProvider, { useAuth } from '../utils/AuthProvider';
-import Header  from '../../components/shared/Header/Header';
+import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
 const AUTH_ROUTES = [
     { path: '/', component: pages.Home },
+    {
+        path: '/imageOptimisation', component: pages.Home
+    },
+    {
+        path: '/imageCompression', component: pages.Home
+    },
+    {
+        path: '/imageResizer', component: pages.Home
+    },
+
     { path: '/main', component: pages.Main }
 ];
 

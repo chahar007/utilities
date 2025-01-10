@@ -1,11 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import Conversion from './Tabs/Conversion';
 import Compression from './Tabs/Compression';
 import Resizing from './Tabs/Resizing';
+import HomeHelmet from './seo/HomeHelmet';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('conversion');
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // if(location)
+    let path = location.pathname.split('/')[1];
+    console.log('location', location, path)
+    if(path) {
+      if(path == 'imageResizer') {
+        setActiveTab('resizing')
+      } else if(path == 'imageCompression') {
+        setActiveTab('compression')
+      } else {
+        setActiveTab('conversion')
+
+      }
+    }
+  }, [location])
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -21,7 +41,11 @@ const Home = () => {
   };
 
   return (
+    
     <div className={styles.home}>
+   
+    <HomeHelmet />
+
       <main className={styles.main}>
         <div className={styles.tabContainer}>
           {['conversion', 'compression', 'resizing'].map((tab) => (

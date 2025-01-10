@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles/Conversion.module.scss";
 import UploadFileHandling from "../components/UploadFileHandling";
+import { ConversionHelmet } from "../seo/TabsHelment";
 
 const Conversion = () => {
   const [selectedFormat, setSelectedFormat] = useState("jpg");
@@ -131,7 +132,9 @@ const Conversion = () => {
 
   return (
     <div className={styles.conversion}>
-      {error && <div className={styles.errorMessage}>{error}</div>}
+
+     <ConversionHelmet />
+
 
       <UploadFileHandling onFileUpload={handleFileUpload} />
 
@@ -192,6 +195,9 @@ const Conversion = () => {
           />
         </div>
       </div>
+
+      {error && <div className={styles.errorMessage}>{error}</div>}
+
 
       <button className={styles.downloadButton} onClick={handleDownload}>
         Convert & Download

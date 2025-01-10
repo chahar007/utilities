@@ -48,10 +48,10 @@
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: capitalize;
+  background: linear-gradient(135deg, #444, #666); /* Subtle gradient for active state, matches dark theme */
 }
 
 .tab.active {
-  background: linear-gradient(135deg, #444, #666); /* Subtle gradient for active state, matches dark theme */
   color: #fff; /* White text for active tab */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for active tab */
   transform: scale(1.05);
