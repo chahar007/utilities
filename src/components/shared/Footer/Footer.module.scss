@@ -1,45 +1,64 @@
-// src/components/Footer.module.scss
+/* src/components/Footer.module.scss */
 .footerStrip {
-    background-color: #202020;
-    color: #fff;
-    padding: 10px 0;
-    height: 100%;
-    width: 100%;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .footerContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-    font-weight: bold;
-  }
-  
-  .footerContent p {
-    margin: 0;
-  }
-  
-  .socialIcons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .socialLink {
-    color: #aaa;
-    text-decoration: none;
-  }
-  
-  .socialLink:hover {
-    color: #fff;
-  }
-  
-  .socialLink i {
-    font-size: 16px;
-  }
-  
+  background-color: #111;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 0.75rem; /* Smaller text size */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 2px 5px;
+  height: 100%;
+  overflow-y: auto; /* Make the footer content scrollable if it exceeds height */
+}
+
+.footerContent section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 15px;
+  width: 30%; /* Ensure sections are compact */
+}
+
+.footerContent h2 {
+  font-size: 0.85rem; /* Smaller heading size */
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.footerContent ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerContent li {
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+.footerContent a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.75rem; /* Smaller link size */
+}
+
+.footerContent a:hover {
+  text-decoration: underline;
+}
+
+.footerContent p {
+  font-size: 0.75rem; /* Smaller paragraph text */
+  color: #ccc;
+  margin-bottom: 5px;
+}

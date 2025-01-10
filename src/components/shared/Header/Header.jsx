@@ -22,7 +22,7 @@ const Header = () => {
       </div>
       <nav>
         <a className={activeTab === 'conversion' ? styles.active : ''} onClick={handleNavigation('imageOptmization')}>Image Optimization</a>
-        <a href="#">Help</a>
+        <a>Help</a>
       </nav>
     </header>
   );
