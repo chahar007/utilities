@@ -1,189 +1,73 @@
-// src/components/Home.module.scss
+@import 'src/assets/styles/helpers/mixins.scss';
+
 .home {
-  font-family: Arial, sans-serif;
-  color: #fff;
-  height: 100%;
+  background-color: #121212; // Dark background
+  color: #ffffff; // Light text color
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
   width: 100%;
-  background-color: #181818; /* Dark theme background */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  margin: 0 auto;
-  text-align: center;
-  background-color: #202020; /* Dark background for the content */
-  width: 80%; /* Reduced width for better integration with surrounding space */
-  padding: 20px;
-  border-radius: 10px;
-  overflow-y: auto;
   height: 100%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Soft shadow to blend with dark theme */
-}
-
-
-.tabContainer {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  padding: 10px 0;
-  border-radius: 12px;
-  background: #2a2a2a; /* Slightly lighter dark background to match dark theme */
-  position: relative;
-  z-index: 1;
-  margin-bottom: 30px; /* Extra space below the tabs for a cleaner look */
-}
-
-.tab {
-  background: transparent;
-  border: none;
-  color: #fff; /* Softer gray for inactive state, easy on the eyes */
-  font-size: 16px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  background: linear-gradient(135deg, #444, #666); /* Subtle gradient for active state, matches dark theme */
-}
-
-.tab.active {
-  color: #fff; /* White text for active tab */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for active tab */
-  transform: scale(1.05);
-}
-
-.tab:hover {
-  color: #fff;
-  background-color: #3a3a3a; /* Darker background for hover, fits with dark theme */
-  transform: scale(1.03);
-}
-
-.tab::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background-color: transparent;
-  transition: all 0.3s ease;
-}
-
-.tab.active::after {
-  background-color: #f25c05; /* Soft orange underline for active tab */
-}
-
-.tab:hover::after {
-  background-color: #ff6a00; /* Orange underline on hover */
-}
-
-.tabContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay for depth */
-  border-radius: 12px;
-  z-index: -1;
-}
-
-.previewContainer {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.previewImage {
-  max-width: 100%;
-  height: 300px;  // Fixed height
-  object-fit: contain;  // Ensures the image maintains aspect ratio and doesn't stretch
-  border-radius: 10px;
-  margin-bottom: 10px;  // Space between image and image name
-}
-
-.imageName {
-  color: #ccc;
-}
-
-.convertSection {
-  margin: 20px 0;
-  text-align: center;
-  display: flex;
-  justify-content: center ;
-  .selectBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    select {
-      width: 100px;
-      margin-top: 7px;
+  .homePageWrapper {
+    width: 100%;
+    height: 100%;
+    .topSection {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 40px;
+      height: 45vh;
+      .homeCaousel {
+        width: calc(80% - 1rem);
+        height: 100%;
+      }
+  
+      .topPics {
+        width: calc(20% - 1rem);
+        height: 100%;
+      }
+      
     }
-
-
+  
+    .featuredSections {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+  
+      .row {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+  
+        .rowTitle {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: #f5f5f5;
+        }
+  
+        .cardContainer {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
+  
+          .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+            &:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            }
+          }
+        }
+      }
+    }
   }
-}
-
-select {
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: #333;
-  color: #fff;
-  font-size: 14px;
-  border: 1px solid #444;
-  width: 100%;
-}
-
-.downloadButton {
-  background-color: #44c767;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.downloadButton:hover {
-  background-color: #3b9e57;
-}
-
-@media (max-width: 768px) {
-  .tabContainer {
-    flex-direction: column;
-  }
-
-  .tab {
-    margin: 10px 0;
-  }
-
-  .main {
-    padding: 15px;
-  }
-
-  .previewImage {
-    height: 200px;  // Adjust height for smaller screens
-  }
-}
-
-@media (max-width: 480px) {
-  .previewImage {
-    height: 150px;  // Further reduce height for very small screens
-  }
-
-  select {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .downloadButton {
-    width: 100%;
-  }
+ 
 }

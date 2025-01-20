@@ -9,19 +9,19 @@ const Header = () => {
   const navigate = useNavigate();
 
 
-  const handleNavigation= () => {
-    navigate('/imageOptimisation');
+  const handleNavigation= (slug='/') => {
+    navigate(slug);
   }
 
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
+      <div className={styles.logo} >
         <i className="fas fa-image"></i>
-        <span>Image Utility Tool</span>
+        <span onClick={() => handleNavigation('/')} >Gamers Zone</span>
       </div>
       <nav>
-        <a className={activeTab === 'conversion' ? styles.active : ''} onClick={handleNavigation('imageOptmization')}>Image Optimization</a>
+        <a onClick={() => handleNavigation('/about-us')} >About Us</a>
         <a>Help</a>
       </nav>
     </header>

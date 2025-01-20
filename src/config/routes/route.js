@@ -1,23 +1,16 @@
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import pages from '../../components/screens';
-import React, { Children } from 'react';
+import React, { Children, Suspense } from 'react';
 import './route.scss';
 import AuthProvider, { useAuth } from '../utils/AuthProvider';
 import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+
 const AUTH_ROUTES = [
     { path: '/', component: pages.Home },
-    {
-        path: '/imageOptimisation', component: pages.Home
-    },
-    {
-        path: '/imageCompression', component: pages.Home
-    },
-    {
-        path: '/imageResizer', component: pages.Home
-    },
 
-    { path: '/main', component: pages.Main }
+    { path: 'game-detail', component: pages.DetailedScreen },
+    { path: 'about-us', component: pages.AboutUs }
 ];
 
 const WITHOUT_AUTH_ROUTES = [

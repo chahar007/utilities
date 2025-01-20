@@ -18,6 +18,9 @@
   font-size: 20px;
   color: #fff; /* White color for logo */
   font-weight: bold;
+  span {
+    pointer-events: pointer;
+  }
 }
 
 .logo i {
