@@ -68,7 +68,7 @@ const DetailedScreen = () => {
   return (
     <div className={styles.detailedScreen}>
 
-      <GameHubHelmet  game={game} />
+      <GameHubHelmet  game={game} slug={slug} />
       {(game?.description || game?.title) && (
         <>
           <Header />

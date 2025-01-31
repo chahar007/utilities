@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet";
 
-const GameHubHelmet = ({ game }) => {
+const GameHubHelmet = ({ game, slug }) => {
   const gameTitle = game?.title || "Game Hub - The Ultimate Gaming Destination";
   const gameDescription = game?.description || "Game Hub offers the latest gaming news, trailers, reviews, and system requirements for your favorite games. Join our gaming community now!";
   const gameSlug = game?.slug || "game-hub";
   const gameBannerImage = game?.bannerImage || "default-banner-image.jpg"; // Default image if not available
-  const currentUrl = `${window.location.origin}/games/${gameSlug}`;
+  const currentUrl = `${window.location.origin}/game-detail/${slug}`;
 
   return (
     <Helmet>
