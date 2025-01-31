@@ -5,7 +5,7 @@ const GameHubHelmet = ({ game, slug }) => {
   const gameDescription = game?.description || "Game Hub offers the latest gaming news, trailers, reviews, and system requirements for your favorite games. Join our gaming community now!";
   const gameSlug = game?.slug || "game-hub";
   const gameBannerImage = game?.bannerImage || "default-banner-image.jpg"; // Default image if not available
-  const currentUrl = `${window.location.origin}/game-detail/${slug}`;
+  const currentUrl = slug ?  `${window.location.origin}/game-detail/${slug}` : window.location.origin;
 
   return (
     <Helmet>
