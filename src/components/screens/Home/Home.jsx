@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
-import HomeHelmet from '../seo/HomeHelmet';
+import GameHubHelmet from '../seo/GameHubHelmet';
 import { useLocation } from 'react-router-dom';
 import HomeCarousel from '../Carousel/HomeCarousel';
 import LatestNews from './components/LatestNews';
@@ -45,7 +45,7 @@ const Home = () => {
   return (
 
     <div className={styles.home}>
-      <HomeHelmet />
+      <GameHubHelmet />
 
       <div className={styles.homePageWrapper} >
         {/* Top Section with Carousel */}

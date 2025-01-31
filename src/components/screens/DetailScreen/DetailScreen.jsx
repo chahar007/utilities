@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './DetailScreen.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GAME_DETAILS } from '../../../assets/constants/app.constant';
+import GameHubHelmet from '../seo/GameHubHelmet';
 const DetailedScreen = () => {
   // Static Data for the DetailedScreen
   const [showTrailer, setShowTrailer] = React.useState(false);
@@ -69,6 +70,8 @@ const DetailedScreen = () => {
 
   return (
     <div className={styles.detailedScreen}>
+
+      <GameHubHelmet  game={game} />
       {(game?.description || game?.title) && (
         <>
           <Header />
@@ -121,7 +124,7 @@ const DetailedScreen = () => {
                 {game.relatedGames.map((relatedGame, index) => (
                   <div key={index} className={styles.relatedGameCard} onClick={() => handleGameRedirection(relatedGame?.slug)}  >
                     <img src={relatedGame.image} alt={relatedGame.title} />
-                    <p>{relatedGame.title}</p>
+                    <h4>{relatedGame.title}</h4>
                   </div>
                 ))}
               </div>
