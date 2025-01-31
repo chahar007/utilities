@@ -5,10 +5,9 @@ import { useLocation } from 'react-router-dom';
 import HomeCarousel from '../Carousel/HomeCarousel';
 import LatestNews from './components/LatestNews';
 import FeaturedCard from './components/FeaturedCard';
-import {GAME_INFO_CARDS, GAME_SUMMARY, GAMING_CATEGORY } from  '../../../assets/constants/app.constant';  
+import {GAME_SUMMARY, GAMING_CATEGORY } from  '../../../assets/constants/app.constant';  
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('conversion');
   const [cards, setCards] = useState([]);
   const location = useLocation();
 

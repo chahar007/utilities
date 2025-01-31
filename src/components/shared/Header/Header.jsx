@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Header.module.scss'; // Import the CSS for the header
 import { useNavigate } from 'react-router-dom';
 import { imageMappings } from '../../../assets/images/ImageKeyMapping';
-import { GAME_SUMMARY, GAME_INFO_CARDS } from '../../../assets/constants/app.constant';
+import { GAME_SUMMARY } from '../../../assets/constants/app.constant';
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);

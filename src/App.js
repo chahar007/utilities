@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 
 import { AppContext, APP_CONSTANTS } from "./config/utils/AppContext";
 

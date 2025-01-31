@@ -1,7 +1,7 @@
 import pages from '../../components/screens';
-import React, { Children, Suspense } from 'react';
+import React from 'react';
 import './route.scss';
-import AuthProvider, { useAuth } from '../utils/AuthProvider';
+import AuthProvider from '../utils/AuthProvider';
 import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';

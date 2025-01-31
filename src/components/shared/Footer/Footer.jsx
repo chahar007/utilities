@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import styles from './Footer.module.scss'; // Make sure this is correct
 
 const Footer = () => {
-  const navigate = useNavigate();
-  const [showFooter, setShowFooter] = useState(false);
+ 
 
-  const handleNavigation = (slug) => {
-    navigate(slug);
-  };
-
-  useEffect(() => {
-    // Additional logic if needed
-  }, []);
 
   return (
     <>

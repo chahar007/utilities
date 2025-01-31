@@ -5,16 +5,13 @@ import { GAME_DETAILS } from '../../../assets/constants/app.constant';
 import GameHubHelmet from '../seo/GameHubHelmet';
 const DetailedScreen = () => {
   // Static Data for the DetailedScreen
-  const [showTrailer, setShowTrailer] = React.useState(false);
   const [game, setGame] = useState({});
   const { slug } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     let _game = GAME_DETAILS[slug] || GAME_DETAILS['the-witcher-3-wild-hunt'];
     console.log("game", _game, slug);
     setGame(_game);
-
   }, [])
 
 

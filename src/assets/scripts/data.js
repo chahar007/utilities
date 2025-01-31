@@ -1,13 +1,4 @@
-export const HOME_PAGE_DATA = {
-  heading: 'React Js Project Base Setup'
-}
-
-
-export const IMAGE_EXTENSIONS = [
-  'png', 'jpg', 'webp', 'svg'
-]
-
-export const GAME_SUMMARY = [
+module.exports.GAME_SUMMARY = [
   {
     "title": "The Witcher 3: Wild Hunt",
     "slug": "the-witcher-3-wild-hunt",
@@ -566,7 +557,7 @@ export const GAME_SUMMARY = [
 ]
 
 
-export const GAME_DETAILS = {
+module.exports.GAME_DETAILS = {
   'the-witcher-3-wild-hunt': {
     title: 'The Witcher 3: Wild Hunt',
     developer: 'CD Projekt Red',
@@ -1413,6 +1404,37 @@ export const GAME_DETAILS = {
       { title: 'Stardew Valley', slug: 'stardew-valley' }
     ]
   },
+  'watch-dogs-2': {
+    title: 'Watch Dogs 2',
+    subtitle: 'A Hacker’s Open-World Adventure',
+    bannerImage: 'https://cdn.cloudflare.steamstatic.com/steam/apps/978800/header.jpg',
+    description: 'Watch Dogs 2 takes players to the vibrant city of San Francisco, where they control Marcus Holloway, a hacker with the goal of taking down a corrupt tech corporation. The game is an open-world action adventure where players can hack into various systems, drive cars, engage in combat, and interact with the world around them. Watch Dogs 2 offers a variety of missions that can be completed in multiple ways, allowing for different playstyles, including stealth, hacking, and action-packed combat. The game is also known for its satirical commentary on modern-day technology and surveillance.',
+    developer: 'Ubisoft Montreal',
+    publisher: 'Ubisoft',
+    releaseDate: 'November 15, 2016',
+    category: ['PC Games', 'PS4', 'Action Adventure'],
+    systemRequirements: {
+      minimum: [
+        'OS: Windows 7 64-bit',
+        'Processor: Intel Core i5-2400 @ 3.1 GHz or AMD FX-6300 @ 3.5 GHz',
+        'Memory: 6 GB RAM',
+        'Graphics: Nvidia GeForce GTX 660 / AMD Radeon HD 7870',
+        'Storage: 50 GB available space'
+      ],
+      recommended: [
+        'OS: Windows 10 64-bit',
+        'Processor: Intel Core i7-3770 @ 3.4 GHz or AMD Ryzen 5 1600 @ 3.2 GHz',
+        'Memory: 8 GB RAM',
+        'Graphics: Nvidia GeForce GTX 970 / AMD Radeon RX 480',
+        'Storage: 50 GB available space'
+      ]
+    },
+    relatedGames: [
+      { title: 'Assassin\'s Creed Syndicate', slug: 'assassins-creed-syndicate' },
+      { title: 'Grand Theft Auto V', slug: 'grand-theft-auto-v' },
+      { title: 'Watch Dogs: Legion', slug: 'watch-dogs-legion' }
+    ]
+  },
   'subnautica': {
     title: 'Subnautica',
     subtitle: 'A Deep Sea Exploration Adventure',
@@ -2061,37 +2083,3 @@ export const GAME_DETAILS = {
     ]
   }
 };
-
-
-
-export const GAMING_CATEGORY = [
-  "PC Games",
-  "Top Games",
-  "Strategy Games",
-  "Nintendo Switch",
-  "Simulation Games",
-  "PS4",
-  "PS5",
-  "Action Adventure",
-  "Action RPG",
-  "Competitive Games",
-  "Co-op RPG",
-  "FPS Games",
-  "Co-op Games",
-  "Open-World Games",
-  "Sandbox Games",
-  "Survival Games",
-  "Life Simulation",
-  "FPS",
-  "Multiplayer",
-  "Strategy",
-  "RTS",
-  "Simulation",
-  "Xbox One",
-  "RPG",
-  "Turn-Based Combat",
-  "MMO",
-  "Shooter",
-  "Battle Royale",
-  "Indie"
-];
