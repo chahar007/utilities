@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DetailScreen.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { GAME_DETAILS } from '../../../assets/constants/app.constant';
 import GameHubHelmet from '../seo/GameHubHelmet';
 const DetailedScreen = () => {
