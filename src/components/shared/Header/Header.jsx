@@ -40,7 +40,8 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <i className="fas fa-image"></i>
-        <span onClick={() => handleNavigation('/')}>Gamers Zone</span>
+        <img onClick={() => handleNavigation('/')} src={imageMappings.appLogo} alt="GamePlay" />
+        {/* <span onClick={() => handleNavigation('/')}>Gamers Zone</span> */}
       </div>
       <nav>
         <img

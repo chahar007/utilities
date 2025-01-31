@@ -1,0 +1,59 @@
+/* GameNews.module.scss */
+.game-news-container {
+    background-color: #121212;
+    color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .news-header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .news-item {
+    background-color: #1c1c1c;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #333;
+    }
+  }
+  
+  .news-item-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00bfff;
+    margin-bottom: 10px;
+  }
+  
+  .news-item-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+  }
+  
+  .read-more {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .news-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 30px;
+  }
+  
