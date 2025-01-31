@@ -4,12 +4,12 @@ import './route.scss';
 import AuthProvider, { useAuth } from '../utils/AuthProvider';
 import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 
 const AUTH_ROUTES = [
     { path: '/', component: pages.Home },
 
-    { path: 'game-detail', component: pages.DetailedScreen },
+    { path: 'game-detail/:slug', component: pages.DetailedScreen },
     { path: 'about-us', component: pages.AboutUs }
 ];
 
@@ -66,7 +66,7 @@ const AppRoute = () => {
                     </Route>
 
                     {/* Fallback Route */}
-                    <Route path="*" element={<pages.Home />} />
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

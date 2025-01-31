@@ -1,9 +1,9 @@
-footer {
-  /* background-color: #121212; */
+.footer {
   background-color: #202020;
   color: white;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 .footerContainer {
@@ -87,17 +87,17 @@ button:hover {
   background-color: #e64a19;
 }
 
-.social-icons {
+.socialIcons {
   display: flex;
   gap: 10px;
 }
 
-.social-icons img {
+.socialIcons img {
   width: 32px;
   height: 32px;
 }
 
-.footer-legal {
+.footerLegal {
   margin-top: 40px;
   text-align: center;
   border-top: 1px solid #333;
@@ -106,13 +106,13 @@ button:hover {
   color: #c7c7c7;
 }
 
-.footer-legal ul {
+.footerLegal ul {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
 }
 
-.footer-legal ul li {
+.footerLegal ul li {
   margin: 0;
 }
