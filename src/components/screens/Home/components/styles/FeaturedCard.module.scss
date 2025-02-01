@@ -3,7 +3,6 @@
 .topPics {
   width: 100%;
   overflow-x: auto; // Enable horizontal scrolling
-  
   h2 {
     margin: 1rem 0;
   }
@@ -16,8 +15,9 @@
     overflow-y: hidden; // Hide vertical scrollbar if any
 
     .topPicsCard {
+      position: relative;
       cursor: pointer;
-      width: 20%; // Each card takes up 20% of the container width
+      width: 20%; // Default for larger screens
       height: 350px; // Set fixed height for all cards to be the same
       background-color: #1e1e1e;
       border: 1px solid #333;
@@ -65,12 +65,55 @@
           font-weight: bold;
           color: #ff5722;
           text-decoration: none;
-
+          position: absolute;
+          bottom: 7px;
+          right: 1rem;
           &:hover {
             text-decoration: underline;
           }
         }
       }
     }
+  }
+}
+
+// Mobile responsiveness (for smaller screens)
+@media (max-width: 768px) {
+  .topPicsWrapper {
+    @include flex-container(flex-start, flex-start);
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+    
+    .topPicsCard {
+      width: 50% !important; // Each card takes up 50% width on medium-sized screens
+      height: auto; // Adjust height dynamically
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .topPicsWrapper {
+    @include flex-container(flex-start, flex-start);
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+
+    .topPicsCard {
+      width: 80% !important; // Cards take up 100% width on smaller screens
+      height: auto;
+    }
+  }
+
+  .cardTitle {
+    font-size: 1rem; // Smaller title font size for mobile
+  }
+
+  .cardDescription {
+    font-size: 0.85rem; // Smaller description font size for mobile
+  }
+
+  .readMore {
+    font-size: 0.8rem; // Smaller read more font size for mobile
   }
 }

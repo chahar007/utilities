@@ -12,6 +12,10 @@ const DetailedScreen = () => {
     let _game = GAME_DETAILS[slug] || GAME_DETAILS['the-witcher-3-wild-hunt'];
     console.log("game", _game, slug);
     setGame(_game);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0,0);
   }, [])
 
 
@@ -56,8 +60,6 @@ const DetailedScreen = () => {
       <p>{content}</p>
     </div>
   );
-
-  
 
   const handleGameRedirection = (slug) => {
     // navigate(`/game-detail/${slug}`);

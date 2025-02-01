@@ -10,11 +10,12 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const navigate = useNavigate();
-
   const handleNavigation = (slug = '/') => {
     setSearchOpen(false);
-    navigate(slug);
+    // navigate(slug);
+    let _route = window.location.origin +slug;
+    console.log("_route", _route);
+    window.open(_route, '_self');
   };
 
   const handleSearchSubmit = () => {

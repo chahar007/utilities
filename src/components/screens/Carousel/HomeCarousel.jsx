@@ -9,8 +9,10 @@ import 'swiper/css/navigation';
 
 // Import required modules
 import { Pagination, Navigation } from 'swiper/modules';
+import { useEffect, useState } from 'react';
 
 const HomeCarousel = () => {
+  const [slidesCount, setSlidesCount] = useState(2);
   const slides = [
     {
       image: 'https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg',
@@ -39,10 +41,36 @@ const HomeCarousel = () => {
     },
   ];
 
+
+  useEffect(() => {
+
+    const newWidth = window.innerWidth;
+    if(newWidth <= 768) {
+      setSlidesCount(1);
+    } else {
+      setSlidesCount(2);
+    }
+
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      if(newWidth <= 768) {
+        setSlidesCount(1);
+      } else {
+        setSlidesCount(2);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+
+  }, [])
+
   return (
     <div className={classes.carouselContainer}>
       <Swiper
-        slidesPerView={2}
+        slidesPerView={slidesCount}
         spaceBetween={30}
         loop={true}
         pagination={{

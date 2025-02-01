@@ -67,7 +67,8 @@
     background-color: #333;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-
+    width: 100%;
+    max-width: 300px;
     input {
       flex: 1;
       border: 1px solid #555;
@@ -107,7 +108,7 @@
   .searchResults {
     margin-top: 1rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     background-color: #252525;
     border-radius: 5px;
     padding: 1rem;

@@ -21,7 +21,7 @@ const FeaturedCard = ({title, cards}) => {
             <img src={item.bannerImage} alt={item.title} className={styles.cardImage} />
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>{item.title}</h3>
-              <p className={styles.cardDescription}>{item?.description?.slice(0, 100)}</p>
+              <p className={styles.cardDescription}>{item?.description?.slice(0, 100)}</p>  
               <a href={item.link} className={styles.readMore}>
                 Read More
               </a>
