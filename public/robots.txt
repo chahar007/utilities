@@ -1,3 +1,12 @@
-# https://utilities-vpc2.onrender.com/robotstxt.html
 User-agent: *
 Disallow:
+
+# Allow search engines to crawl everything
+Allow: /
+
+# Specify crawl-delay to prevent server overload (optional)
+Crawl-delay: 5
+
+
+# Add sitemap for better indexing
+Sitemap: https://gameplay.in.net/sitemap.xml
