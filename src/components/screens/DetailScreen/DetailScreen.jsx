@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DetailScreen.module.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GAME_DETAILS } from '../../../assets/constants/app.constant';
 import GameHubHelmet from '../seo/GameHubHelmet';
 const DetailedScreen = () => {
   // Static Data for the DetailedScreen
   const [game, setGame] = useState({});
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let _game = GAME_DETAILS[slug] || GAME_DETAILS['the-witcher-3-wild-hunt'];
     console.log("game", _game, slug);
     setGame(_game);
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  }, [])
+    setTimeout(() => {
+      window.scrollTo(10,0);
+    }, 200);
+  }, [slug]);
 
 
   const Header = () => (
@@ -62,9 +65,7 @@ const DetailedScreen = () => {
   );
 
   const handleGameRedirection = (slug) => {
-    // navigate(`/game-detail/${slug}`);
-    let _route = window.location.origin + '/game-detail/' +slug;
-    window.open(_route, '_self');
+    navigate(`/game-detail/${slug}`);
   }
 
   return (
