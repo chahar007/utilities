@@ -2,7 +2,7 @@ const fs = require('fs');
 
 // Configuration for the keys to collect
 const config = {
-  objectKey: 'GAME_SUMMARY', // The key of the object we want to extract
+  objectKey: 'GAME_DETAILS', // The key of the object we want to extract
   nestedKeys: ['title', 'slug', 'subtitle', 'bannerImage', 'description'], // The nested keys we want to collect from the object
   outputFile: 'collected_data.json' // Output file where we will save the collected data
 };
@@ -23,10 +23,10 @@ const collectData = (sourceFile, config) => {
     }
 
     // Collect data from the object and its nested keys
-    // const collectedData = collectAllSlugFromGames(objectToCollect);
-    const siteMapData = generateSiteMapData(objectToCollect);
+    const collectedData = collectAllSlugFromGames(objectToCollect, jsonData);
+    // const siteMapData = generateSiteMapData(objectToCollect);
 
-    console.log("collectedData game summary", siteMapData.length);
+    // console.log("collectedData game summary", siteMapData.length);
     
     // let missingSlug = findMissingRelatedGamesSlug(jsonData, collectedData);
     
@@ -39,7 +39,7 @@ const collectData = (sourceFile, config) => {
     // }
 
     // Write the collected data to the output file
-    writeData(config, siteMapData);
+    writeData(config, collectedData);
 
   } catch (parseError) {
     console.error(`Error reading the file: ${parseError}`);
@@ -58,25 +58,23 @@ const generateSiteMapData = (data)  =>{
 }
 
 
-const collectAllSlugFromGames = (objectToCollect) => {
+const collectAllSlugFromGames = (objectToCollect, jsonData) => {
   let category = new Set();
-  let data =  Object.keys(objectToCollect).map((item) => {
-    objectToCollect[item].category.forEach((item) => {
-      category.add(item);
-    })
-    return {
-      title: objectToCollect[item].title,
-      slug: item,
-      subtitle: objectToCollect[item].subtitle,
-      bannerImage: objectToCollect[item].bannerImage,
-      description: objectToCollect[item].description,
-      category: objectToCollect[item].category
-    }
+  let _slugs = new Set();
+  let allYoutubeLink = jsonData['YOUTUBE_LINK_DATA']
+  let data =  Object.keys(objectToCollect).map((item, key) => {
+    // return {
+    //   ...objectToCollect[item],
+    //   youtubeTrailerLink: allYoutubeLink[item]
+    // }
+
+    objectToCollect[item].youtubeTrailerLink = allYoutubeLink[item];
   });
 
-  category = [...category];
+  // category = [...category];
+  // _slugs = [..._slugs];
 
-  return [category,data];
+  return objectToCollect;
 }
 
 

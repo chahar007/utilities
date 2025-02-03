@@ -30,7 +30,7 @@ const DetailedScreen = () => {
   }, [slug, game]);
   
 
-  const Header = () => (
+  const GameHeader = () => (
     <div className={styles.header}>
 
       <div className={`${styles.headerImage}  ${!isMobile && styles.isDesktopView} `}>
@@ -38,7 +38,7 @@ const DetailedScreen = () => {
         <iframe
           width="100%"
           height="100%"
-          src={`${game?.youtubeTrailerLink}?rel=0&autoplay=1&mute=1`} // `rel=0` disables suggested videos
+          src={`${game?.youtubeTrailerLink.youtubeLink}?rel=0&autoplay=1&mute=1`} // `rel=0` disables suggested videos
           title={`${game.title} Trailer`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -85,7 +85,7 @@ const DetailedScreen = () => {
       <GameHubHelmet game={game} slug={slug} />
       {(game?.description || game?.title) && (
         <>
-          <Header />
+          <GameHeader />
           
           <div className={styles.mainContent}>
             {/* Game Details Card */}

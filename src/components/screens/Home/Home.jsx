@@ -37,8 +37,6 @@ const Home = () => {
         allCategoryCards.push(cardObj); // Push the card object to the result array
       }
     });
-
-    console.log(allCategoryCards); // View the final result
     setCards(allCategoryCards);
   }
 
