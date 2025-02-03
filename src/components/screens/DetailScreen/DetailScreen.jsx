@@ -28,9 +28,18 @@ const DetailedScreen = () => {
       }, 1000); 
     }
   }, [slug, game]);
+
+
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    const videoId = url.split("v=")[1]?.split("&")[0]; // Extract video ID
+    return `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1`;
+  };
+  
   
 
   const GameHeader = () => (
+    
     <div className={styles.header}>
 
       <div className={`${styles.headerImage}  ${!isMobile && styles.isDesktopView} `}>
@@ -38,7 +47,7 @@ const DetailedScreen = () => {
         <iframe
           width="100%"
           height="100%"
-          src={`${game?.youtubeTrailerLink.youtubeLink}?rel=0&autoplay=1&mute=1`} // `rel=0` disables suggested videos
+          src={getEmbedUrl(game?.youtubeTrailerLink.youtubeLink)} // `rel=0` disables suggested videos
           title={`${game.title} Trailer`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
