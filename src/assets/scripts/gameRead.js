@@ -23,7 +23,7 @@ const collectData = (sourceFile, config) => {
     }
 
     // Collect data from the object and its nested keys
-    const collectedData = collectAllSlugFromGames(objectToCollect, jsonData);
+    const collectedData = findMissingBannerInRealtedGames(jsonData);
     // const siteMapData = generateSiteMapData(objectToCollect);
 
     // console.log("collectedData game summary", siteMapData.length);
@@ -45,6 +45,19 @@ const collectData = (sourceFile, config) => {
     console.error(`Error reading the file: ${parseError}`);
   }
 };
+
+const findMissingBannerInRealtedGames = (jsonData) => {
+  let allGamesDetails = jsonData['GAME_DETAILS']
+
+  Object.keys(allGamesDetails).forEach((item, key) => {
+    allGamesDetails[item]?.relatedGames.forEach((item2) => {
+      if(!item2.image) {
+        item2.image = allGamesDetails[item].bannerImage;
+      }
+     }) 
+  });
+  return allGamesDetails;
+}
 
 
 const generateSiteMapData = (data)  =>{ 

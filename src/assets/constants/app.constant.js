@@ -1075,15 +1075,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Civilization VI",
-        "slug": "civilization-vi"
+        "slug": "civilization-vi",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1466860/header.jpg"
       },
       {
         "title": "Stellaris",
-        "slug": "stellaris"
+        "slug": "stellaris",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1466860/header.jpg"
       },
       {
         "title": "Age of Empires II: Definitive Edition",
-        "slug": "age-of-empires-ii-definitive-edition"
+        "slug": "age-of-empires-ii-definitive-edition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1466860/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1111,15 +1114,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Stardew Valley",
-        "slug": "stardew-valley"
+        "slug": "stardew-valley",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1693850/header.jpg"
       },
       {
         "title": "My Time at Portia",
-        "slug": "my-time-at-portia"
+        "slug": "my-time-at-portia",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1693850/header.jpg"
       },
       {
         "title": "The Sims 4",
-        "slug": "the-sims-4"
+        "slug": "the-sims-4",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1693850/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1159,15 +1165,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Red Dead Redemption 2",
-        "slug": "red-dead-redemption-2"
+        "slug": "red-dead-redemption-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
       },
       {
         "title": "Assassin's Creed Valhalla",
-        "slug": "assassins-creed-valhalla"
+        "slug": "assassins-creed-valhalla",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
       },
       {
         "title": "Far Cry 5",
-        "slug": "far-cry-5"
+        "slug": "far-cry-5",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1195,15 +1204,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Elden Ring",
-        "slug": "elden-ring"
+        "slug": "elden-ring",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/349280/header.jpg"
       },
       {
         "title": "Dark Souls III",
-        "slug": "dark-souls-iii"
+        "slug": "dark-souls-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/349280/header.jpg"
       },
       {
         "title": "Sekiro: Shadows Die Twice",
-        "slug": "sekiro-shadows-die-twice"
+        "slug": "sekiro-shadows-die-twice",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/349280/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1241,15 +1253,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Civilization VI",
-        "slug": "civilization-vi"
+        "slug": "civilization-vi",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/8930/header.jpg"
       },
       {
         "title": "Stellaris",
-        "slug": "stellaris"
+        "slug": "stellaris",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/8930/header.jpg"
       },
       {
         "title": "Total War: Rome II",
-        "slug": "total-war-rome-ii"
+        "slug": "total-war-rome-ii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/8930/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1280,15 +1295,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Valorant",
-        "slug": "valorant"
+        "slug": "valorant",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
       },
       {
         "title": "Rainbow Six Siege",
-        "slug": "rainbow-six-siege"
+        "slug": "rainbow-six-siege",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
       },
       {
         "title": "Overwatch",
-        "slug": "overwatch"
+        "slug": "overwatch",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1327,15 +1345,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Elden Ring",
-        "slug": "elden-ring"
+        "slug": "elden-ring",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg"
       },
       {
         "title": "Bloodborne",
-        "slug": "bloodborne"
+        "slug": "bloodborne",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg"
       },
       {
         "title": "Sekiro: Shadows Die Twice",
-        "slug": "sekiro-shadows-die-twice"
+        "slug": "sekiro-shadows-die-twice",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1373,15 +1394,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Watch Dogs 2",
-        "slug": "watch-dogs-2"
+        "slug": "watch-dogs-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/337000/header.jpg"
       },
       {
         "title": "Cyberpunk 2077",
-        "slug": "cyberpunk-2077"
+        "slug": "cyberpunk-2077",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/337000/header.jpg"
       },
       {
         "title": "Assassin's Creed Syndicate",
-        "slug": "assassins-creed-syndicate"
+        "slug": "assassins-creed-syndicate",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/337000/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1420,15 +1444,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Pillars of Eternity II: Deadfire",
-        "slug": "pillars-of-eternity-ii-deadfire"
+        "slug": "pillars-of-eternity-ii-deadfire",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/435150/header.jpg"
       },
       {
         "title": "Baldur's Gate III",
-        "slug": "baldurs-gate-iii"
+        "slug": "baldurs-gate-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/435150/header.jpg"
       },
       {
         "title": "The Witcher 3: Wild Hunt",
-        "slug": "the-witcher-3-wild-hunt"
+        "slug": "the-witcher-3-wild-hunt",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/435150/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1467,15 +1494,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "The Witcher 3: Wild Hunt",
-        "slug": "the-witcher-3-wild-hunt"
+        "slug": "the-witcher-3-wild-hunt",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222690/header.jpg"
       },
       {
         "title": "Skyrim Special Edition",
-        "slug": "skyrim-special-edition"
+        "slug": "skyrim-special-edition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222690/header.jpg"
       },
       {
         "title": "Mass Effect: Legendary Edition",
-        "slug": "mass-effect-legendary-edition"
+        "slug": "mass-effect-legendary-edition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222690/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1514,15 +1544,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "DOOM Eternal",
-        "slug": "doom-eternal"
+        "slug": "doom-eternal",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/379720/header.jpg"
       },
       {
         "title": "Wolfenstein: Youngblood",
-        "slug": "wolfenstein-youngblood"
+        "slug": "wolfenstein-youngblood",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/379720/header.jpg"
       },
       {
         "title": "Halo: The Master Chief Collection",
-        "slug": "halo-master-chief-collection"
+        "slug": "halo-master-chief-collection",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/379720/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1561,15 +1594,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Assassin's Creed Odyssey",
-        "slug": "assassins-creed-odyssey"
+        "slug": "assassins-creed-odyssey",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/header.jpg"
       },
       {
         "title": "Red Dead Redemption 2",
-        "slug": "red-dead-redemption-2"
+        "slug": "red-dead-redemption-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/header.jpg"
       },
       {
         "title": "Watch Dogs: Legion",
-        "slug": "watch-dogs-legion"
+        "slug": "watch-dogs-legion",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1608,15 +1644,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Stardew Valley",
-        "slug": "stardew-valley"
+        "slug": "stardew-valley",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/699190/header.jpg"
       },
       {
         "title": "Animal Crossing: New Horizons",
-        "slug": "animal-crossing-new-horizons"
+        "slug": "animal-crossing-new-horizons",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/699190/header.jpg"
       },
       {
         "title": "My Time at Portia",
-        "slug": "my-time-at-portia"
+        "slug": "my-time-at-portia",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/699190/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1656,15 +1695,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Red Dead Redemption 2",
-        "slug": "red-dead-redemption-2"
+        "slug": "red-dead-redemption-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
       },
       {
         "title": "Watch Dogs: Legion",
-        "slug": "watch-dogs-legion"
+        "slug": "watch-dogs-legion",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
       },
       {
         "title": "Cyberpunk 2077",
-        "slug": "cyberpunk-2077"
+        "slug": "cyberpunk-2077",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1702,15 +1744,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "DOOM (2016)",
-        "slug": "doom-2016"
+        "slug": "doom-2016",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       },
       {
         "title": "Overwatch",
-        "slug": "overwatch"
+        "slug": "overwatch",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       },
       {
         "title": "Destiny 2",
-        "slug": "destiny-2"
+        "slug": "destiny-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1750,15 +1795,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Assassin's Creed Odyssey",
-        "slug": "assassins-creed-odyssey"
+        "slug": "assassins-creed-odyssey",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/978800/header.jpg"
       },
       {
         "title": "Red Dead Redemption 2",
-        "slug": "red-dead-redemption-2"
+        "slug": "red-dead-redemption-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/978800/header.jpg"
       },
       {
         "title": "Grand Theft Auto V",
-        "slug": "grand-theft-auto-v"
+        "slug": "grand-theft-auto-v",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/978800/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1797,15 +1845,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "DOOM Eternal",
-        "slug": "doom-eternal"
+        "slug": "doom-eternal",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1045770/header.jpg"
       },
       {
         "title": "Metro Exodus",
-        "slug": "metro-exodus"
+        "slug": "metro-exodus",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1045770/header.jpg"
       },
       {
         "title": "Call of Duty: Warzone",
-        "slug": "call-of-duty-warzone"
+        "slug": "call-of-duty-warzone",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1045770/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1844,15 +1895,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Minecraft",
-        "slug": "minecraft"
+        "slug": "minecraft",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg"
       },
       {
         "title": "Starbound",
-        "slug": "starbound"
+        "slug": "starbound",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg"
       },
       {
         "title": "Stardew Valley",
-        "slug": "stardew-valley"
+        "slug": "stardew-valley",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1891,15 +1945,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Terraria",
-        "slug": "terraria"
+        "slug": "terraria",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/header.jpg"
       },
       {
         "title": "No Man's Sky",
-        "slug": "no-mans-sky"
+        "slug": "no-mans-sky",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/header.jpg"
       },
       {
         "title": "Minecraft",
-        "slug": "minecraft"
+        "slug": "minecraft",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1939,15 +1996,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Stardew Valley",
-        "slug": "stardew-valley"
+        "slug": "stardew-valley",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/666140/header.jpg"
       },
       {
         "title": "Animal Crossing: New Horizons",
-        "slug": "animal-crossing-new-horizons"
+        "slug": "animal-crossing-new-horizons",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/666140/header.jpg"
       },
       {
         "title": "Farm Together",
-        "slug": "farm-together"
+        "slug": "farm-together",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/666140/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -1988,15 +2048,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Valorant",
-        "slug": "valorant"
+        "slug": "valorant",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/411010/header.jpg"
       },
       {
         "title": "Counter-Strike: Global Offensive",
-        "slug": "counter-strike-global-offensive"
+        "slug": "counter-strike-global-offensive",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/411010/header.jpg"
       },
       {
         "title": "Paladins",
-        "slug": "paladins"
+        "slug": "paladins",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/411010/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -2037,15 +2100,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Overwatch",
-        "slug": "overwatch"
+        "slug": "overwatch",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg"
       },
       {
         "title": "Valorant",
-        "slug": "valorant"
+        "slug": "valorant",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg"
       },
       {
         "title": "Counter-Strike: Global Offensive",
-        "slug": "counter-strike-global-offensive"
+        "slug": "counter-strike-global-offensive",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -2084,15 +2150,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Dark Souls III",
-        "slug": "dark-souls-iii"
+        "slug": "dark-souls-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg"
       },
       {
         "title": "Bloodborne",
-        "slug": "bloodborne"
+        "slug": "bloodborne",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg"
       },
       {
         "title": "Nioh",
-        "slug": "nioh"
+        "slug": "nioh",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg"
       }
     ],
     "youtubeTrailerLink": {
@@ -2134,15 +2203,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Age of Empires III: Definitive Edition",
-        "slug": "age-of-empires-iii-definitive-edition"
+        "slug": "age-of-empires-iii-definitive-edition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg"
       },
       {
         "title": "Empire Earth",
-        "slug": "empire-earth"
+        "slug": "empire-earth",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg"
       },
       {
         "title": "Civilization VI",
-        "slug": "civilization-vi"
+        "slug": "civilization-vi",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg"
       }
     ]
   },
@@ -2181,15 +2253,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "The Sims 3",
-        "slug": "the-sims-3"
+        "slug": "the-sims-3",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/header.jpg"
       },
       {
         "title": "SimCity",
-        "slug": "simcity"
+        "slug": "simcity",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/header.jpg"
       },
       {
         "title": "Stardew Valley",
-        "slug": "stardew-valley"
+        "slug": "stardew-valley",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/header.jpg"
       }
     ]
   },
@@ -2229,15 +2304,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Assassin's Creed Origins",
-        "slug": "assassins-creed-origins"
+        "slug": "assassins-creed-origins",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       },
       {
         "title": "Dark Souls III",
-        "slug": "dark-souls-iii"
+        "slug": "dark-souls-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       },
       {
         "title": "The Witcher 3: Wild Hunt",
-        "slug": "the-witcher-3-wild-hunt"
+        "slug": "the-witcher-3-wild-hunt",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg"
       }
     ]
   },
@@ -2276,15 +2354,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Total War: Shogun 2",
-        "slug": "total-war-shogun-2"
+        "slug": "total-war-shogun-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/214950/header.jpg"
       },
       {
         "title": "Empire: Total War",
-        "slug": "empire-total-war"
+        "slug": "empire-total-war",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/214950/header.jpg"
       },
       {
         "title": "Rome: Total War",
-        "slug": "rome-total-war"
+        "slug": "rome-total-war",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/214950/header.jpg"
       }
     ]
   },
@@ -2325,15 +2406,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Counter-Strike: Global Offensive",
-        "slug": "counter-strike-global-offensive"
+        "slug": "counter-strike-global-offensive",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg"
       },
       {
         "title": "Overwatch",
-        "slug": "overwatch"
+        "slug": "overwatch",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg"
       },
       {
         "title": "Valorant",
-        "slug": "valorant"
+        "slug": "valorant",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg"
       }
     ]
   },
@@ -2373,15 +2457,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Watch Dogs",
-        "slug": "watch-dogs"
+        "slug": "watch-dogs",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
       },
       {
         "title": "Grand Theft Auto V",
-        "slug": "grand-theft-auto-v"
+        "slug": "grand-theft-auto-v",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
       },
       {
         "title": "Assassin's Creed IV: Black Flag",
-        "slug": "assassins-creed-iv-black-flag"
+        "slug": "assassins-creed-iv-black-flag",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
       }
     ]
   },
@@ -2421,15 +2508,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Assassin's Creed IV: Black Flag",
-        "slug": "assassins-creed-iv-black-flag"
+        "slug": "assassins-creed-iv-black-flag",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/361310/header.jpg"
       },
       {
         "title": "Watch Dogs 2",
-        "slug": "watch-dogs-2"
+        "slug": "watch-dogs-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/361310/header.jpg"
       },
       {
         "title": "Batman: Arkham Knight",
-        "slug": "batman-arkham-knight"
+        "slug": "batman-arkham-knight",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/361310/header.jpg"
       }
     ]
   },
@@ -2467,15 +2557,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Divinity: Original Sin 2",
-        "slug": "divinity-original-sin-2"
+        "slug": "divinity-original-sin-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/560130/header.jpg"
       },
       {
         "title": "Baldur's Gate III",
-        "slug": "baldurs-gate-iii"
+        "slug": "baldurs-gate-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/560130/header.jpg"
       },
       {
         "title": "Tyranny",
-        "slug": "tyranny"
+        "slug": "tyranny",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/560130/header.jpg"
       }
     ]
   },
@@ -2514,15 +2607,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Pillars of Eternity II: Deadfire",
-        "slug": "pillars-of-eternity-ii-deadfire"
+        "slug": "pillars-of-eternity-ii-deadfire",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
       },
       {
         "title": "Divinity: Original Sin 2",
-        "slug": "divinity-original-sin-2"
+        "slug": "divinity-original-sin-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
       },
       {
         "title": "Dragon Age: Inquisition",
-        "slug": "dragon-age-inquisition"
+        "slug": "dragon-age-inquisition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
       }
     ]
   },
@@ -2562,15 +2658,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "The Witcher 3: Wild Hunt",
-        "slug": "the-witcher-3-wild-hunt"
+        "slug": "the-witcher-3-wild-hunt",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg"
       },
       {
         "title": "Dragon Age: Inquisition",
-        "slug": "dragon-age-inquisition"
+        "slug": "dragon-age-inquisition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg"
       },
       {
         "title": "Dark Souls III",
-        "slug": "dark-souls-iii"
+        "slug": "dark-souls-iii",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg"
       }
     ]
   },
@@ -2610,15 +2709,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "The Witcher 3: Wild Hunt",
-        "slug": "the-witcher-3-wild-hunt"
+        "slug": "the-witcher-3-wild-hunt",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1328670/header.jpg"
       },
       {
         "title": "Dragon Age: Inquisition",
-        "slug": "dragon-age-inquisition"
+        "slug": "dragon-age-inquisition",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1328670/header.jpg"
       },
       {
         "title": "Star Wars: Knights of the Old Republic",
-        "slug": "star-wars-knights-of-the-old-republic"
+        "slug": "star-wars-knights-of-the-old-republic",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1328670/header.jpg"
       }
     ]
   },
@@ -2657,15 +2759,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Warframe",
-        "slug": "warframe"
+        "slug": "warframe",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg"
       },
       {
         "title": "The Division 2",
-        "slug": "the-division-2"
+        "slug": "the-division-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg"
       },
       {
         "title": "Halo: The Master Chief Collection",
-        "slug": "halo-master-chief-collection"
+        "slug": "halo-master-chief-collection",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg"
       }
     ]
   },
@@ -2705,15 +2810,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Call of Duty: Modern Warfare",
-        "slug": "call-of-duty-modern-warfare"
+        "slug": "call-of-duty-modern-warfare",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/412020/header.jpg"
       },
       {
         "title": "Far Cry 5",
-        "slug": "far-cry-5"
+        "slug": "far-cry-5",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/412020/header.jpg"
       },
       {
         "title": "S.T.A.L.K.E.R. 2",
-        "slug": "stalker-2"
+        "slug": "stalker-2",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/412020/header.jpg"
       }
     ]
   },
@@ -2753,15 +2861,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Fortnite",
-        "slug": "fortnite"
+        "slug": "fortnite",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1642490/header.jpg"
       },
       {
         "title": "Apex Legends",
-        "slug": "apex-legends"
+        "slug": "apex-legends",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1642490/header.jpg"
       },
       {
         "title": "Battlefield V",
-        "slug": "battlefield-v"
+        "slug": "battlefield-v",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1642490/header.jpg"
       }
     ]
   },
@@ -2800,15 +2911,18 @@ export const GAME_DETAILS = {
     "relatedGames": [
       {
         "title": "Terraria",
-        "slug": "terraria"
+        "slug": "terraria",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/211820/header.jpg"
       },
       {
         "title": "No Man's Sky",
-        "slug": "no-mans-sky"
+        "slug": "no-mans-sky",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/211820/header.jpg"
       },
       {
         "title": "Space Engineers",
-        "slug": "space-engineers"
+        "slug": "space-engineers",
+        "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/211820/header.jpg"
       }
     ]
   }
