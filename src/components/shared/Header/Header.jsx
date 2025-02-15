@@ -52,8 +52,8 @@ const Header = () => {
           className={styles.searchIcon}
           onClick={() => setSearchOpen(true)}
         />
-        <a onClick={() => handleNavigation('/about-us')}>About Us</a>
-        <a>Help</a>
+        <a onClick={() => handleNavigation('/all-games')}>Games</a>
+        {/* <a>Help</a> */}
       </nav>
       {searchOpen && (
         <div className={styles.searchPopup}>

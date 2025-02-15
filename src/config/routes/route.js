@@ -10,7 +10,13 @@ const AUTH_ROUTES = [
     { path: '/', component: pages.Home },
 
     { path: 'game-detail/:slug', component: pages.DetailedScreen },
-    { path: 'about-us', component: pages.AboutUs }
+    { path: 'about-us', component: pages.AboutUs },
+    {
+        path: 'all-games', component:  pages.AllGamesListing,
+    },
+    {
+        path: 'games/:id', component: pages.ComingSoonGame
+    }
 ];
 
 const WITHOUT_AUTH_ROUTES = [

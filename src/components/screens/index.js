@@ -5,6 +5,8 @@ import Login from './Login/Login';
 import Fallback from './Login/Fallback';
 import DetailedScreen from './DetailScreen/DetailScreen';
 import AboutUs from './About/About';
+import AllGamesListing from './Games/GameListing';
+import ComingSoonGame from './Games/ComingSoonGame';
 
 export default {
     Main,
@@ -13,5 +15,7 @@ export default {
     Login,
     Fallback,
     DetailedScreen,
-    AboutUs
+    AboutUs,
+    AllGamesListing,
+    ComingSoonGame,
 }
