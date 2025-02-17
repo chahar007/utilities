@@ -10,6 +10,7 @@ import useIsMobile from '../../../config/hooks/useIsMobile';
 
 const Home = () => {
   const [cards, setCards] = useState([]);
+  const [slides, setSlides] = useState([]);
   const location = useLocation();
   const isMobileScreen = useIsMobile();
 
@@ -38,6 +39,7 @@ const Home = () => {
       }
     });
     setCards(allCategoryCards);
+    setSlides([...allCategoryCards[0]?.cards].slice(0, 5));
   }
 
   return (
@@ -49,7 +51,7 @@ const Home = () => {
         {/* Top Section with Carousel */}
         <section className={styles.topSection}>
           <div className={`${styles.homeCaousel}  ${isMobileScreen && styles.mobileScreen} `} >
-            <HomeCarousel />
+            <HomeCarousel slides={slides} />
           </div>
           {
             !isMobileScreen && (

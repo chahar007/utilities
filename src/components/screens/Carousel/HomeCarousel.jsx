@@ -10,37 +10,11 @@ import 'swiper/css/navigation';
 // Import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const HomeCarousel = () => {
+const HomeCarousel = ({slides}) => {
   const [slidesCount, setSlidesCount] = useState(2);
-  const slides = [
-    {
-      image: 'https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg',
-      title: 'Counter-Strike: Global Offensive',
-      description: 'Join the ultimate tactical shooter with competitive gameplay and intense action.',
-    },
-    {
-      image: 'https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg',
-      title: 'The Witcher 3: Wild Hunt',
-      description: 'Step into the shoes of Geralt of Rivia and explore a vast, breathtaking fantasy world.',
-    },
-    {
-      image: 'https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg',
-      title: 'Red Dead Redemption 2',
-      description: 'Experience life in the Wild West in this epic story of outlaws and survival.',
-    },
-    {
-      image: 'https://cdn.akamai.steamstatic.com/steam/apps/812140/header.jpg',
-      title: 'Assassin’s Creed Odyssey',
-      description: 'Forge your own epic journey through Ancient Greece as a legendary hero.',
-    },
-    {
-      image: 'https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg',
-      title: 'Grand Theft Auto V',
-      description: 'Dive into the world of crime, heists, and thrilling adventures in Los Santos.',
-    },
-  ];
-
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -67,6 +41,10 @@ const HomeCarousel = () => {
 
   }, [])
 
+  const hanldeNavigation = (slug) => {
+    navigate(`/game-detail/${slug}`);
+  }
+
   return (
     <div className={classes.carouselContainer}>
       <Swiper
@@ -81,14 +59,14 @@ const HomeCarousel = () => {
         className={classes.mySwiper}
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className={classes.slide}>
+          <SwiperSlide key={index} className={classes.slide} onClick={() => hanldeNavigation(slide?.slug)} >
             <div
               className={classes.card}
-              style={{ backgroundImage: `url(${slide.image})` }}
+              style={{ backgroundImage: `url(${slide.bannerImage})` }}
             >
               <div className={classes.overlay}>
                 <h2 className={classes.title}>{slide.title}</h2>
-                <p className={classes.description}>{slide.description}</p>
+                <p className={classes.description}>{slide.description.slice(0, 100)}...</p>
               </div>
             </div>
           </SwiperSlide>
