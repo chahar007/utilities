@@ -1,19 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Footer.module.scss'; // Import the SCSS module
+import { Helmet } from 'react-helmet';
 
 const Footer = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (slug) => {
-    console.log('slug', slug);
     // Ensure that navigate does not call setState or any state change logic that would cause a re-render
     navigate(slug);
   };
-
-  const openUrl = () => {
-    window.open('https://gameplay.in.net/');
-  }
 
   return (
     <footer className={styles.footerStrip}>
@@ -35,12 +31,35 @@ const Footer = () => {
         </section>
         <section className={styles.footerTools}>
           <h2>Our Other Tool</h2>
-          <ul>
-            <li>
-              <h3 onClick={openUrl} >GamePlay - A Gamification Hub</h3></li>
-          </ul>
+          <a href="https://gameplay.in.net/" target="_blank" rel="noopener noreferrer">
+            GameInfo and Game Hub
+          </a>
         </section>
       </div>
+
+       {/* SEO Schema Markup */}
+       <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "GameInfo & Game Hub",
+            "url": "https://gameplay.in.net/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://your-game-app.com/search?q={search_term}",
+              "query-input": "required name=search_term",
+            },
+            "description": "Find the latest game information and play mini-games online.",
+            // "sameAs": [
+            //   "https://www.facebook.com/your-game-app",
+            //   "https://twitter.com/your-game-app",
+            //   "https://www.instagram.com/your-game-app"
+            // ]
+          })}
+        </script>
+      </Helmet>
+
     </footer>
   );
 };
