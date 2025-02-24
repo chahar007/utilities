@@ -11,6 +11,10 @@ const Footer = () => {
     navigate(slug);
   };
 
+  const openUrl = () => {
+    window.open('https://gameplay.in.net/');
+  }
+
   return (
     <footer className={styles.footerStrip}>
       <div className={styles.footerContent}>
@@ -24,9 +28,16 @@ const Footer = () => {
         <section className={styles.footerTools}>
           <h2>Image Tools</h2>
           <ul>
-            <li><a>Compression</a></li>
-            <li><a>Resizing</a></li>
-            <li><a>Conversion</a></li>
+            <li><h3>Compression</h3></li>
+            <li><h3>Resizing</h3></li>
+            <li><h3>Conversion</h3></li>
+          </ul>
+        </section>
+        <section className={styles.footerTools}>
+          <h2>Our Other Tool</h2>
+          <ul>
+            <li>
+              <h3 onClick={openUrl} >GamePlay - A Gamification Hub</h3></li>
           </ul>
         </section>
       </div>
