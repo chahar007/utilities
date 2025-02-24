@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './Footer.module.scss'; // Make sure this is correct
+import { Helmet } from "react-helmet";
 
 const Footer = () => {
- 
+
+
+  const openUrl = () => {
+    window.open('', '_blank')
+  }
 
 
   return (
@@ -16,7 +21,7 @@ const Footer = () => {
             </p>
             <p>Stay connected and dive into the world of gaming with us!</p>
           </div>
-  
+
           <div className={styles.footerLinks}>
             <h3>Quick Links</h3>
             <ul>
@@ -27,23 +32,31 @@ const Footer = () => {
               <li><a href="/contact">Contact Us</a></li>
             </ul>
           </div>
-  
+
           <div className={styles.footerNewsletter}>
-            <h3>Stay Updated</h3>
-            <p>Subscribe to our newsletter for the latest gaming news and updates.</p>
-            <form>
-              <input type="email" placeholder="Enter your email" required />
-              <button type="submit">Subscribe</button>
-            </form>
+            <h3>Other Tools</h3>
+            <a href="https://utilix.pro/" target="_blank" rel="noopener noreferrer">
+              Optimize Your Images
+            </a>
           </div>
         </div>
-        {/* <div className="footer-legal">
-          <p>&copy; 2025 Game Hub. All Rights Reserved.</p>
-          <ul>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-          </ul>
-        </div> */}
+
+        {/* SEO Schema Markup */}
+        <Helmet>
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Utilix | Image Optimize Tool",
+              "url": "https://utilix.pro/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://utilix.pro/search?q={search_term}",
+                "query-input": "required name=search_term",
+              },
+            })}
+          </script>
+        </Helmet>
       </footer>
     </>
   );
