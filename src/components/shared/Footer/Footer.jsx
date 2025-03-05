@@ -24,22 +24,22 @@ const Footer = () => {
           <h2>Image Tools</h2>
           <ul>
             <li>
-              <a onClick={() => handleNavigation('/imageOptimisation')} role="button">
+              <a onClick={() => handleNavigation('/image-optimisation')} role="button">
                 Conversion
               </a>
             </li>
             <li>
-              <a onClick={() => handleNavigation('/imageCompression')} role="button">
+              <a onClick={() => handleNavigation('/image-compression')} role="button">
                 Compression
               </a>
             </li>
             <li>
-              <a onClick={() => handleNavigation('/imageResizer')} role="button">
+              <a onClick={() => handleNavigation('/image-resizer')} role="button">
                 Resizing
               </a>
             </li>
             <li>
-              <a onClick={() => handleNavigation('/imageBase64Converter')} role="button">
+              <a onClick={() => handleNavigation('/image-base64-converter')} role="button">
                 Base64 Conversion
               </a>
             </li>

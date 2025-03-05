@@ -11,7 +11,7 @@ export const CompressionHelmet = () => {
             <meta property="og:description" content="Reduce your image file size while preserving quality. Compress images online in seconds." />
             {/* <meta property="og:image" content="URL-to-compression-thumbnail.jpg" /> */}
             <meta property="og:url" content={window.location.origin} />
-            <link rel="canonical" href={window.location.origin + '/imageCompression'} />
+            <link rel="canonical" href={window.location.origin + '/image-compression'} />
         </Helmet>
 
     )
@@ -28,7 +28,7 @@ export const ConversionHelmet = () => {
             <meta property="og:description" content="Convert your images to popular formats such as JPG, PNG, and WebP online." />
             {/* <meta property="og:image" content="URL-to-conversion-thumbnail.jpg" /> */}
             <meta property="og:url" content={window.location.origin} />
-            <link rel="canonical" href={window.location.origin + '/imageOptimisation'} />
+            <link rel="canonical" href={window.location.origin + '/image-optimisation'} />
         </Helmet>
     )
 }
@@ -45,7 +45,7 @@ export const ResizingHelment = () => {
             <meta property="og:description" content="Resize images online with ease. Adjust dimensions to fit your needs while preserving quality." />
             {/* <meta property="og:image" content="URL-to-resizing-thumbnail.jpg" /> */}
             <meta property="og:url" content={window.location.origin} />
-            <link rel="canonical" href={window.location.origin+'/imageResizer'} />
+            <link rel="canonical" href={window.location.origin+'/image-resizer'} />
         </Helmet>
     )
 }
@@ -68,8 +68,8 @@ export const Base64Helmet = () => {
                 property="og:description" 
                 content="Easily convert images to Base64 format online. Perfect for embedding images in HTML, CSS, or JSON data." 
             />
-            <meta property="og:url" content={window.location.origin + '/imageBase64Converter'} />
-            <link rel="canonical" href={window.location.origin + '/imageBase64Converter'} />
+            <meta property="og:url" content={window.location.origin + '/image-resizer'} />
+            <link rel="canonical" href={window.location.origin + '/image-resizer'} />
         </Helmet>
     );
 };

@@ -17,11 +17,11 @@ const Home = () => {
     let path = location.pathname.split('/')[1];
     console.log('location', location, path)
     if(path) {
-      if(path == 'imageResizer') {
+      if(path == 'image-resizer') {
         setActiveTab('resizing')
-      } else if(path == 'imageCompression') {
+      } else if(path == 'image-compression') {
         setActiveTab('compression')
-      } else if(path == 'imageOptimisation') {
+      } else if(path == 'image-optimisation') {
         setActiveTab('conversion')
       } else {
         setActiveTab('base 64');
@@ -37,7 +37,7 @@ const Home = () => {
         return <Compression />;
       case 'resizing':
         return <Resizing />;
-      case 'base 64':
+      case 'base 64 conversion':
         return <Base64 />;
       default:
         return null;
@@ -52,7 +52,7 @@ const Home = () => {
 
       <main className={styles.main}>
         <div className={styles.tabContainer}>
-          {['conversion', 'compression', 'resizing', 'base 64'].map((tab) => (
+          {['conversion', 'compression', 'resizing', 'base 64 conversion'].map((tab) => (
             <button
               key={tab}
               className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}

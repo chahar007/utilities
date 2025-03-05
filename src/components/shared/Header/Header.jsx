@@ -10,7 +10,7 @@ const Header = () => {
 
 
   const handleNavigation= () => {
-    navigate('/imageOptimisation');
+    navigate('/image-optimisation');
   }
 
 
@@ -21,8 +21,8 @@ const Header = () => {
         <span>Image Utility Tool</span>
       </div>
       <nav>
-        <a className={activeTab === 'conversion' ? styles.active : ''} onClick={() => handleNavigation('imageOptmization')}>Image Optimization</a>
-        <a>Help</a>
+        {/* <a className={activeTab === 'conversion' ? styles.active : ''} onClick={() => handleNavigation}>Image Optimization</a> */}
+        {/* <a>Help</a> */}
       </nav>
     </header>
   );

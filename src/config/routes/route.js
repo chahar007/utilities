@@ -8,16 +8,16 @@ import Footer from '../../components/shared/Footer/Footer';
 const AUTH_ROUTES = [
     { path: '/', component: pages.Home },
     {
-        path: '/imageOptimisation', component: pages.Home
+        path: '/image-optimisation', component: pages.Home
     },
     {
-        path: '/imageCompression', component: pages.Home
+        path: '/image-compression', component: pages.Home
     },
     {
-        path: '/imageResizer', component: pages.Home
+        path: '/image-resizer', component: pages.Home
     },
     {
-        path: '/imageBase64Converter', component: pages.Home
+        path: '/image-base64-converter', component: pages.Home
     },
     { path: '/main', component: pages.Main }
 ];

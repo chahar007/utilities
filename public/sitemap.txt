@@ -1,5 +1,5 @@
 https://utilix.pro/
-https://utilix.pro/imageResizer
-https://utilix.pro/imageCompression
-https://utilix.pro/imageOptimisation
-https://utilix.pro/imageBase64Converter
+https://utilix.pro/image-resizer
+https://utilix.pro/image-compression
+https://utilix.pro/image-optimisation
+https://utilix.pro/image-resizer

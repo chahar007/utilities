@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './styles/Base64.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
-import imageCompression from 'browser-image-compression'; // Image compression library
 import { Base64Helmet } from '../seo/TabsHelment';
 
 const Base64 = () => {
