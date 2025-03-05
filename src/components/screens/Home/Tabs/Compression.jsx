@@ -99,7 +99,11 @@ const Compression = () => {
       <UploadFileHandling onFileUpload={handleFileUpload} />
 
       {/* No File Uploaded */}
-      {!previewUrl && <div className={styles.noFileMessage}>No image uploaded yet. Please upload an image to compress.</div>}
+      {!previewUrl && <div className={styles.noFileMessage}>
+        <h4>
+        No image uploaded yet. Please upload an image to compress.
+        </h4>
+        </div>}
 
       <div className={styles.imageContainer}>
         {/* Original Image Section */}

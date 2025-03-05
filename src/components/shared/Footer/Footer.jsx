@@ -7,8 +7,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (slug) => {
-    // Ensure that navigate does not call setState or any state change logic that would cause a re-render
-    navigate(slug);
+    navigate(slug); // SPA-friendly navigation
   };
 
   return (
@@ -24,11 +23,30 @@ const Footer = () => {
         <section className={styles.footerTools}>
           <h2>Image Tools</h2>
           <ul>
-            <li><h3>Compression</h3></li>
-            <li><h3>Resizing</h3></li>
-            <li><h3>Conversion</h3></li>
+            <li>
+              <a onClick={() => handleNavigation('/imageOptimisation')} role="button">
+                Conversion
+              </a>
+            </li>
+            <li>
+              <a onClick={() => handleNavigation('/imageCompression')} role="button">
+                Compression
+              </a>
+            </li>
+            <li>
+              <a onClick={() => handleNavigation('/imageResizer')} role="button">
+                Resizing
+              </a>
+            </li>
+            <li>
+              <a onClick={() => handleNavigation('/imageBase64Converter')} role="button">
+                Base64 Conversion
+              </a>
+            </li>
           </ul>
         </section>
+
+        {/* External Link (Already Correct) */}
         <section className={styles.footerTools}>
           <h2>Our Other Tool</h2>
           <a href="https://gameplay.in.net/" target="_blank" rel="noopener noreferrer">
@@ -37,8 +55,8 @@ const Footer = () => {
         </section>
       </div>
 
-       {/* SEO Schema Markup */}
-       <Helmet>
+      {/* SEO Schema Markup */}
+      <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -51,15 +69,9 @@ const Footer = () => {
               "query-input": "required name=search_term",
             },
             "description": "Find the latest game information and play mini-games online.",
-            // "sameAs": [
-            //   "https://www.facebook.com/your-game-app",
-            //   "https://twitter.com/your-game-app",
-            //   "https://www.instagram.com/your-game-app"
-            // ]
           })}
         </script>
       </Helmet>
-
     </footer>
   );
 };

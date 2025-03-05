@@ -16,7 +16,9 @@ const AUTH_ROUTES = [
     {
         path: '/imageResizer', component: pages.Home
     },
-
+    {
+        path: '/imageBase64Converter', component: pages.Home
+    },
     { path: '/main', component: pages.Main }
 ];
 
@@ -73,7 +75,7 @@ const AppRoute = () => {
                     </Route>
 
                     {/* Fallback Route */}
-                    <Route path="*" element={<pages.Home />} />
+                    <Route path="*" element={<Navigate to={'/'} />} />
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

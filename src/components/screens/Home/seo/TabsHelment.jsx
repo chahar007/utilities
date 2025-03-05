@@ -49,3 +49,28 @@ export const ResizingHelment = () => {
         </Helmet>
     )
 }
+
+
+export const Base64Helmet = () => {
+    return (
+        <Helmet>
+            <title>Image to Base64 Converter | Convert Images to Base64 Online</title>
+            <meta 
+                name="description" 
+                content="Convert images to Base64 encoding quickly and easily. Generate Base64 strings for JPG, PNG, and WebP formats for web and app development." 
+            />
+            <meta 
+                name="keywords" 
+                content="image to base64, base64 converter, convert image to base64 online, png to base64, jpg to base64, webp to base64, base64 encoding" 
+            />
+            <meta property="og:title" content="Image to Base64 Converter" />
+            <meta 
+                property="og:description" 
+                content="Easily convert images to Base64 format online. Perfect for embedding images in HTML, CSS, or JSON data." 
+            />
+            <meta property="og:url" content={window.location.origin + '/imageBase64Converter'} />
+            <link rel="canonical" href={window.location.origin + '/imageBase64Converter'} />
+        </Helmet>
+    );
+};
+

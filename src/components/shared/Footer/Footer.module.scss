@@ -28,6 +28,7 @@
   align-items: flex-start;
   margin-right: 15px;
   width: 30%; /* Ensure sections are compact */
+
 }
 
 .footerContent h2 {
@@ -45,6 +46,13 @@
 .footerContent li {
   margin-bottom: 5px;
   color: #ccc;
+
+  a {
+    cursor: pointer;
+    &:hover {
+      color: #f25c05;
+    }
+  }
 }
 
 .footerContent a {

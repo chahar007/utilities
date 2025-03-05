@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import Conversion from './Tabs/Conversion';
 import Compression from './Tabs/Compression';
+import Base64 from './Tabs/Base64';
 import Resizing from './Tabs/Resizing';
 import HomeHelmet from './seo/HomeHelmet';
 import { useLocation } from 'react-router-dom';
@@ -20,9 +21,10 @@ const Home = () => {
         setActiveTab('resizing')
       } else if(path == 'imageCompression') {
         setActiveTab('compression')
-      } else {
+      } else if(path == 'imageOptimisation') {
         setActiveTab('conversion')
-
+      } else {
+        setActiveTab('base 64');
       }
     }
   }, [location])
@@ -35,6 +37,8 @@ const Home = () => {
         return <Compression />;
       case 'resizing':
         return <Resizing />;
+      case 'base 64':
+        return <Base64 />;
       default:
         return null;
     }
@@ -48,7 +52,7 @@ const Home = () => {
 
       <main className={styles.main}>
         <div className={styles.tabContainer}>
-          {['conversion', 'compression', 'resizing'].map((tab) => (
+          {['conversion', 'compression', 'resizing', 'base 64'].map((tab) => (
             <button
               key={tab}
               className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
