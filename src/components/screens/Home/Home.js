@@ -24,7 +24,7 @@ const Home = () => {
       } else if(path == 'image-optimisation') {
         setActiveTab('conversion')
       } else {
-        setActiveTab('base 64');
+        setActiveTab('base 64 conversion');
       }
     }
   }, [location])
@@ -51,7 +51,7 @@ const Home = () => {
     <HomeHelmet />
 
       <main className={styles.main}>
-        <div className={styles.tabContainer}>
+        {/* <div className={styles.tabContainer}>
           {['conversion', 'compression', 'resizing', 'base 64 conversion'].map((tab) => (
             <button
               key={tab}
@@ -61,7 +61,7 @@ const Home = () => {
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className={styles.tabContent}>{renderTabContent()}</div>
       </main>

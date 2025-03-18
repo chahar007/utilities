@@ -4,7 +4,7 @@
   color: #fff;
   height: 100%;
   width: 100%;
-  background-color: #181818; /* Dark theme background */
+  // background-color: #181818; /* Dark theme background */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -13,13 +13,13 @@
 .main {
   margin: 0 auto;
   text-align: center;
-  background-color: #202020; /* Dark background for the content */
+  // background-color: #202020; /* Dark background for the content */
   width: 80%; /* Reduced width for better integration with surrounding space */
   padding: 20px;
   border-radius: 10px;
   overflow-y: auto;
   height: 100%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Soft shadow to blend with dark theme */
+  // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Soft shadow to blend with dark theme */
 }
 
 
