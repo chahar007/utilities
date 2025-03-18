@@ -1,0 +1,148 @@
+// Enhanced Dark Theme Variables
+$background-dark: #181818; // Deep dark for a premium feel
+$background-light: #242424; // Slightly lighter for side elements
+$text-primary: #ffffff; // Pure white for sharp contrast
+$text-secondary: #c0c0c0; // Softer gray for readability
+$primary-accent: #539bf5; // Softer blue with a modern touch
+$button-default: #292929; // Dark gray for default button
+$button-hover: #3a3a3a; // Lighter gray for hover state
+$destructive-accent: #ff5252; // Warmer red for destructive actions
+
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: $background-dark;
+  color: $text-primary;
+  font-family: Arial, sans-serif;
+}
+
+/* Left Section - Action Buttons */
+.leftSection {
+  width: 300px;
+  background: $background-light;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.leftSection h2 {
+  color: $primary-accent;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actions button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background: $button-default;
+  color: $text-primary;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+
+.actions button:hover {
+  background: $button-hover;
+}
+
+.degreeButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.degreeButtons button {
+  padding: 12px;
+  background: $primary-accent;
+  border: none;
+  border-radius: 5px;
+  color: $text-primary;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.degreeButtons button:hover {
+  background: darken($primary-accent, 10%);
+}
+
+.downloadBtn {
+  background: $destructive-accent !important;
+  margin-top: 10px;
+}
+
+.downloadBtn:hover {
+  background: darken($destructive-accent, 10%) !important;
+}
+
+/* Right Section - Image Upload and Preview */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.previewArea {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $background-light;
+  border: 2px dashed $text-secondary;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.rotatedImage {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.placeholderText {
+  font-size: 18px;
+  color: $text-secondary;
+}
+
+
+.description {
+  font-size: 14px;
+  color: $text-secondary;
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 450px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: $text-primary;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.outputTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: $primary-accent;
+  margin-top: 20px;
+}

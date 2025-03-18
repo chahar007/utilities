@@ -6,9 +6,9 @@ import AuthProvider, { useAuth } from '../utils/AuthProvider';
 import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
 const AUTH_ROUTES = [
-    { path: '/', component: pages.Home },
+    { path: '/', component: pages.Main },
     {
-        path: '/image-optimisation', component: pages.Home
+        path: '/image-conversion', component: pages.Home
     },
     {
         path: '/image-compression', component: pages.Home
@@ -17,9 +17,15 @@ const AUTH_ROUTES = [
         path: '/image-resizer', component: pages.Home
     },
     {
+        path: '/crop-image', component: pages.CropImage,
+    },
+    {
+        path: '/rotate-image', component: pages.RotateImage,
+    },
+    {
         path: '/image-base64-converter', component: pages.Home
     },
-    { path: '/main', component: pages.Main },
+        { path: '/main', component: pages.Main },
     {
         path: '/privacy-policy', component: pages.PrivacyPolicy
     }

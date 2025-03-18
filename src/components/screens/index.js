@@ -5,6 +5,9 @@ import Splash from './Splash/Splash';
 import Login from './Login/Login';
 import Fallback from './Login/Fallback';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import CropImage from './CropImage/CropImage';
+import RotateImage from './RotateImage/RotateImage';
+
 
 export default {
     Main,
@@ -12,5 +15,7 @@ export default {
     Splash,
     Login,
     Fallback,
-    PrivacyPolicy
+    PrivacyPolicy,
+    CropImage,
+    RotateImage
 }

@@ -21,7 +21,7 @@ const Home = () => {
         setActiveTab('resizing')
       } else if(path == 'image-compression') {
         setActiveTab('compression')
-      } else if(path == 'image-optimisation') {
+      } else if(path == 'image-conversion') {
         setActiveTab('conversion')
       } else {
         setActiveTab('base 64 conversion');

@@ -1,77 +1,46 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './Footer.module.scss'; // Import the SCSS module
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   const navigate = useNavigate();
 
-  const handleNavigation = (slug) => {
-    navigate(slug); // SPA-friendly navigation
-  };
-
   return (
-    <footer className={styles.footerStrip}>
-      <div className={styles.footerContent}>
-        {/* Project Description for SEO */}
-        <section className={styles.footerProject}>
-          <h2>About the Project</h2>
-          <p>Our Image Utility Tool provides users with a fast and easy way to compress, resize, and convert images online.</p>
-        </section>
-
-        {/* Image Tools for SEO */}
-        <section className={styles.footerTools}>
+    <footer className={styles.footer}>
+      <div className={styles.footerContainer}>
+        {/* Image Utility Tools */}
+        <div className={styles.footerSection}>
           <h2>Image Tools</h2>
-          <ul>
-            <li>
-              <a onClick={() => handleNavigation('/image-optimisation')} role="button">
-                Conversion
-              </a>
-            </li>
-            <li>
-              <a onClick={() => handleNavigation('/image-compression')} role="button">
-                Compression
-              </a>
-            </li>
-            <li>
-              <a onClick={() => handleNavigation('/image-resizer')} role="button">
-                Resizing
-              </a>
-            </li>
-            <li>
-              <a onClick={() => handleNavigation('/image-base64-converter')} role="button">
-                Base64 Conversion
-              </a>
-            </li>
+          <ul className={styles.footerLinks}>
+            <li onClick={() => navigate("/image-conversion")}>Image Conversion</li>
+            <li onClick={() => navigate("/image-compression")}>Image Compression</li>
+            <li onClick={() => navigate("/image-resizer")}>Image Resizing</li>
+            <li onClick={() => navigate("/image-base64-converter")}>Base64 Converter</li>
           </ul>
-        </section>
+        </div>
 
-        {/* External Link (Already Correct) */}
-        <section className={styles.footerTools}>
-          <h2>Our Other Tool</h2>
+        {/* Other External Tools */}
+        <div className={styles.footerSection}>
+          <h2>More Tools</h2>
           <a href="https://gameplay.in.net/" target="_blank" rel="noopener noreferrer">
-            GameInfo and Game Hub
+            GameInfo & Game Hub
           </a>
-        </section>
+        </div>
+
+        {/* Legal & Copyright */}
+        <div className={styles.footerSection}>
+          <h2>Legal</h2>
+          <ul className={styles.footerLinks}>
+            <li onClick={() => navigate("/terms-of-service")}>Terms of Service</li>
+            <li onClick={() => navigate("/privacy-policy")}>Privacy Policy</li>
+          </ul>
+        </div>
       </div>
 
-      {/* SEO Schema Markup */}
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "GameInfo & Game Hub",
-            "url": "https://gameplay.in.net/",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://your-game-app.com/search?q={search_term}",
-              "query-input": "required name=search_term",
-            },
-            "description": "Find the latest game information and play mini-games online.",
-          })}
-        </script>
-      </Helmet>
+      {/* Footer Bottom */}
+      <div className={styles.footerBottom}>
+        <p>&copy; {new Date().getFullYear()} Image Utility Tool. All rights reserved.</p>
+      </div>
     </footer>
   );
 };

@@ -31,9 +31,9 @@ const Header = () => {
             <span>Image Compression <i className="fas fa-chevron-down"></i></span>
             {dropdown === "compression" && (
               <ul className={styles.dropdown}>
-                <li><Link to="/compress/jpg">Compress JPG</Link></li>
-                <li><Link to="/compress/png">Compress PNG</Link></li>
-                <li><Link to="/compress/webp">Compress WebP</Link></li>
+                <li><Link to="/image-compression">Compress JPG</Link></li>
+                <li><Link to="/image-compression">Compress PNG</Link></li>
+                <li><Link to="/image-compression">Compress WebP</Link></li>
               </ul>
             )}
           </li>
@@ -47,9 +47,9 @@ const Header = () => {
             <span>Image Resize <i className="fas fa-chevron-down"></i></span>
             {dropdown === "resize" && (
               <ul className={styles.dropdown}>
-                <li><Link to="/resize/jpg">Resize JPG</Link></li>
-                <li><Link to="/resize/png">Resize PNG</Link></li>
-                <li><Link to="/resize/webp">Resize WebP</Link></li>
+                <li><Link to="/image-resizer">Resize JPG</Link></li>
+                <li><Link to="/image-resizer">Resize PNG</Link></li>
+                <li><Link to="/image-resizer">Resize WebP</Link></li>
               </ul>
             )}
           </li>
@@ -63,12 +63,48 @@ const Header = () => {
             <span>Image Convert <i className="fas fa-chevron-down"></i></span>
             {dropdown === "convert" && (
               <ul className={styles.dropdown}>
-                <li><Link to="/convert/jpg">Convert to JPG</Link></li>
-                <li><Link to="/convert/png">Convert to PNG</Link></li>
-                <li><Link to="/convert/webp">Convert to WebP</Link></li>
+                <li><Link to="/image-conversion">Convert to JPG</Link></li>
+                <li><Link to="/image-conversion">Convert to PNG</Link></li>
+                <li><Link to="/image-conversion">Convert to WebP</Link></li>
               </ul>
             )}
           </li>
+
+
+          {/* Image Convert Dropdown */}
+          <li 
+            className={styles.navItem}
+            onMouseEnter={() => handleMouseEnter("convert")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>More Tools <i className="fas fa-chevron-down"></i></span>
+            {dropdown === "convert" && (
+              <ul className={styles.dropdown}>
+                <li><Link to="/crop-image">Crop Image</Link></li>
+                <li> <Link to="/rotate-image">Rotate Image</Link></li>
+              </ul>
+            )}
+          </li>
+
+          {/* <li 
+            className={styles.navItem}
+            onMouseEnter={() => handleMouseEnter("convert")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>
+              <Link to="/crop-image">Crop Image</Link>
+              </span>
+          </li>
+
+          <li 
+            className={styles.navItem}
+            onMouseEnter={() => handleMouseEnter("convert")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>
+              <Link to="/rotate-image">Rotate Image</Link>
+              </span>
+          </li> */}
 
         </ul>
       </nav>

@@ -1,0 +1,124 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    background: #1e1e1e;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.heroSection {
+    max-width: 700px;
+    margin-bottom: 30px;
+
+    h1 {
+        font-size: 2.8rem;
+        color: #f25c05;
+        font-weight: 700;
+    }
+
+    p {
+        font-size: 1.3rem;
+        color: #ccc;
+        line-height: 1.6;
+    }
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 20px;
+}
+
+.ctaSection {
+    margin-top: 40px;
+    text-align: center;
+
+    h2 {
+        font-size: 2rem;
+        color: #ff0044;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: #ccc;
+        margin-bottom: 15px;
+    }
+
+    .ctaButton {
+        background: #ff0044;
+        color: white;
+        font-size: 1.2rem;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease-in-out;
+        display: inline-block;
+        &:hover {
+            background: darken(#ff0044, 10%);
+        }
+    }
+}
+
+
+.featureCard {
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    i {
+        font-size: 2.2rem;
+        color: #ff0044;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.5;
+        max-width: 220px;
+    }
+
+    .featureLink {
+        margin-top: 12px;
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 5px;
+        // background: #ff0044;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease-in-out;
+        color: #28a745;
+        border: 2px solid #28a745;
+
+        &:hover {
+            background-color: #3b9e57;
+            color: white;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}

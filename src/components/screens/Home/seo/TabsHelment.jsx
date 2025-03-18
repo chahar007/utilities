@@ -28,7 +28,7 @@ export const ConversionHelmet = () => {
             <meta property="og:description" content="Convert your images to popular formats such as JPG, PNG, and WebP online." />
             {/* <meta property="og:image" content="URL-to-conversion-thumbnail.jpg" /> */}
             <meta property="og:url" content={window.location.origin} />
-            <link rel="canonical" href={window.location.origin + '/image-optimisation'} />
+            <link rel="canonical" href={window.location.origin + '/image-conversion'} />
         </Helmet>
     )
 }
