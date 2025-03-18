@@ -59,7 +59,16 @@ const CropImage = () => {
 
   return (
     <div className={styles.cropImgPage}>
+
+      <h2 className={styles.headingTool} >Effortless Image Resizing</h2>
+      <p className={styles.instructions}>
+        Easily crop images to the perfect size for social media, websites, 
+        <br /> or personal use. Upload, adjust, and download in seconds!
+      </p>
+
       <UploadFileHandling onFileUpload={handleFileUpload} />
+
+
 
       {!imageSrc && <p className={styles.noFileMessage}>No image uploaded yet. Please upload an image to crop.</p>}
 

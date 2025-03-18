@@ -6,6 +6,10 @@
   justify-content: flex-start;
   align-items: center;
 
+  .instructions {
+    padding: 0.7rem 0;
+  }
+
   .imageContainer {
     display: flex;
     flex-direction: row;
@@ -102,7 +106,7 @@
 
   .noFileMessage {
     color: #999;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 16px;
   }
 }

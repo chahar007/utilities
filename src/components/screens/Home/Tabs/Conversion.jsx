@@ -135,6 +135,14 @@ const Conversion = () => {
 
      <ConversionHelmet />
 
+     <h2 className={styles.headingTool} >Fast & High-Quality Image Compression</h2>
+      <p className={styles.instructions}>
+      Reduce file size without losing quality. Optimize images for faster websites,
+      <br />
+       better storage, and seamless sharing.
+       Upload now for instant conversion! 
+      </p>
+
 
       <UploadFileHandling onFileUpload={handleFileUpload} />
 

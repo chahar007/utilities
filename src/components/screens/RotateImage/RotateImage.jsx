@@ -75,8 +75,8 @@ const RotateImage = () => {
                     <p className={styles.description}>
                         Use the buttons below to rotate the image left or right by 90 degrees.
                     </p>
-                    <button onClick={() => rotateImage(-90)}>↺ Rotate Left (90°)</button>
-                    <button onClick={() => rotateImage(90)}>↻ Rotate Right (90°)</button>
+                    <button onClick={() => rotateImage(-90)}>↺ Rotate Left</button>
+                    <button onClick={() => rotateImage(90)}>↻ Rotate Right</button>
                     <hr className={styles.divider} />
                     <p className={styles.sectionTitle}>Set a Specific Rotation Angle</p>
                     <div className={styles.degreeButtons}>
@@ -102,14 +102,16 @@ const RotateImage = () => {
 
             {/* Right Section - Image Upload and Preview */}
             <div className={styles.rightSection}>
+            <h2 className={styles.sectionTitle}>Rotate Image Instantly</h2>
+
                 <p className={styles.description}>
-                    Select an image from your device to begin editing. Once uploaded, you can rotate the image using the
-                    available controls on the left panel.
+                    
+                Quickly rotate your image left or right or set it to a fixed angle. Adjust with a click and download the perfect orientation!
                 </p>
                 <UploadFileHandling onFileUpload={handleFileUpload} />
 
-                <h3 className={styles.outputTitle}>Output Preview</h3>
                 <div className={styles.previewArea}>
+                    <h3 className={styles.outputTitle}>Output Preview</h3>
                     {imageSrc ? (
                         <img
                             ref={imageRef}

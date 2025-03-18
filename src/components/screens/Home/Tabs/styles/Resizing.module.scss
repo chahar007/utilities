@@ -6,6 +6,11 @@
   justify-content: flex-start;
   align-items: center;
 
+  .instructions {
+    padding: 0.7rem 0;
+  }
+
+
   .imageContainer {
     display: flex;
     flex-direction: row;

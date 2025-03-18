@@ -88,22 +88,25 @@ const Compression = () => {
   };
 
   return (
-  
     <div className={styles.compression}>
+      <CompressionHelmet />
 
-    
-    <CompressionHelmet />
-      
+      <h2 className={styles.headingTool} >Image Compression Tool</h2>
+      <p className={styles.instructions}>
+        Upload an image to reduce its file size while maintaining quality. 
+        <br />
+        This helps in saving storage space and improving website load time.
+      </p>
 
       {/* File Upload Component */}
       <UploadFileHandling onFileUpload={handleFileUpload} />
 
       {/* No File Uploaded */}
-      {!previewUrl && <div className={styles.noFileMessage}>
-        <h4>
-        No image uploaded yet. Please upload an image to compress.
-        </h4>
-        </div>}
+      {!previewUrl && (
+        <div className={styles.noFileMessage}>
+          <h4>No image uploaded yet. Please upload an image to compress.</h4>
+        </div>
+      )}
 
       <div className={styles.imageContainer}>
         {/* Original Image Section */}
@@ -141,8 +144,13 @@ const Compression = () => {
           </button>
         )}
       </div>
-    </div>
 
+
+      <p className={styles.footerNote}>
+        Note: This tool compresses images by reducing their resolution and optimizing file size without significant quality loss.
+      </p>
+
+    </div>
   );
 };
 

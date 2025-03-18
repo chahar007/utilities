@@ -81,7 +81,7 @@ const Resizing = () => {
       // Fetch the file from the preview URL and compress it
       const file = await fetch(previewUrl).then((res) => res.blob());
 
-      const compressedFile = await image-compression(file, options);
+      const compressedFile = await image - compression(file, options);
 
       const compressedFileSizeInKB = (compressedFile.size / 1024).toFixed(2);
       setCompressedSize(compressedFileSizeInKB);
@@ -117,8 +117,17 @@ const Resizing = () => {
   return (
     <div className={styles.resizing}>
 
-   
+
       <ResizingHelment />
+
+      <h2 className={styles.headingTool} >Effortless Image Resizing</h2>
+      <p className={styles.instructions}>
+        Resize images to fit any need—web, social media, or
+        <br />
+        print—without losing quality.
+
+        Upload, adjust, and download instantly!
+      </p>
 
       <UploadFileHandling onFileUpload={handleFileUpload} />
 
