@@ -2,4 +2,6 @@ https://utilix.pro/
 https://utilix.pro/image-resizer
 https://utilix.pro/image-compression
 https://utilix.pro/image-conversion
-https://utilix.pro/image-resizer
+https://utilix.pro/image-base64-converter
+https://utilix.pro/crop-image
+https://utilix.pro/rotate-image
