@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './styles/Resizing.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
 import { ResizingHelment } from '../seo/TabsHelment';
+import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
 
 const Resizing = () => {
   const [error, setError] = useState(null);
@@ -81,7 +82,7 @@ const Resizing = () => {
       // Fetch the file from the preview URL and compress it
       const file = await fetch(previewUrl).then((res) => res.blob());
 
-      const compressedFile = await image - compression(file, options);
+      const compressedFile = await imageCompression(file, options);
 
       const compressedFileSizeInKB = (compressedFile.size / 1024).toFixed(2);
       setCompressedSize(compressedFileSizeInKB);
