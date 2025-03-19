@@ -19,6 +19,14 @@ const Footer = () => {
           </ul>
         </div>
 
+        <div className={styles.footerSection}>
+          <h2>Other Tools</h2>
+          <ul className={styles.footerLinks}>
+            <li onClick={() => navigate("/rotate-image")}>Rotate Image</li>
+            <li onClick={() => navigate("/crop-image")}>Crop Image</li>
+          </ul>
+        </div>
+
         {/* Other External Tools */}
         <div className={styles.footerSection}>
           <h2>More Tools</h2>
