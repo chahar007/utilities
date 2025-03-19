@@ -25,9 +25,12 @@ const AUTH_ROUTES = [
     {
         path: '/image-base64-converter', component: pages.Home
     },
-        { path: '/main', component: pages.Main },
+    { path: '/main', component: pages.Main },
     {
         path: '/privacy-policy', component: pages.PrivacyPolicy
+    },
+    {
+    path: '/terms-of-service', component: pages.TermsOfUse
     }
 ];
 

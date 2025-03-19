@@ -83,6 +83,15 @@ const Base64 = () => {
     <div className={styles.base64}>
       <Base64Helmet />
 
+      <h2 className={styles.headingTool} >Fast & Secure Base64 Image Converter</h2>
+      <p className={styles.instructions}>
+      Easily convert images to Base64 format for optimized web performance and seamless integration. 
+      <br />
+      Enhance loading speed, reduce server requests, and ensure smooth data handling. 
+      <br />
+      Upload now for instant conversion!
+      </p>
+
       <UploadFileHandling onFileUpload={handleFileUpload} />
 
       {!previewUrl && (

@@ -84,7 +84,6 @@ const RotateImage = () => {
                         <button onClick={() => setRotationToDegree(90)}>90°</button>
                         <button onClick={() => setRotationToDegree(180)}>180°</button>
                         <button onClick={() => setRotationToDegree(270)}>270°</button>
-                        <button onClick={() => setRotationToDegree(360)}>360°</button>
                     </div>
 
                     <hr className={styles.divider} />

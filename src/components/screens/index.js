@@ -7,7 +7,7 @@ import Fallback from './Login/Fallback';
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import CropImage from './CropImage/CropImage';
 import RotateImage from './RotateImage/RotateImage';
-
+import TermsOfUse from './TermsOfUse/TermsOfUse';
 
 export default {
     Main,
@@ -17,5 +17,6 @@ export default {
     Fallback,
     PrivacyPolicy,
     CropImage,
-    RotateImage
+    RotateImage,
+    TermsOfUse
 }

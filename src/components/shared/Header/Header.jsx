@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Header.module.scss'; // Importing SCSS file
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [dropdown, setDropdown] = useState(null);
@@ -9,6 +10,14 @@ const Header = () => {
 
   const handleMouseEnter = (menu) => setDropdown(menu);
   const handleMouseLeave = () => setDropdown(null);
+  
+  useEffect(() => {
+    const outletElement = document.querySelector(".outlet");
+    if (outletElement) {
+      outletElement.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.pathname]); // Runs when route changes
+
 
   return (
     <header className={styles.header}>
@@ -85,27 +94,6 @@ const Header = () => {
               </ul>
             )}
           </li>
-
-          {/* <li 
-            className={styles.navItem}
-            onMouseEnter={() => handleMouseEnter("convert")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <span>
-              <Link to="/crop-image">Crop Image</Link>
-              </span>
-          </li>
-
-          <li 
-            className={styles.navItem}
-            onMouseEnter={() => handleMouseEnter("convert")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <span>
-              <Link to="/rotate-image">Rotate Image</Link>
-              </span>
-          </li> */}
-
         </ul>
       </nav>
     </header>
