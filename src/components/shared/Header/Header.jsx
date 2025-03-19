@@ -75,6 +75,7 @@ const Header = () => {
                 <li><Link to="/image-conversion">Convert to JPG</Link></li>
                 <li><Link to="/image-conversion">Convert to PNG</Link></li>
                 <li><Link to="/image-conversion">Convert to WebP</Link></li>
+                <li><Link to="/image-base64-converter">Convert to Base64</Link></li>
               </ul>
             )}
           </li>

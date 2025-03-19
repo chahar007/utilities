@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "./RotateImage.module.scss";
 import UploadFileHandling from "../Home/components/UploadFileHandling";
+import { RotateImageHelmet } from "../Home/seo/TabsHelment";
 
 const RotateImage = () => {
     const [imageSrc, setImageSrc] = useState(null);
@@ -62,6 +63,8 @@ const RotateImage = () => {
 
     return (
         <div className={styles.container}>
+            <RotateImageHelmet />
+
             {/* Left Section - Action Buttons */}
             <div className={styles.leftSection}>
                 {/* <h2>Image Editor</h2>

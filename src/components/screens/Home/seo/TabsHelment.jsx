@@ -74,3 +74,91 @@ export const Base64Helmet = () => {
     );
 };
 
+
+
+export const CropImageHelmet = () => {
+    return (
+        <Helmet>
+            <title>Crop Image Online | Free Image Cropping Tool</title>
+            <meta 
+                name="description" 
+                content="Easily crop images online with our free image cropping tool. Adjust and resize images for web, social media, and app development." 
+            />
+            <meta 
+                name="keywords" 
+                content="crop image, image cropping tool, online image cropper, free crop image tool, photo crop, resize and crop, crop jpg, crop png, crop webp" 
+            />
+            <meta property="og:title" content="Crop Image Online" />
+            <meta 
+                property="og:description" 
+                content="Use our simple and fast image cropper to crop and resize images online. Perfect for web and social media use." 
+            />
+            <meta property="og:url" content={window.location.origin + '/crop-image'} />
+            <link rel="canonical" href={window.location.origin + '/crop-image'} />
+        </Helmet>
+    );
+};
+
+
+export const RotateImageHelmet = () => {
+    return (
+        <Helmet>
+            <title>Rotate Image Online | Free Image Rotator Tool</title>
+            <meta 
+                name="description" 
+                content="Rotate images online easily with our free image rotator tool. Adjust image orientation for web, social media, and app development." 
+            />
+            <meta 
+                name="keywords" 
+                content="rotate image, image rotator, online image rotation, free rotate image tool, rotate jpg, rotate png, rotate webp, flip image, adjust image orientation" 
+            />
+            <meta property="og:title" content="Rotate Image Online" />
+            <meta 
+                property="og:description" 
+                content="Use our simple and fast image rotation tool to rotate and adjust image orientation online. Perfect for web and social media use." 
+            />
+            <meta property="og:url" content={window.location.origin + '/rotate-image'} />
+            <link rel="canonical" href={window.location.origin + '/rotate-image'} />
+        </Helmet>
+    );
+};
+
+
+
+
+
+
+export const MainHelmet = () => {
+    return (
+        <Helmet>
+            {/* Page Title */}
+            <title>All-in-One Image Editing Tools | Compress, Resize, Crop, Rotate & Convert | Utilix Pro</title>
+
+            {/* Meta Description */}
+            <meta 
+                name="description" 
+                content="Edit and optimize images online with our free all-in-one toolset. Compress, resize, crop, rotate, convert, and enhance images effortlessly for web, social media, and app development." 
+            />
+
+            {/* Meta Keywords */}
+            <meta 
+                name="keywords" 
+                content="image editing, image optimizer, compress image, resize image, crop image, rotate image, image converter, base64 converter, JPG to PNG, WebP to JPG, online image tools" 
+            />
+
+            {/* Open Graph (OG) Meta Tags for Social Sharing */}
+            <meta property="og:title" content="All-in-One Image Editing Tools" />
+            <meta 
+                property="og:description" 
+                content="Optimize, edit, and transform images online. Use our free tools to compress, resize, crop, rotate, and convert images with ease." 
+            />
+            <meta property="og:url" content={window.location.origin} />
+            <meta property="og:type" content="website" />
+            {/* <meta property="og:image" content={window.location.origin + "/assets/preview-image.jpg"} /> */}
+
+            {/* Canonical URL */}
+            <link rel="canonical" href={window.location.origin} />
+        </Helmet>
+    );
+};
+

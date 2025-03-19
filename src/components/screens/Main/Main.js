@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Main.module.scss';
 import { Helmet } from 'react-helmet';
 import { useState } from "react";
+import {MainHelmet} from '../Home/seo/TabsHelment';
 
 const FeatureCard = ({ title, description, link, icon }) => {
     return (
@@ -13,18 +14,6 @@ const FeatureCard = ({ title, description, link, icon }) => {
         </div>
     );
 };
-
-const MainHelmet = () => {
-    return (
-        <Helmet>
-            <title>All-in-One Image Editing Tools | Compress, Resize, Convert Images Online</title>
-            <meta
-                name="description"
-                content="Optimize and edit images online with our free tools. Compress, resize, convert, and enhance images for web and social media. Fast, secure, and easy to use."
-            />
-        </Helmet>
-    )
-}
 
 const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);

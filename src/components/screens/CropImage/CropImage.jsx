@@ -3,6 +3,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import UploadFileHandling from "../Home/components/UploadFileHandling";
 import styles from "./CropImage.module.scss";
+import { CropImageHelmet } from "../Home/seo/TabsHelment";
 
 const CropImage = () => {
   const [imageSrc, setImageSrc] = useState(null);
@@ -59,6 +60,8 @@ const CropImage = () => {
 
   return (
     <div className={styles.cropImgPage}>
+
+      <CropImageHelmet />
 
       <h2 className={styles.headingTool} >Effortless Image Resizing</h2>
       <p className={styles.instructions}>
