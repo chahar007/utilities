@@ -1,112 +1,234 @@
 .compression {
-  color: #ccc;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  // padding: 2rem 1rem;
+  color: #e6edf3;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  .headingTool {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
 
   .instructions {
-    padding: 0.7rem 0;
+    text-align: center;
+    color: #8b949e;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .imageContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    align-items: start;
+  }
+
+  // Image Card Styling
+  .imageCard {
+    background: #161b22;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #30363d;
+    box-shadow: 0 4px 6px rgba(1, 4, 9, 0.1);
+    transition: all 0.2s ease;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 30px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(1, 4, 9, 0.2);
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      object-fit: contain;
+    }
   }
 
-  /* Original Image Styling */
   .originalImage {
-    max-width: 250px;
-    border: 2px solid #ccc; /* Light border for original image */
-    border-radius: 8px;
-    padding: 10px;
-    transition: transform 0.3s ease-in-out;
+    border-left: 4px solid #58a6ff;
+
+    .imageLabel {
+      color: #58a6ff;
+    }
   }
 
-  .originalImage:hover {
-    transform: scale(1.03);
-  }
-
-  /* Compressed Image Styling */
   .compressedImage {
-    max-width: 250px;
-    border: 2px solid #28a745; /* Green border for compressed image */
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Soft shadow to make it pop */
-    transition: transform 0.3s ease-in-out;
-  }
+    border-left: 4px solid #3fb950;
 
-  .compressedImage:hover {
-    transform: scale(1.03);
+    .imageLabel {
+      color: #3fb950;
+    }
   }
 
   .imageDetails {
-    margin-top: 10px;
+    width: 100%;
+    margin-top: 1rem;
     text-align: center;
-    font-size: 14px;
-    color: #ccc;
-  }
+    font-size: 0.95rem;
 
-  .imageDetails p {
-    margin: 5px 0;
-  }
+    p {
+      margin: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+    }
 
-  .imageDetails strong {
-    font-weight: 600;
-    color: #28a745; /* Green color for labels */
+    strong {
+      font-weight: 600;
+    }
+
+    .imageLabel {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
   }
 
   .compressionControls {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
   }
 
   .uploadButton,
   .downloadButton {
-    padding: 12px 24px;
-    background-color: transparent;
-    color: #28a745;
-    border: 2px solid #28a745;
-    border-radius: 8px;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, color 0.3s, border-color 0.3s;
-    margin: 15px 0;
-    font-size: 16px;
-    font-weight: bold;
+    border: none;
+    min-width: 200px;
   }
 
-  .uploadButton:hover,
-  .downloadButton:hover {
-    background-color: #28a745;
+  .uploadButton {
+    background: linear-gradient(90deg, #1f6feb 0%, #58a6ff 100%);
     color: white;
-    border-color: #218838;
-    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(31, 111, 235, 0.4);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(31, 111, 235, 0.5);
+    }
+
+    &:disabled {
+      background: #484f58;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
   }
 
-  .compressionInfo {
-    margin-top: 20px;
-    color: #ccc;
-    font-size: 16px;
-    font-weight: bold;
+  .downloadButton {
+    background: linear-gradient(90deg, #2ea043 0%, #56d364 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(46, 160, 67, 0.4);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 160, 67, 0.5);
+    }
   }
 
   .errorMessage {
-    color: red;
-    margin-bottom: 15px;
-    font-size: 14px;
+    color: #f85149;
+    background: rgba(248, 81, 73, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 1rem auto;
+    max-width: 600px;
+    text-align: center;
+    border-left: 4px solid #f85149;
   }
 
   .noFileMessage {
-    color: #999;
-    margin-top: 5px;
-    font-size: 16px;
+    color: #8b949e;
+    background: #161b22;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    margin: 1rem auto;
+    max-width: 600px;
+    border: 1px dashed #30363d;
+  }
+
+  .footerNote {
+    color: #8b949e;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #30363d;
+  }
+
+  // Stats comparison
+  .statsComparison {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: #0d1117;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+
+    .statItem {
+      text-align: center;
+      flex: 1;
+
+      .statValue {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .statLabel {
+        font-size: 0.8rem;
+        color: #8b949e;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .savings {
+      color: #3fb950;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .imageContainer {
+      grid-template-columns: 1fr;
+    }
+
+    .compressionControls {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .uploadButton,
+    .downloadButton {
+      width: 100%;
+    }
   }
 }

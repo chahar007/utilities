@@ -8,7 +8,7 @@
         overflow-y: auto;
         position: relative;
         .header-layout {
-            height: 5.5rem;
+            height: 4rem;
             width: 100%;
             position: fixed;
             top: 0;
@@ -16,10 +16,11 @@
         }
 
         .body-outlet {
-            padding-top: 5.5rem;
+            padding-top: 4rem;
             width: 100%;
             overflow-y: auto;
-            background-color: #1a1a1a;
+            // background-color: #1a1a1a;
+            background: #0d1117;
             min-height: 90vh;
         }
 
