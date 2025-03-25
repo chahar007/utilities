@@ -1,0 +1,358 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    color: #58a6ff;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p {
+    color: #8b949e;
+    font-size: 1.1rem;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.leftPanel, .rightPanel {
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid #30363d;
+}
+
+.leftPanel {
+  width: 40%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.rightPanel {
+  width: 60%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reuploadBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #f85149;
+  border: 1px solid #f85149;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  align-self: flex-end;
+
+  &:hover {
+    background: rgba(248, 81, 73, 0.1);
+  }
+}
+
+.previewSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    color: #58a6ff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+.previewPlaceholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(88, 166, 255, 0.05);
+  border: 2px dashed #30363d;
+  border-radius: 8px;
+  color: #8b949e;
+  gap: 1rem;
+  padding: 2rem;
+
+  i {
+    font-size: 3rem;
+    color: #58a6ff;
+  }
+
+  .convertHint {
+    font-size: 0.9rem;
+    color: #58a6ff;
+  }
+}
+
+.pdfPreview {
+  width: 100%;
+  flex: 1;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #0d1117;
+}
+
+.sortingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    color: #58a6ff;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+}
+
+.instructions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #8b949e;
+  font-size: 0.9rem;
+
+  i {
+    color: #58a6ff;
+  }
+}
+
+.imageListContainer {
+  flex: 1;
+  overflow: hidden;
+}
+
+.imageList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #8b949e;
+  background: rgba(88, 166, 255, 0.05);
+  border: 2px dashed #30363d;
+  border-radius: 8px;
+  padding: 2rem;
+
+  i {
+    font-size: 2rem;
+    color: #58a6ff;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.convertBtn, .downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.convertBtn {
+  background: linear-gradient(90deg, #1f6feb 0%, #58a6ff 100%);
+  color: white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 111, 235, 0.3);
+  }
+
+  &:disabled {
+    background: #484f58;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+.downloadBtn {
+  background: linear-gradient(90deg, #2ea043 0%, #56d364 100%);
+  color: white;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 160, 67, 0.3);
+  }
+}
+
+/* Custom scrollbar */
+.imageList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.imageList::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 3px;
+}
+
+.imageList::-webkit-scrollbar-thumb {
+  background: #58a6ff;
+  border-radius: 3px;
+}
+
+.imageList::-webkit-scrollbar-thumb:hover {
+  background: #1f6feb;
+}
+
+
+
+.sortableItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  cursor: grab;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #30363d;
+    border-color: #58a6ff;
+  }
+
+  &.dragging {
+    background: rgba(88, 166, 255, 0.1);
+    border-color: #58a6ff;
+    box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+  }
+}
+
+.imageContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.imagePreview {
+  width: 60px;
+  max-height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #30363d;
+}
+
+.imageInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #c9d1d9;
+  font-size: 0.9rem;
+}
+
+.dragHandle {
+  color: #8b949e;
+  padding: 0.5rem;
+  cursor: grab;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #58a6ff;
+  }
+}
+
+.supportedFormats {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.fileTypeBadge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: rgba(88, 166, 255, 0.1);
+  color: #58a6ff;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+
+.sortableItem {
+  touch-action: none; // Prevent default touch behaviors
+  user-select: none; // Prevent text selection during drag
+  -webkit-user-drag: none; // Prevent default drag behavior on iOS
+}
+
+.imageList {
+  -webkit-overflow-scrolling: touch; // Enable smooth scrolling on iOS
+  overflow-y: auto; // Ensure scrolling works
+  max-height: 60vh; // Limit height to ensure scrollable area
+}
+
+// For better touch feedback
+.sortableItem:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}

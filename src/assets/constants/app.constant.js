@@ -56,69 +56,33 @@ export const IMAGE_FEATURES = [
 
 export const PDF_FEATURES = [
     {
-        title: "Merge PDFs",
-        description: "Combine multiple PDF files into one document. Perfect for consolidating reports, presentations, or any PDF documents that belong together.",
-        link: "/pdf-merge",
-        icon: "fas fa-object-group"
-    },
-    {
         title: "Split PDF",
         description: "Extract specific pages or split a PDF into multiple documents. Great for separating chapters, forms, or sharing just the needed pages.",
         link: "/pdf-split",
         icon: "fas fa-cut"
     },
     {
-        title: "Compress PDF",
-        description: "Reduce PDF file size without significant quality loss. Optimize PDFs for email attachments, web uploads, or storage savings.",
-        link: "/pdf-compress",
-        icon: "fas fa-file-export"
-    },
-    {
-        title: "PDF to Images",
-        description: "Convert PDF pages to high-quality images (JPG, PNG, WebP). Useful for sharing PDF content as images on social media or websites.",
-        link: "/pdf-to-image",
-        icon: "fas fa-file-image"
-    },
-    {
         title: "Images to PDF",
         description: "Combine multiple images into a single PDF document. Create photo albums, portfolios, or convert scanned images to PDF format.",
-        link: "/image-to-pdf",
+        link: "/pdf/image-to-pdf",
         icon: "fas fa-file-pdf"
     },
-    {
-        title: "Protect PDF",
-        description: "Add password protection to your PDF files. Secure sensitive documents with encryption to control who can view or edit them.",
-        link: "/pdf-protect",
-        icon: "fas fa-lock"
-    },
-    {
-        title: "Unlock PDF",
-        description: "Remove password protection from PDFs (with proper authorization). Regain access to your own documents when you've forgotten the password.",
-        link: "/pdf-unlock",
-        icon: "fas fa-unlock"
-    },
-    {
-        title: "Edit PDF Metadata",
-        description: "View and modify PDF document properties like title, author, and keywords. Improve organization and searchability of your PDF files.",
-        link: "/pdf-metadata",
-        icon: "fas fa-tags"
-    },
-    {
-        title: "Extract PDF Text",
-        description: "Extract text content from PDF files for editing or analysis. Useful for copying text from scanned documents or PDF forms.",
-        link: "/pdf-text-extract",
-        icon: "fas fa-font"
-    },
+    // {
+    //     title: "Extract PDF Text",
+    //     description: "Extract text content from PDF files for editing or analysis. Useful for copying text from scanned documents or PDF forms.",
+    //     link: "/pdf-text-extract",
+    //     icon: "fas fa-font"
+    // },
     {
         title: "Rotate PDF Pages",
         description: "Adjust page orientation in PDF documents. Rotate individual pages or entire documents by 90°, 180°, or 270° as needed.",
-        link: "/pdf-rotate",
+        link: "/pdf/rotate-pdf",
         icon: "fas fa-redo"
     },
     {
         title: "Reorder PDF Pages",
         description: "Rearrange pages within a PDF document. Change the order of pages to create the perfect document flow.",
-        link: "/pdf-reorder",
+        link: "/pdf/reorder-pdf",
         icon: "fas fa-sort-numeric-down"
     },
     {
@@ -126,8 +90,90 @@ export const PDF_FEATURES = [
         description: "Add text or image watermarks to PDF documents. Brand your documents or mark them as drafts, confidential, etc.",
         link: "/pdf-watermark",
         icon: "fas fa-stamp"
+    },
+    {
+        title: "Edit PDF Metadata",
+        description: "View and modify PDF document properties like title, author, and keywords. Improve organization and searchability of your PDF files.",
+        link: "/pdf-metadata",
+        icon: "fas fa-tags"
     }
 ];
+
+
+// export const PDF_FEATURES = [
+//     {
+//         title: "Merge PDFs",
+//         description: "Combine multiple PDF files into one document. Perfect for consolidating reports, presentations, or any PDF documents that belong together.",
+//         link: "/pdf-merge",
+//         icon: "fas fa-object-group"
+//     },
+//     {
+//         title: "Split PDF",
+//         description: "Extract specific pages or split a PDF into multiple documents. Great for separating chapters, forms, or sharing just the needed pages.",
+//         link: "/pdf-split",
+//         icon: "fas fa-cut"
+//     },
+//     {
+//         title: "Compress PDF",
+//         description: "Reduce PDF file size without significant quality loss. Optimize PDFs for email attachments, web uploads, or storage savings.",
+//         link: "/pdf-compress",
+//         icon: "fas fa-file-export"
+//     },
+//     {
+//         title: "PDF to Images",
+//         description: "Convert PDF pages to high-quality images (JPG, PNG, WebP). Useful for sharing PDF content as images on social media or websites.",
+//         link: "/pdf-to-image",
+//         icon: "fas fa-file-image"
+//     },
+//     {
+//         title: "Images to PDF",
+//         description: "Combine multiple images into a single PDF document. Create photo albums, portfolios, or convert scanned images to PDF format.",
+//         link: "/image-to-pdf",
+//         icon: "fas fa-file-pdf"
+//     },
+//     {
+//         title: "Protect PDF",
+//         description: "Add password protection to your PDF files. Secure sensitive documents with encryption to control who can view or edit them.",
+//         link: "/pdf-protect",
+//         icon: "fas fa-lock"
+//     },
+//     {
+//         title: "Unlock PDF",
+//         description: "Remove password protection from PDFs (with proper authorization). Regain access to your own documents when you've forgotten the password.",
+//         link: "/pdf-unlock",
+//         icon: "fas fa-unlock"
+//     },
+//     {
+//         title: "Edit PDF Metadata",
+//         description: "View and modify PDF document properties like title, author, and keywords. Improve organization and searchability of your PDF files.",
+//         link: "/pdf-metadata",
+//         icon: "fas fa-tags"
+//     },
+//     {
+//         title: "Extract PDF Text",
+//         description: "Extract text content from PDF files for editing or analysis. Useful for copying text from scanned documents or PDF forms.",
+//         link: "/pdf-text-extract",
+//         icon: "fas fa-font"
+//     },
+//     {
+//         title: "Rotate PDF Pages",
+//         description: "Adjust page orientation in PDF documents. Rotate individual pages or entire documents by 90°, 180°, or 270° as needed.",
+//         link: "/pdf-rotate",
+//         icon: "fas fa-redo"
+//     },
+//     {
+//         title: "Reorder PDF Pages",
+//         description: "Rearrange pages within a PDF document. Change the order of pages to create the perfect document flow.",
+//         link: "/pdf-reorder",
+//         icon: "fas fa-sort-numeric-down"
+//     },
+//     {
+//         title: "Watermark PDF",
+//         description: "Add text or image watermarks to PDF documents. Brand your documents or mark them as drafts, confidential, etc.",
+//         link: "/pdf-watermark",
+//         icon: "fas fa-stamp"
+//     }
+// ];
 
 export const FAQs =  [
     {

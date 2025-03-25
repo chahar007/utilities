@@ -13,7 +13,7 @@ $destructive-accent: #ff5252; // Warmer red for destructive actions
   display: flex;
   height: 100vh;
   width: 100vw;
-  background: $background-dark;
+  // background: $background-dark;
   color: $text-primary;
   font-family: Arial, sans-serif;
 }
@@ -21,7 +21,8 @@ $destructive-accent: #ff5252; // Warmer red for destructive actions
 /* Left Section - Action Buttons */
 .leftSection {
   width: 300px;
-  background: $background-light;
+  // background: $background-light;
+  border-right: 1px solid #30363d;
   padding: 20px;
   display: flex;
   flex-direction: column;

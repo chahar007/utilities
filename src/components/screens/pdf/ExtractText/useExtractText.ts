@@ -1,0 +1,1 @@
+// useExtractText.ts - Generated

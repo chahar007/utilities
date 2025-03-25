@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import styles from "./UploadFileHandling.module.scss";
 
-const UploadFileHandling = ({ onFileUpload, acceptedFormats = ["image/*"] }) => {
+const UploadFileHandling = ({ 
+  onFileUpload, 
+  acceptedFormats = ["image/*"], 
+  multiple = false 
+}) => {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleFileUpload = (file) => {
-    if (file) {
-      onFileUpload(file); // Pass file data to parent
+  // Handle File Upload
+  const handleFileUpload = (files) => {
+    if (!files.length) return;
+
+    if (multiple) {
+      onFileUpload(Array.from(files)); // Send array of files for multi-upload
+    } else {
+      onFileUpload(files[0]); // Send single file for single upload
     }
   };
 
+  // Handle Drag & Drop
   const handleFileDrop = (event) => {
     event.preventDefault();
     setIsDragging(false);
-    const file = event.dataTransfer.files[0];
-    handleFileUpload(file);
+    handleFileUpload(event.dataTransfer.files);
   };
 
   const handleDragOver = (event) => {
@@ -24,11 +33,6 @@ const UploadFileHandling = ({ onFileUpload, acceptedFormats = ["image/*"] }) => 
 
   const handleDragLeave = () => {
     setIsDragging(false);
-  };
-
-  const formatAcceptString = () => {
-    if (acceptedFormats.includes("*")) return "any file";
-    return acceptedFormats.map(f => f.split('/')[0]).join(", ");
   };
 
   return (
@@ -43,12 +47,13 @@ const UploadFileHandling = ({ onFileUpload, acceptedFormats = ["image/*"] }) => 
           type="file"
           className={styles.uploadInput}
           accept={acceptedFormats.join(",")}
-          onChange={(e) => handleFileUpload(e.target.files[0])}
+          onChange={(e) => handleFileUpload(e.target.files)}
           id="uploadFile"
+          multiple={multiple}
         />
         <div className={styles.uploadContent}>
           <i className={`fas fa-cloud-upload-alt ${styles.uploadIcon}`}></i>
-          <h3 className={styles.uploadText}>Drag & drop your file here</h3>
+          <h3 className={styles.uploadText}>Drag & drop your file(s) here</h3>
           <p className={styles.uploadSubtext}>or</p>
           <label className={styles.uploadLink} htmlFor="uploadFile">
             <i className="fas fa-file-alt fa-icon"></i> Browse files
@@ -58,7 +63,7 @@ const UploadFileHandling = ({ onFileUpload, acceptedFormats = ["image/*"] }) => 
       <div className={styles.fileTypes}>
         {acceptedFormats.map((format, index) => (
           <span key={index} className={styles.fileType}>
-            {format.split('/')[0].toUpperCase()}
+            {format.split("/")[0].toUpperCase()}
           </span>
         ))}
       </div>

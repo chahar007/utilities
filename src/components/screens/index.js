@@ -8,6 +8,9 @@ import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import CropImage from './CropImage/CropImage';
 import RotateImage from './RotateImage/RotateImage';
 import TermsOfUse from './TermsOfUse/TermsOfUse';
+import RotatePDF from './pdf/RotatePDF/RotatePDF';
+import ReorderPDF from './pdf/ReorderPDF/ReorderPDF';
+import ImagesToPDF from './pdf/ImagesToPDF/ImagesToPDF';
 
 export default {
     Main,
@@ -18,5 +21,8 @@ export default {
     PrivacyPolicy,
     CropImage,
     RotateImage,
-    TermsOfUse
+    TermsOfUse,
+    RotatePDF,
+    ReorderPDF,
+    ImagesToPDF
 }
