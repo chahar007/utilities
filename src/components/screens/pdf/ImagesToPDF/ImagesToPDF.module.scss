@@ -356,3 +356,46 @@
   transform: scale(0.98);
   transition: transform 0.1s ease;
 }
+
+.unsavedChanges {
+  color: #ff9800;
+  font-size: 0.8em;
+  margin-left: 8px;
+}
+
+.reorderWarning {
+  color: #ff9800;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.mobilePreview {
+  text-align: center;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  color: black;
+  button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    &:hover {
+      background: #0d8bf2;
+    }
+  }
+}
+
+.viewBtn {
+  background: #4caf50;
+  color: white;
+  margin: 0 10px;
+  
+  &:hover {
+    background: #3d8b40;
+  }
+}

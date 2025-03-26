@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import {
@@ -19,10 +19,19 @@ import SortableItem from "./SortableItem";
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import styles from "./ImagesToPDF.module.scss";
 
+// Enhanced mobile detection
+const isMobile = () => {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
+         window.innerWidth < 768;
+};
+
 const ImagesToPDF = () => {
   const [images, setImages] = useState([]);
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hasReordered, setHasReordered] = useState(false);
+  const [lastGeneratedOrder, setLastGeneratedOrder] = useState([]);
+  const previewWindowRef = useRef(null);
 
   const supportedFormats = [
     'image/png', 
@@ -32,15 +41,39 @@ const ImagesToPDF = () => {
     'image/gif',
     'image/bmp',
     'image/tiff',
-    'image/svg+xml' // Added SVG support
+    'image/svg+xml'
   ];
+
+  // Track if images have changed since last generation
+  useEffect(() => {
+    if (images.length === 0) {
+      setHasReordered(false);
+      return;
+    }
+
+    // Check if order has changed since last generation
+    const currentOrder = images.map(img => img.id);
+    const hasChanged = !arraysEqual(currentOrder, lastGeneratedOrder);
+    setHasReordered(hasChanged);
+  }, [images, lastGeneratedOrder]);
+
+  // Clean up object URLs on unmount
+  useEffect(() => {
+    return () => {
+      images.forEach(image => URL.revokeObjectURL(image.url));
+      if (pdfPreviewUrl) URL.revokeObjectURL(pdfPreviewUrl);
+      if (previewWindowRef.current && !previewWindowRef.current.closed) {
+        previewWindowRef.current.close();
+      }
+    };
+  }, [images, pdfPreviewUrl]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 5, // Require slight movement before dragging starts
-        delay: 250, // Add slight delay to distinguish from taps/clicks
-        tolerance: 5, // Allow for slight movement before considering it a drag
+        distance: 5,
+        delay: isMobile() ? 300 : 250, // Longer delay for mobile
+        tolerance: 10, // More tolerance for touch devices
       },
     }),
     useSensor(KeyboardSensor, {
@@ -49,7 +82,6 @@ const ImagesToPDF = () => {
   );
   
   const handleImageUpload = (uploadedFiles) => {
-    // Filter out unsupported formats
     const validFiles = uploadedFiles?.filter(file => 
       supportedFormats.includes(file.type.toLowerCase())
     );
@@ -64,11 +96,12 @@ const ImagesToPDF = () => {
       url: URL.createObjectURL(file),
       name: file.name,
       type: file.type.split('/')[1]?.toLowerCase() || 
-           (file.name.endsWith('.svg') ? 'svg' : 'unknown') // Handle SVG type
+           (file.name.endsWith('.svg') ? 'svg' : 'unknown')
     }));
 
     setImages((prevImages) => [...prevImages, ...newImages]);
-    setPdfPreviewUrl(null); // Clear previous preview when new images are added
+    setPdfPreviewUrl(null);
+    setHasReordered(true); // New uploads require generation
   };
 
   const handleDragEnd = (event) => {
@@ -77,7 +110,14 @@ const ImagesToPDF = () => {
       setImages((items) => {
         const oldIndex = items.findIndex((item) => item?.id === active?.id);
         const newIndex = items.findIndex((item) => item?.id === over?.id);
-        return arrayMove(items, oldIndex, newIndex);
+        const newItems = arrayMove(items, oldIndex, newIndex);
+        
+        // Mark as reordered only if we already had a generated PDF
+        if (pdfPreviewUrl) {
+          setHasReordered(true);
+        }
+        
+        return newItems;
       });
     }
   };
@@ -87,6 +127,12 @@ const ImagesToPDF = () => {
 
     setIsProcessing(true);
     try {
+      // Clean up previous PDF if exists
+      if (pdfPreviewUrl) {
+        URL.revokeObjectURL(pdfPreviewUrl);
+        setPdfPreviewUrl(null);
+      }
+
       const pdfDoc = await PDFDocument.create();
       
       for (const imageObj of images) {
@@ -94,7 +140,6 @@ const ImagesToPDF = () => {
           const imageBytes = await imageObj.file.arrayBuffer();
           let embeddedImage;
           
-          // Handle different image formats
           switch(imageObj.type) {
             case 'png':
               embeddedImage = await pdfDoc.embedPng(imageBytes);
@@ -107,12 +152,10 @@ const ImagesToPDF = () => {
             case 'gif':
             case 'bmp':
             case 'tiff':
-              // Convert unsupported formats to PNG via canvas
               embeddedImage = await convertViaCanvas(imageBytes, pdfDoc);
               break;
             case 'svg':
             case 'svg+xml':
-              // Convert SVG to PNG via canvas
               embeddedImage = await convertSvgToPdf(imageBytes, pdfDoc);
               break;
             default:
@@ -138,6 +181,8 @@ const ImagesToPDF = () => {
       const pdfUrl = URL.createObjectURL(pdfBlob);
 
       setPdfPreviewUrl(pdfUrl);
+      setHasReordered(false);
+      setLastGeneratedOrder(images.map(img => img.id));
     } catch (error) {
       console.error("PDF generation error:", error);
       alert("Error generating PDF. Please try again.");
@@ -146,7 +191,6 @@ const ImagesToPDF = () => {
     }
   };
 
-  // Convert unsupported formats to PNG using canvas
   const convertViaCanvas = async (imageBytes, pdfDoc) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -157,8 +201,11 @@ const ImagesToPDF = () => {
         canvas.width = img.width;
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
         
+        // Draw image to canvas
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        // Convert canvas to PNG blob
         canvas.toBlob(async (blob) => {
           try {
             const pngBytes = await blob.arrayBuffer();
@@ -166,21 +213,20 @@ const ImagesToPDF = () => {
             URL.revokeObjectURL(url);
             resolve(embeddedImage);
           } catch (err) {
-            reject(err);
+            reject(new Error(`Failed to convert image: ${err.message}`));
           }
         }, 'image/png');
       };
       
       img.onerror = () => {
         URL.revokeObjectURL(url);
-        reject(new Error('Failed to load image'));
+        reject(new Error('Failed to load image for conversion'));
       };
       
       img.src = url;
     });
   };
 
-  // Special handler for SVG files
   const convertSvgToPdf = async (svgBytes, pdfDoc) => {
     return new Promise((resolve, reject) => {
       const svgBlob = new Blob([svgBytes], { type: 'image/svg+xml' });
@@ -189,12 +235,13 @@ const ImagesToPDF = () => {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        canvas.width = img.width || 800; // Default width if not specified
-        canvas.height = img.height || 600; // Default height if not specified
+        // Set reasonable default dimensions if not specified
+        canvas.width = img.width || 800;
+        canvas.height = img.height || 600;
         
         const ctx = canvas.getContext('2d');
         
-        // For SVG, we need to ensure it's rendered properly
+        // Ensure SVG has proper dimensions
         const svgContent = new TextDecoder().decode(svgBytes);
         const svgWithDimensions = svgContent.includes('viewBox') ? 
           svgContent : 
@@ -203,28 +250,35 @@ const ImagesToPDF = () => {
         const svgBlob = new Blob([svgWithDimensions], { type: 'image/svg+xml' });
         const newUrl = URL.createObjectURL(svgBlob);
         
-        img.onload = () => {
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          
-          canvas.toBlob(async (blob) => {
-            try {
-              const pngBytes = await blob.arrayBuffer();
-              const embeddedImage = await pdfDoc.embedPng(pngBytes);
-              URL.revokeObjectURL(url);
-              URL.revokeObjectURL(newUrl);
-              resolve(embeddedImage);
-            } catch (err) {
-              reject(err);
-            }
-          }, 'image/png');
+        // Create new image with updated SVG
+        const newImg = new Image();
+        newImg.onload = () => {
+          try {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(async (blob) => {
+              try {
+                const pngBytes = await blob.arrayBuffer();
+                const embeddedImage = await pdfDoc.embedPng(pngBytes);
+                URL.revokeObjectURL(url);
+                URL.revokeObjectURL(newUrl);
+                resolve(embeddedImage);
+              } catch (err) {
+                reject(err);
+              }
+            }, 'image/png');
+          } catch (err) {
+            reject(err);
+          }
         };
         
-        img.onerror = () => {
+        newImg.onerror = () => {
           URL.revokeObjectURL(newUrl);
-          reject(new Error('Failed to load SVG'));
+          reject(new Error('Failed to load processed SVG'));
         };
         
-        img.src = newUrl;
+        newImg.src = newUrl;
       };
       
       img.onerror = () => {
@@ -234,6 +288,33 @@ const ImagesToPDF = () => {
       
       img.src = url;
     });
+  };
+
+  // Helper function to compare arrays
+  const arraysEqual = (a, b) => {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    for (let i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  };
+
+  const handleViewPDF = () => {
+    if (!pdfPreviewUrl) return;
+    
+    if (isMobile()) {
+      // For mobile devices, open in new tab
+      previewWindowRef.current = window.open(pdfPreviewUrl, '_blank');
+      if (!previewWindowRef.current) {
+        alert('Pop-up blocked. Please allow pop-ups for this site to view the PDF.');
+      }
+    } else {
+      // For desktop, keep the iframe preview
+      setPdfPreviewUrl(pdfPreviewUrl); // Refresh if needed
+    }
   };
 
   const handleDownloadPDF = () => {
@@ -248,6 +329,8 @@ const ImagesToPDF = () => {
     
     setImages([]);
     setPdfPreviewUrl(null);
+    setHasReordered(false);
+    setLastGeneratedOrder([]);
   };
 
   return (
@@ -278,13 +361,26 @@ const ImagesToPDF = () => {
           </div>
 
           <div className={styles.previewSection}>
-            <h3>PDF Preview</h3>
+            <h3>PDF Preview {hasReordered && <span className={styles.unsavedChanges}>(Unsaved Changes)</span>}</h3>
             {pdfPreviewUrl ? (
-              <iframe 
-                src={pdfPreviewUrl} 
-                title="PDF Preview" 
-                className={styles.pdfPreview}
-              />
+              isMobile() ? (
+                <div className={styles.mobilePreview}>
+                  <p>PDF preview is not available on mobile. Please download or open in new tab.</p>
+                  <button 
+                    onClick={handleViewPDF}
+                    className={styles.viewBtn}
+                  >
+                    <i className="fas fa-external-link-alt"></i> Open PDF
+                  </button>
+                </div>
+              ) : (
+                <iframe 
+                  src={`${pdfPreviewUrl}#toolbar=1&navpanes=0`}
+                  title="PDF Preview" 
+                  className={styles.pdfPreview}
+                  // type="application/pdf"
+                />
+              )
             ) : (
               <div className={styles.previewPlaceholder}>
                 <i className="fas fa-file-pdf"></i>
@@ -306,6 +402,11 @@ const ImagesToPDF = () => {
             <div className={styles.instructions}>
               <i className="fas fa-info-circle"></i>
               <p>Drag images to reorder them</p>
+              {hasReordered && (
+                <p className={styles.reorderWarning}>
+                  <i className="fas fa-exclamation-triangle"></i> Order changed - regenerate PDF
+                </p>
+              )}
             </div>
           </div>
 
@@ -347,12 +448,16 @@ const ImagesToPDF = () => {
       <div className={styles.actionButtons}>
         <button 
           onClick={generatePDF} 
-          disabled={images.length === 0 || isProcessing}
+          disabled={images.length === 0 || (isProcessing && !hasReordered)}
           className={styles.convertBtn}
         >
           {isProcessing ? (
             <>
-              <i className="fas fa-spinner fa-spin"></i> Converting...
+              <i className="fas fa-spinner fa-spin"></i> {hasReordered ? 'Regenerating...' : 'Converting...'}
+            </>
+          ) : hasReordered ? (
+            <>
+              <i className="fas fa-sync-alt"></i> Generate PDF
             </>
           ) : (
             <>
@@ -362,12 +467,22 @@ const ImagesToPDF = () => {
         </button>
         
         {pdfPreviewUrl && (
-          <button 
-            onClick={handleDownloadPDF}
-            className={styles.downloadBtn}
-          >
-            <i className="fas fa-download"></i> Download PDF
-          </button>
+          <>
+            {!isMobile() && (
+              <button 
+                onClick={handleViewPDF}
+                className={styles.viewBtn}
+              >
+                <i className="fas fa-eye"></i> View Fullscreen
+              </button>
+            )}
+            <button 
+              onClick={handleDownloadPDF}
+              className={styles.downloadBtn}
+            >
+              <i className="fas fa-download"></i> Download PDF
+            </button>
+          </>
         )}
       </div>
     </div>
