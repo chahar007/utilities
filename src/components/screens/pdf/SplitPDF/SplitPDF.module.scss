@@ -1,1 +1,682 @@
-// SplitPDF.module.scss - Generated
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    padding: 2rem;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  
+    h1 {
+      font-size: 2rem;
+      color: #58a6ff;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    p {
+      color: #8b949e;
+      font-size: 1.1rem;
+    }
+  }
+  
+  .content {
+    display: flex;
+    gap: 2rem;
+    flex: 1;
+  
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+  
+  .leftPanel, .rightPanel {
+    display: flex;
+    flex-direction: column;
+    background: #161b22;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #30363d;
+  }
+  
+  .leftPanel {
+    width: 40%;
+  
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+  }
+  
+  .rightPanel {
+    width: 60%;
+  
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+  }
+  
+  .uploadSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .fileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: #21262d;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+  
+    .fileName {
+      font-weight: 600;
+      color: #c9d1d9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .fileDetails {
+      color: #8b949e;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .reuploadBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: #f85149;
+    border: 1px solid #f85149;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    align-self: flex-end;
+  
+    &:hover {
+      background: rgba(248, 81, 73, 0.1);
+    }
+  }
+  
+  .splitOptions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .methodSelector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+  
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem;
+      background: #21262d;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+  
+      input {
+        display: none;
+      }
+  
+      span {
+        font-size: 0.9rem;
+        color: #c9d1d9;
+      }
+  
+      &:hover {
+        border-color: #58a6ff;
+        background: rgba(88, 166, 255, 0.1);
+      }
+  
+      input:checked + span {
+        color: #58a6ff;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .methodOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+    label {
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      font-weight: 500;
+    }
+  
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #e6edf3;
+      font-size: 0.9rem;
+  
+      &:focus {
+        outline: none;
+        border-color: #58a6ff;
+        box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
+      }
+    }
+  }
+  
+  .equalPartsControl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: #21262d;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #c9d1d9;
+      cursor: pointer;
+      transition: all 0.2s ease;
+  
+      &:hover {
+        background: #30363d;
+        border-color: #58a6ff;
+        color: #58a6ff;
+      }
+  
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  
+    input {
+      text-align: center;
+      max-width: 60px;
+    }
+  }
+  
+  .supportedFormats {
+    color: #8b949e;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .addButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background: #2ea043;
+    }
+  }
+  
+  .customSplitItem {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      color: #e6edf3;
+      font-size: 0.9rem;
+  
+      &:first-child {
+        max-width: 150px;
+      }
+    }
+  }
+  
+  .removeSmallButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #f85149;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background: #da3633;
+    }
+  }
+  
+  .actionButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .convertBtn, .downloadBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  
+  .convertBtn {
+    background: linear-gradient(90deg, #1f6feb 0%, #58a6ff 100%);
+    color: white;
+  
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(31, 111, 235, 0.3);
+    }
+  
+    &:disabled {
+      background: #484f58;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+  
+  .downloadBtn {
+    background: linear-gradient(90deg, #2ea043 0%, #56d364 100%);
+    color: white;
+  
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 160, 67, 0.3);
+    }
+  }
+  
+  .error {
+    color: #f85149;
+    padding: 0.75rem;
+    background: rgba(248, 81, 73, 0.1);
+    border-radius: 6px;
+    border-left: 3px solid #f85149;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .previewSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .sortingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  
+    h3 {
+      color: #58a6ff;
+      font-size: 1.2rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+  .instructions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #8b949e;
+    font-size: 0.9rem;
+  }
+  
+  .unsavedChanges {
+    color: #ff9800;
+    font-size: 0.8em;
+    margin-left: 8px;
+  }
+  
+  .previewPlaceholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(88, 166, 255, 0.05);
+    border: 2px dashed #30363d;
+    border-radius: 8px;
+    color: #8b949e;
+    gap: 1rem;
+    padding: 2rem;
+  
+    i {
+      font-size: 3rem;
+      color: #58a6ff;
+    }
+  
+    .convertHint {
+      font-size: 0.9rem;
+      color: #58a6ff;
+    }
+  }
+  
+  .pdfPreview {
+    width: 100%;
+    flex: 1;
+    min-height: 300px;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    background: #0d1117;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pdfIframe {
+    width: 100%;
+    flex: 1;
+    border: none;
+  }
+  
+  .imageListContainer {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .imageList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  
+  .sortableItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background: #30363d;
+      border-color: #58a6ff;
+    }
+  }
+  
+  .imageContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+  }
+  
+  .imageInfo {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .fileName {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #c9d1d9;
+    font-size: 0.9rem;
+  }
+  
+  .fileTypeBadge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+  }
+  
+  .emptyState {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #8b949e;
+    background: rgba(88, 166, 255, 0.05);
+    border: 2px dashed #30363d;
+    border-radius: 8px;
+    padding: 2rem;
+  
+    i {
+      font-size: 2rem;
+      color: #58a6ff;
+    }
+  }
+  
+  .mobilePreview {
+    text-align: center;
+    padding: 2rem;
+    color: #c9d1d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  
+    button {
+      margin-top: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  
+    .viewBtn {
+      background: #1f6feb;
+      color: white;
+  
+      &:hover {
+        background: #1a5bc7;
+      }
+    }
+  }
+  
+  /* Custom scrollbar */
+  .imageList::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .imageList::-webkit-scrollbar-track {
+    background: #161b22;
+    border-radius: 3px;
+  }
+  
+  .imageList::-webkit-scrollbar-thumb {
+    background: #58a6ff;
+    border-radius: 3px;
+  }
+  
+  .imageList::-webkit-scrollbar-thumb:hover {
+    background: #1f6feb;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .header {
+      h1 {
+        font-size: 1.5rem;
+      }
+  
+      p {
+        font-size: 1rem;
+      }
+    }
+  
+    .methodSelector {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .imageList {
+      max-height: 40vh;
+    }
+  }
+
+
+
+  .splitResultsContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .splitResultsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  
+  .splitResultItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background: #30363d;
+    }
+  
+    &.active {
+      border-color: #58a6ff;
+      background: rgba(88, 166, 255, 0.1);
+    }
+  }
+  
+  .splitResultInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
+  
+    i {
+      color: #f85149;
+      font-size: 1.25rem;
+    }
+  }
+  
+  .splitResultName {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .splitResultMeta {
+    font-size: 0.8rem;
+    color: #8b949e;
+  }
+  
+  .downloadBtnSmall {
+    background: transparent;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background: #30363d;
+      border-color: #58a6ff;
+      color: #58a6ff;
+    }
+  }
+  
+  .previewActions {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0 0;
+  }
+  
+  .mobileActions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }

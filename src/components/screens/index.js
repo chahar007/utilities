@@ -11,6 +11,7 @@ import TermsOfUse from './TermsOfUse/TermsOfUse';
 import RotatePDF from './pdf/RotatePDF/RotatePDF';
 import ReorderPDF from './pdf/ReorderPDF/ReorderPDF';
 import ImagesToPDF from './pdf/ImagesToPDF/ImagesToPDF';
+import SplitPDF from './pdf/SplitPDF/SplitPDF';
 
 export default {
     Main,
@@ -24,5 +25,6 @@ export default {
     TermsOfUse,
     RotatePDF,
     ReorderPDF,
-    ImagesToPDF
+    ImagesToPDF,
+    SplitPDF
 }

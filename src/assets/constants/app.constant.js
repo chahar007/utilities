@@ -58,7 +58,7 @@ export const PDF_FEATURES = [
     {
         title: "Split PDF",
         description: "Extract specific pages or split a PDF into multiple documents. Great for separating chapters, forms, or sharing just the needed pages.",
-        link: "/pdf-split",
+        link: "/pdf/split-pdf",
         icon: "fas fa-cut"
     },
     {

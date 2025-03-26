@@ -40,6 +40,9 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/image-to-pdf', component: pages.ImagesToPDF,
+    },
+    {
+        path: '/pdf/split-pdf', component: pages.SplitPDF,
     }
 ];
 
