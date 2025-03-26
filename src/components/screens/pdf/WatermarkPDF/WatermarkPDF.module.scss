@@ -1,1 +1,434 @@
-// WatermarkPDF.module.scss - Generated
+.watermarkContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e0e0;
+
+  .header {
+    padding: 20px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #333;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #58a6ff;
+    }
+
+    .tabControls {
+      display: flex;
+      gap: 10px;
+
+      .tabButton {
+        padding: 8px 16px;
+        border: none;
+        color: #e0e0e0;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+
+        &:hover:not(:disabled) {
+          background: #444;
+        }
+
+        &.active {
+          background: #58a6ff;
+          color: #121212;
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  .leftPanel {
+    width: 35%;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid #333;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 15px;
+      border-right: none;
+      border-bottom: 1px solid #333;
+    }
+
+    h3 {
+      margin: 0 0 15px 0;
+      color: #58a6ff;
+      font-size: 18px;
+    }
+
+    .uploadSection, .watermarkOptions, .actions {
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #333;
+    }
+
+    .dropArea {
+      border: 2px dashed #444;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      background: #252525;
+
+      &:hover {
+        border-color: #58a6ff;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      p {
+        margin: 0;
+        color: #a0a0a0;
+      }
+
+      .fileInfo {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        background: #333;
+        border-radius: 4px;
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 70%;
+        }
+
+        .clearButton {
+          background: #cf6679;
+          padding: 4px 8px;
+          font-size: 12px;
+          color: white;
+
+          &:hover {
+            background: #b00020;
+          }
+        }
+      }
+    }
+
+    .optionGroup {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #e0e0e0;
+        font-size: 14px;
+      }
+
+      input[type="text"], select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        font-size: 14px;
+        background: #333;
+        color: #e0e0e0;
+
+        &:disabled {
+          background: #252525;
+          cursor: not-allowed;
+        }
+      }
+
+      input[type="range"] {
+        width: 100%;
+        height: 6px;
+        background: #333;
+        border-radius: 3px;
+        -webkit-appearance: none;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 16px;
+          height: 16px;
+          background: #58a6ff;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        &:disabled::-webkit-slider-thumb {
+          background: #666;
+        }
+      }
+
+      .radioGroup {
+        display: flex;
+        gap: 15px;
+        margin-top: 8px;
+
+        .radioOption {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+
+          input {
+            margin: 0;
+            accent-color: #58a6ff;
+          }
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .colorPicker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        input[type="color"] {
+          width: 40px;
+          height: 30px;
+          padding: 0;
+          border: 1px solid #444;
+          cursor: pointer;
+          background: #333;
+        }
+
+        span {
+          font-family: monospace;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .imageUpload {
+      .uploadArea {
+        border: 2px dashed #444;
+        border-radius: 6px;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #252525;
+
+        &:hover {
+          border-color: #58a6ff;
+        }
+
+        input[type="file"] {
+          display: none;
+        }
+
+        p {
+          margin: 0 0 5px 0;
+          color: #a0a0a0;
+        }
+
+        small {
+          color: #666;
+          font-size: 12px;
+        }
+      }
+
+      .imagePreviewContainer {
+        margin-bottom: 10px;
+        max-height: 150px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background: #252525;
+
+        .imagePreview {
+          max-width: 100%;
+          max-height: 150px;
+          object-fit: contain;
+        }
+      }
+
+      .removeButton {
+        width: 100%;
+        background: #cf6679;
+        padding: 8px;
+        color: white;
+
+        &:hover {
+          background: #b00020;
+        }
+      }
+    }
+
+    .applyButton {
+      width: 100%;
+      padding: 12px;
+      background: #58a6ff;
+      color: #121212;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover:not(:disabled) {
+        background: #9a67ea;
+      }
+
+      &:disabled {
+        background: #333;
+        color: #666;
+        cursor: not-allowed;
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    }
+
+    .error {
+      color: #cf6679;
+      font-size: 14px;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(207, 102, 121, 0.1);
+      border-radius: 4px;
+      border-left: 3px solid #cf6679;
+    }
+  }
+
+  .rightPanel {
+    width: 65%;
+    padding: 20px;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .previewContainer {
+      width: 100%;
+      height: 100%;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #333;
+
+      .pdfPreview {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .previewOverlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(30, 30, 30, 0.8);
+        color: #e0e0e0;
+        padding: 8px;
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+
+    .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border: 1px solid #333;
+
+      .placeholderContent {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+
+        .placeholderIcon {
+          width: 60px;
+          height: 60px;
+          fill: #444;
+          margin-bottom: 15px;
+        }
+
+        h3 {
+          margin: 0 0 10px 0;
+          color: #58a6ff;
+        }
+
+        p {
+          margin: 0;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

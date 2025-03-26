@@ -43,6 +43,9 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/split-pdf', component: pages.SplitPDF,
+    },
+    {
+        path: '/pdf/watermark-pdf', component: pages.WatermarkPDF,
     }
 ];
 

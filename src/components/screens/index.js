@@ -12,6 +12,7 @@ import RotatePDF from './pdf/RotatePDF/RotatePDF';
 import ReorderPDF from './pdf/ReorderPDF/ReorderPDF';
 import ImagesToPDF from './pdf/ImagesToPDF/ImagesToPDF';
 import SplitPDF from './pdf/SplitPDF/SplitPDF';
+import WatermarkPDF from './pdf/WatermarkPDF/WatermarkPDF';
 
 export default {
     Main,
@@ -26,5 +27,6 @@ export default {
     RotatePDF,
     ReorderPDF,
     ImagesToPDF,
-    SplitPDF
+    SplitPDF,
+    WatermarkPDF
 }

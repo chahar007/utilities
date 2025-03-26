@@ -88,7 +88,7 @@ export const PDF_FEATURES = [
     {
         title: "Watermark PDF",
         description: "Add text or image watermarks to PDF documents. Brand your documents or mark them as drafts, confidential, etc.",
-        link: "/pdf-watermark",
+        link: "/pdf/watermark-pdf",
         icon: "fas fa-stamp"
     },
     {
