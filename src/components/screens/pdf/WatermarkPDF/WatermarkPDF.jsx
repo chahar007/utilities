@@ -383,7 +383,7 @@ const WatermarkPDF = () => {
 
               <div className={styles.actions}>
                 <button 
-                  className={styles.previewButton}
+                  className={styles.applyButton}
                   onClick={previewWatermark}
                   disabled={isLoading || !pdfFile || 
                     (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
@@ -395,21 +395,6 @@ const WatermarkPDF = () => {
                     </span>
                   ) : (
                     'Preview Watermark'
-                  )}
-                </button>
-                <button 
-                  className={styles.applyButton}
-                  onClick={downloadWatermarkedPdf}
-                  disabled={isLoading || !pdfFile || 
-                    (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
-                >
-                  {isLoading ? (
-                    <span className={styles.loading}>
-                      <span className={styles.spinner}></span>
-                      Applying...
-                    </span>
-                  ) : (
-                    'Download Watermarked PDF'
                   )}
                 </button>
                 {(error || applyError) && <div className={styles.error}>{error || applyError}</div>}
@@ -427,6 +412,21 @@ const WatermarkPDF = () => {
         <div className={styles.rightPanel}>
           {previewPdfUrl ? (
             <div className={styles.previewContainer}>
+               <button 
+                  className={styles.applyButton}
+                  onClick={downloadWatermarkedPdf}
+                  disabled={isLoading || !pdfFile || 
+                    (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
+                >
+                  {isLoading ? (
+                    <span className={styles.loading}>
+                      <span className={styles.spinner}></span>
+                      Applying...
+                    </span>
+                  ) : (
+                    'Download Watermarked PDF'
+                  )}
+                </button>
               <iframe 
                 src={previewPdfUrl} 
                 title="PDF Preview"

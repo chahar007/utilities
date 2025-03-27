@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { PDFDocument, rgb, degrees } from 'pdf-lib';
+import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
 
 const useWatermark = () => {
   const [modifiedPdfUrl, setModifiedPdfUrl] = useState(null);
@@ -45,32 +45,12 @@ const useWatermark = () => {
 
         const colorRgb = hexToRgb(color);
 
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
         for (const page of pages) {
           const { width, height } = page.getSize();
-          
-          let x, y;
-          switch (position) {
-            case 'top-left':
-              x = width * 0.1;
-              y = height * 0.9;
-              break;
-            case 'top-right':
-              x = width * 0.8;
-              y = height * 0.9;
-              break;
-            case 'bottom-left':
-              x = width * 0.1;
-              y = height * 0.1;
-              break;
-            case 'bottom-right':
-              x = width * 0.8;
-              y = height * 0.1;
-              break;
-            default: // center
-              x = width / 2;
-              y = height / 2;
-          }
 
+          // Calculate text size
           let textSize;
           switch (size) {
             case 'small':
@@ -80,21 +60,77 @@ const useWatermark = () => {
               textSize = fontSize * 1.5;
               break;
             case 'cover':
-              textSize = Math.min(width, height) * 0.8;
+              textSize = Math.min(width, height) * 0.08;
               break;
-            default: // medium
+            default:
               textSize = fontSize;
           }
 
-          page.drawText(watermarkText, {
-            x,
-            y,
-            size: textSize,
-            color: colorRgb,
-            rotate: degrees(rotationNum),
-            opacity: opacityNum,
+          // Function to wrap text into multiple lines
+          const wrapText = (text, maxWidth) => {
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+              const testLine = currentLine + ' ' + words[i];
+              const testWidth = font.widthOfTextAtSize(testLine, textSize);
+
+              if (testWidth > maxWidth) {
+                lines.push(currentLine);
+                currentLine = words[i];
+              } else {
+                currentLine = testLine;
+              }
+            }
+            lines.push(currentLine);
+            return lines;
+          };
+
+          // Define max text width to avoid overflow
+          const maxTextWidth = width * 0.8; // Allow some margin
+          const textLines = wrapText(watermarkText, maxTextWidth);
+          const textHeight = textSize * textLines.length * 1.2; // Line spacing
+
+          // Determine x, y position
+          let x, y;
+          switch (position) {
+            case 'top-left':
+              x = width * 0.1;
+              y = height - textSize;
+              break;
+            case 'top-right':
+              x = width * 0.9 - maxTextWidth;
+              y = height - textSize;
+              break;
+            case 'bottom-left':
+              x = width * 0.1;
+              y = textHeight;
+              break;
+            case 'bottom-right':
+              x = width * 0.9 - maxTextWidth;
+              y = textHeight;
+              break;
+            default: // Center
+              x = (width - maxTextWidth) / 2;
+              y = (height + textHeight) / 2;
+          }
+
+          // Draw each line of text
+          textLines.forEach((line, index) => {
+            page.drawText(line, {
+              x,
+              y: y - index * textSize * 1.2, // Adjust for line breaks
+              size: textSize,
+              color: colorRgb,
+              rotate: degrees(rotationNum),
+              opacity: opacityNum,
+              font,
+            });
           });
         }
+
+
       } else if (watermarkType === 'image' && watermarkImage) {
         const imageBytes = await watermarkImage.arrayBuffer();
         let image;
