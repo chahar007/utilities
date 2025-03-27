@@ -1,3 +1,4 @@
-# https://utilix.pro
 User-agent: *
 Disallow:
+
+Sitemap: https://utilix.pro/sitemap.xml
