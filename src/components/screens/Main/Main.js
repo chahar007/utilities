@@ -178,7 +178,7 @@ const Main = () => {
             </section>
 
             <FAQSection />
-
+{/* 
             <section className={styles.ctaSection}>
                 <h2>Ready to Optimize Your Workflow?</h2>
                 <p>Start using our tools today and experience the difference</p>
@@ -186,7 +186,7 @@ const Main = () => {
                     <Link to="/image-tools" className={styles.primaryButton}>Try Image Tools</Link>
                     <Link to="/pdf-tools" className={styles.secondaryButton}>Try PDF Tools</Link>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 };

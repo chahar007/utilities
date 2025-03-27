@@ -40,11 +40,11 @@ const Header = () => {
         closeAll();
       }
     };
-    
+
     if (menuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -52,6 +52,13 @@ const Header = () => {
 
   useEffect(() => {
     closeAll();
+    setTimeout(() => {
+      const outletElement = document.querySelector(".outlet");
+      if (outletElement) {
+          outletElement.scrollTo({ top: 0, behavior: "smooth" });
+      }
+  }, 100); // Delay ensures DOM updates before scrolling
+
   }, [location.pathname]);
 
   // Close dropdown when clicking anywhere on mobile
@@ -61,7 +68,7 @@ const Header = () => {
         setActiveDropdown(null);
       }
     };
-    
+
     document.addEventListener('click', handleMobileClick);
     return () => document.removeEventListener('click', handleMobileClick);
   }, [activeDropdown]);
@@ -82,8 +89,28 @@ const Header = () => {
 
       <nav className={`${styles.navbar} ${menuOpen ? styles.open : ''}`}>
         <ul className={styles.navLinks}>
+
+          {/* PDF Tools Dropdown */}
+          <li
+            className={`${styles.navItem} ${activeDropdown === "pdf" ? styles.active : ''}`}
+            onClick={(e) => {
+              if (window.innerWidth <= 768) e.stopPropagation();
+              toggleDropdown("pdf");
+            }}
+          >
+            <span>PDF Tools <i className="fas fa-chevron-down"></i></span>
+            <ul className={styles.dropdown}>
+              <li><Link to="/pdf/split-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/split-pdf') ? styles.active : ''}>Split PDF</Link></li>
+              <li><Link to="/pdf/image-to-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/image-to-pdf') ? styles.active : ''}>Image to PDF</Link></li>
+              <li><Link to="/pdf/watermark-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/watermark-pdf') ? styles.active : ''}>Add Watermark PDF</Link></li>
+              <li><Link to="/pdf/edit-meta-data-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/edit-meta-data-pdf') ? styles.active : ''}>Edit Meta Data PDF</Link></li>
+              <li><Link to="/pdf/reorder-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/reorder-pdf') ? styles.active : ''}>Reorder PDF</Link></li>
+              <li><Link to="/pdf/rotate-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/rotate-pdf') ? styles.active : ''}>Rotate PDF</Link></li>
+            </ul>
+          </li>
+
           {/* Image Compression Dropdown */}
-          <li 
+          <li
             className={`${styles.navItem} ${activeDropdown === "compression" ? styles.active : ''}`}
             onClick={(e) => {
               if (window.innerWidth <= 768) {
@@ -101,7 +128,7 @@ const Header = () => {
           </li>
 
           {/* Image Resize Dropdown */}
-          <li 
+          <li
             className={`${styles.navItem} ${activeDropdown === "resize" ? styles.active : ''}`}
             onClick={(e) => {
               if (window.innerWidth <= 768) e.stopPropagation();
@@ -117,7 +144,7 @@ const Header = () => {
           </li>
 
           {/* Image Convert Dropdown */}
-          <li 
+          <li
             className={`${styles.navItem} ${activeDropdown === "convert" ? styles.active : ''}`}
             onClick={(e) => {
               if (window.innerWidth <= 768) e.stopPropagation();
@@ -134,7 +161,7 @@ const Header = () => {
           </li>
 
           {/* Other Tools Dropdown */}
-          <li 
+          <li
             className={`${styles.navItem} ${activeDropdown === "other" ? styles.active : ''}`}
             onClick={(e) => {
               if (window.innerWidth <= 768) e.stopPropagation();
@@ -145,23 +172,6 @@ const Header = () => {
             <ul className={styles.dropdown}>
               <li><Link to="/crop-image" onClick={handleLinkClick} className={location.pathname.includes('/crop-image') ? styles.active : ''}>Crop Image</Link></li>
               <li><Link to="/rotate-image" onClick={handleLinkClick} className={location.pathname.includes('/rotate-image') ? styles.active : ''}>Rotate Image</Link></li>
-            </ul>
-          </li>
-
-          {/* PDF Tools Dropdown */}
-          <li 
-            className={`${styles.navItem} ${activeDropdown === "pdf" ? styles.active : ''}`}
-            onClick={(e) => {
-              if (window.innerWidth <= 768) e.stopPropagation();
-              toggleDropdown("pdf");
-            }}
-          >
-            <span>PDF Tools <i className="fas fa-chevron-down"></i></span>
-            <ul className={styles.dropdown}>
-              <li><Link to="/pdf-merge" onClick={handleLinkClick} className={location.pathname.includes('/pdf-merge') ? styles.active : ''}>Merge PDF</Link></li>
-              <li><Link to="/pdf-split" onClick={handleLinkClick} className={location.pathname.includes('/pdf-split') ? styles.active : ''}>Split PDF</Link></li>
-              <li><Link to="/pdf-edit" onClick={handleLinkClick} className={location.pathname.includes('/pdf-edit') ? styles.active : ''}>Edit PDF</Link></li>
-              <li><Link to="/pdf-compress" onClick={handleLinkClick} className={location.pathname.includes('/pdf-compress') ? styles.active : ''}>Compress PDF</Link></li>
             </ul>
           </li>
         </ul>

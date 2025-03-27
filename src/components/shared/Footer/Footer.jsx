@@ -16,14 +16,20 @@ const Footer = () => {
             <li onClick={() => navigate("/image-compression")}>Image Compression</li>
             <li onClick={() => navigate("/image-resizer")}>Image Resizing</li>
             <li onClick={() => navigate("/image-base64-converter")}>Base64 Converter</li>
+            <li onClick={() => navigate("/crop-image")}>Crop Image</li>
+            <li onClick={() => navigate("/rotate-image")}>Rotate Image</li>
           </ul>
         </div>
 
         <div className={styles.footerSection}>
-          <h2>Other Tools</h2>
+          <h2>PDF Tools</h2>
           <ul className={styles.footerLinks}>
-            <li onClick={() => navigate("/rotate-image")}>Rotate Image</li>
-            <li onClick={() => navigate("/crop-image")}>Crop Image</li>
+            <li onClick={() => navigate("/pdf/split-pdf")}>Split PDF</li>
+            <li onClick={() => navigate("/pdf/image-to-pdf")}>Image to PDF</li>
+            <li onClick={() => navigate("/pdf/watermark-pdf")}>Watermark PDF</li>
+            <li onClick={() => navigate("/pdf/edit-meta-data-pdf")}>Edit Meta Data PDF</li>
+            <li onClick={() => navigate("/pdf/reorder-pdf")}>Reorder PDF</li>
+            <li onClick={() => navigate("/pdf/rotate-pdf")}>Rotate PDF</li>
           </ul>
         </div>
 
