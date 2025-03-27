@@ -49,6 +49,9 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/edit-meta-data-pdf', component: pages.EditMetadata,
+    },
+    {
+        path: '/pdf/merge-pdf', component: pages.MergePDF,
     }
 ];
 

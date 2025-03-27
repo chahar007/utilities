@@ -56,6 +56,12 @@ export const IMAGE_FEATURES = [
 
 export const PDF_FEATURES = [
     {
+        title: "Merge PDFs",
+        description: "Combine multiple PDF files into one document. Perfect for consolidating reports, presentations, or any PDF documents that belong together.",
+        link: "/pdf/merge-pdf",
+        icon: "fas fa-object-group"
+    },
+    {
         title: "Split PDF",
         description: "Extract specific pages or split a PDF into multiple documents. Great for separating chapters, forms, or sharing just the needed pages.",
         link: "/pdf/split-pdf",

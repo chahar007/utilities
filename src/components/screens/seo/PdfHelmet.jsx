@@ -19,21 +19,6 @@ export const SplitPDFHelmet = () => {
     );
 };
 
-
-export const MergePDFHelmet = () => {
-    return (
-        <Helmet>
-            <title>Merge PDF Files Online - Combine Multiple PDFs | Utilix Pro</title>
-            <meta name="description" content="Merge multiple PDF files into one document quickly and easily. Utilix Pro lets you combine PDFs online for free." />
-            <meta name="keywords" content="merge PDFs, combine PDF files, online PDF merger, join PDFs, PDF combiner tool" />
-            <meta property="og:title" content="Merge PDFs Online - Utilix Pro" />
-            <meta property="og:description" content="Easily combine multiple PDF documents into a single file with Utilix Pro. Merge PDFs online for free!" />
-            <meta property="og:url" content={window.location.origin + '/merge-pdf'} />
-            <link rel="canonical" href={window.location.origin + '/merge-pdf'} />
-        </Helmet>
-    );
-};
-
 export const RotatePDFHelmet = () => {
     return (
         <Helmet>
@@ -141,6 +126,21 @@ export const ImageToPDFHelmet = () => {
             <meta name="twitter:description" content="Upload multiple images, arrange them in your desired order, and convert them into a PDF easily with Utilix Pro's image-to-PDF converter." />
             <meta name="twitter:image" content={window.location.origin + '/assets/image-to-pdf-preview.jpg'} />
             <link rel="canonical" href={window.location.origin + '/image-to-pdf'} />
+        </Helmet>
+    );
+};
+
+
+export const MergePDFHelmet = () => {
+    return (
+        <Helmet>
+            <title>Merge PDF Files Online - Combine & Arrange PDFs | Utilix Pro</title>
+            <meta name="description" content="Easily merge multiple PDF files online with Utilix Pro. Upload, arrange in any order, and combine them into a single PDF effortlessly." />
+            <meta name="keywords" content="merge PDF, combine PDFs, PDF merger, reorder PDF pages, join PDFs online, merge PDF tool, arrange PDF files" />
+            <meta property="og:title" content="Merge PDF Files Online - Combine & Reorder | Utilix Pro" />
+            <meta property="og:description" content="Upload multiple PDFs, arrange them in your desired order, and merge them into one document with Utilix Pro’s free online PDF merger." />
+            <meta property="og:url" content={window.location.origin + '/merge-pdf'} />
+            <link rel="canonical" href={window.location.origin + '/merge-pdf'} />
         </Helmet>
     );
 };

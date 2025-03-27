@@ -100,6 +100,7 @@ const Header = () => {
           >
             <span>PDF Tools <i className="fas fa-chevron-down"></i></span>
             <ul className={styles.dropdown}>
+              <li><Link to="/pdf/merge-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/merge-pdf') ? styles.active : ''}>Merge PDF</Link></li>
               <li><Link to="/pdf/split-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/split-pdf') ? styles.active : ''}>Split PDF</Link></li>
               <li><Link to="/pdf/image-to-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/image-to-pdf') ? styles.active : ''}>Image to PDF</Link></li>
               <li><Link to="/pdf/watermark-pdf" onClick={handleLinkClick} className={location.pathname.includes('/pdf/watermark-pdf') ? styles.active : ''}>Add Watermark PDF</Link></li>

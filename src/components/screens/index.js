@@ -14,6 +14,7 @@ import ImagesToPDF from './pdf/ImagesToPDF/ImagesToPDF';
 import SplitPDF from './pdf/SplitPDF/SplitPDF';
 import WatermarkPDF from './pdf/WatermarkPDF/WatermarkPDF';
 import EditMetadata from './pdf/EditMetadata/EditMetadata';
+import MergePDF from './pdf/MergePDF/MergePDF';
 
 export default {
     Main,
@@ -30,5 +31,6 @@ export default {
     ImagesToPDF,
     SplitPDF,
     WatermarkPDF,
-    EditMetadata
+    EditMetadata,
+    MergePDF,
 }

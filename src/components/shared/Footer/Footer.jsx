@@ -24,6 +24,7 @@ const Footer = () => {
         <div className={styles.footerSection}>
           <h2>PDF Tools</h2>
           <ul className={styles.footerLinks}>
+            <li onClick={() => navigate("/pdf/merge-pdf")}>Merge PDF</li>
             <li onClick={() => navigate("/pdf/split-pdf")}>Split PDF</li>
             <li onClick={() => navigate("/pdf/image-to-pdf")}>Image to PDF</li>
             <li onClick={() => navigate("/pdf/watermark-pdf")}>Watermark PDF</li>
