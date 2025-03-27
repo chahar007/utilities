@@ -94,7 +94,7 @@ export const PDF_FEATURES = [
     {
         title: "Edit PDF Metadata",
         description: "View and modify PDF document properties like title, author, and keywords. Improve organization and searchability of your PDF files.",
-        link: "/pdf-metadata",
+        link: "/pdf/edit-meta-data-pdf",
         icon: "fas fa-tags"
     }
 ];
@@ -199,12 +199,15 @@ export const FAQs =  [
 ];
 
 
+
 export const HOW_TO_USE_DATA = [
     {
         category: "Image Tools",
+        icon: "fas fa-image",
         tools: [
             {
                 title: "Compress Images",
+                icon: "fas fa-compress",
                 steps: [
                     "Upload your image file",
                     "Adjust compression settings",
@@ -212,10 +215,11 @@ export const HOW_TO_USE_DATA = [
                 ]
             },
             {
-                title: "Convert Formats",
+                title: "Convert Image Formats",
+                icon: "fas fa-file-import",
                 steps: [
                     "Select your image",
-                    "Choose output format",
+                    "Choose output format (PNG, JPG, WebP, etc.)",
                     "Download converted file"
                 ]
             }
@@ -223,21 +227,24 @@ export const HOW_TO_USE_DATA = [
     },
     {
         category: "PDF Tools",
+        icon: "fas fa-file-pdf",
         tools: [
             {
-                title: "Merge PDFs",
+                title: "Images to PDF",
+                icon: "fas fa-file-merge",
                 steps: [
-                    "Upload multiple PDF files",
-                    "Arrange page order",
-                    "Download merged document"
+                    "Upload multiple images files",
+                    "Arrange pages in the desired order",
+                    "Download the merged document"
                 ]
             },
             {
                 title: "Split PDF",
+                icon: "fas fa-cut",
                 steps: [
                     "Upload your PDF",
-                    "Select pages to extract",
-                    "Download separated files"
+                    "Choose how to split (range, even/odd, equal parts)",
+                    "Download separated PDF files"
                 ]
             }
         ]

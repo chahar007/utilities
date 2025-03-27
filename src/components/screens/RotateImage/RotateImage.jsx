@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "./RotateImage.module.scss";
 import UploadFileHandling from "../Home/components/UploadFileHandling";
-import { RotateImageHelmet } from "../Home/seo/TabsHelment";
+import { RotateImageHelmet } from "../seo/TabsHelment";
 
 const RotateImage = () => {
     const [imageSrc, setImageSrc] = useState(null);

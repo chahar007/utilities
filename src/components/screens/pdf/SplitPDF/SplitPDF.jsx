@@ -3,6 +3,7 @@ import { PDFDocument } from "pdf-lib";
 import useSplitPDF from "./useSplitPDF";
 import styles from "./SplitPDF.module.scss";
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import { SplitPDFHelmet } from "../../seo/PdfHelmet";
 
 const SplitPDFComponent = () => {
   // State management
@@ -211,6 +212,9 @@ const SplitPDFComponent = () => {
 
   return (
     <div className={styles.container}>
+
+      <SplitPDFHelmet />
+      
       <div className={styles.header}>
         <h1>Split PDF Files</h1>
         <p>Upload a PDF file and split it by pages or ranges</p>

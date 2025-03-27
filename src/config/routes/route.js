@@ -46,6 +46,9 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/watermark-pdf', component: pages.WatermarkPDF,
+    },
+    {
+        path: '/pdf/edit-meta-data-pdf', component: pages.EditMetadata,
     }
 ];
 

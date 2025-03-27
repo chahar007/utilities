@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles/Resizing.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
-import { ResizingHelment } from '../seo/TabsHelment';
+import { ResizingHelmet } from '../../seo/TabsHelment';
 import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
 
 const Resizing = () => {
@@ -119,7 +119,7 @@ const Resizing = () => {
     <div className={styles.resizing}>
 
 
-      <ResizingHelment />
+      <ResizingHelmet />
 
       <h2 className={styles.headingTool} >Effortless Image Resizing</h2>
       <p className={styles.instructions}>

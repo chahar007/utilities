@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles/Base64.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
-import { Base64Helmet } from '../seo/TabsHelment';
+import { Base64Helmet } from '../../seo/TabsHelment';
 
 const Base64 = () => {
   const [error, setError] = useState(null);

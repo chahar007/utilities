@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './styles/Compression.module.scss';
 import UploadFileHandling from '../components/UploadFileHandling';
 import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
-import { CompressionHelmet } from '../seo/TabsHelment';
+import { CompressionHelmet } from '../../seo/TabsHelment';
 
 const Compression = () => {
   const [error, setError] = useState(null);

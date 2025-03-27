@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { _rotatePDF } from "./useRotatePDF";
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import styles from './RotatePDF.module.scss';
+import { RotatePDFHelmet } from "../../seo/PdfHelmet";
 
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Detect Mobile
 
@@ -57,6 +58,7 @@ const RotatePDF = () => {
 
     return (
         <div className={styles.container}>
+            <RotatePDFHelmet />
             <div className={styles.sidebar}>
                 <h2>PDF Rotation Tools</h2>
 
@@ -179,8 +181,3 @@ const RotatePDF = () => {
 };
 
 export default RotatePDF;
-
-
-
-// 1️⃣ Rotate PDF → 2️⃣ Reorder PDF → 4️⃣ Images to PDF
-// 5️⃣ Split PDF → 6️⃣ Watermark PDF → 7️⃣ Edit Metadata

@@ -18,6 +18,7 @@ import {
 import SortableItem from "./SortableItem";
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import styles from "./ReorderPDF.module.scss";
+import { ReorderPDFHelmet } from "../../seo/PdfHelmet";
 
 const ReorderPDF = () => {
   const [pdfPages, setPdfPages] = useState([]);
@@ -196,7 +197,7 @@ const ReorderPDF = () => {
 
   return (
     <div className={styles.container}>
-      {/* Left Panel - PDF Preview */}
+      <ReorderPDFHelmet />      
       <div className={styles.previewPanel}>
         <div className={styles.panelHeader}>
           <h2>PDF Preview</h2>

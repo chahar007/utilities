@@ -4,7 +4,7 @@ import Conversion from './Tabs/Conversion';
 import Compression from './Tabs/Compression';
 import Base64 from './Tabs/Base64';
 import Resizing from './Tabs/Resizing';
-import HomeHelmet from './seo/HomeHelmet';
+import HomeHelmet from '../seo/HomeHelmet';
 import { useLocation } from 'react-router-dom';
 
 const Home = () => {

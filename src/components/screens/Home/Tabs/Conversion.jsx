@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles/Conversion.module.scss";
 import UploadFileHandling from "../components/UploadFileHandling";
-import { ConversionHelmet } from "../seo/TabsHelment";
+import { ConversionHelmet } from "../../seo/TabsHelment";
 
 const Conversion = () => {
   const [selectedFormat, setSelectedFormat] = useState("jpg");

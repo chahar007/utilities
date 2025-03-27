@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Header.module.scss';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { imageKeyMappings } from '../../../assets/images/imageKeyMapping';
 
 const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -70,7 +71,8 @@ const Header = () => {
       {menuOpen && <div className={styles.overlay} onClick={closeAll}></div>}
 
       <div className={styles.logo} onClick={() => navigate('/')}>
-        <i className="fas fa-image"></i>
+        {/* <i className="fas fa-image"></i> */}
+        <img src={imageKeyMappings.appLogo} alt="" srcset="" />
         <span>Utilix Pro</span>
       </div>
 

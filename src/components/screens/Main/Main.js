@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Main.module.scss';
 import { useState } from "react";
-import { MainHelmet } from '../Home/seo/TabsHelment';
+import { MainHelmet } from '../seo/TabsHelment';
 import { IMAGE_FEATURES, PDF_FEATURES, FAQs, HOW_TO_USE_DATA } from '../../../assets/constants/app.constant';
+import { MainPageHelmet } from '../seo/MainHelmet';
 
 const FeatureCard = ({ title, description, link, icon, category }) => {
     return (
@@ -46,23 +47,23 @@ const FAQSection = () => {
     );
 };
 
+
 const HowToUseSection = () => {
     return (
         <section className={styles.howToUseSection}>
-            <h2>How To Use Our Tools</h2>
+            <h2 className={styles.sectionTitle}>📌 How To Use Our Tools</h2>
+            <p className={styles.sectionDescription}>
+                Follow these **easy steps** to use our **Image & PDF tools** efficiently.
+            </p>
+            
             <div className={styles.howToColumns}>
                 {HOW_TO_USE_DATA.map((category, index) => (
                     <div key={index} className={styles.howToColumn}>
-                        <h3>{category.category}</h3>
+                        <h3 className={styles.categoryTitle}>
+                            <i className={category.icon}></i> {category.category}
+                        </h3>
                         {category.tools.map((tool, toolIndex) => (
-                            <div key={toolIndex} className={styles.howToItem}>
-                                <h4>{tool.title}</h4>
-                                <ol>
-                                    {tool.steps.map((step, stepIndex) => (
-                                        <li key={stepIndex}>{step}</li>
-                                    ))}
-                                </ol>
-                            </div>
+                            <HowToUseItem key={toolIndex} tool={tool} />
                         ))}
                     </div>
                 ))}
@@ -71,12 +72,32 @@ const HowToUseSection = () => {
     );
 };
 
+const HowToUseItem = ({ tool }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+        <div className={`${styles.howToItem} ${isOpen ? styles.open : ""}`}>
+            <div className={styles.toolHeader} onClick={() => setIsOpen(!isOpen)}>
+                <i className={tool.icon}></i> <h4>{tool.title}</h4>
+                <i className={`fas ${isOpen ? "fa-chevron-up" : "fa-chevron-down"} ${styles.toggleIcon}`}></i>
+            </div>
+            {isOpen && (
+                <ol className={styles.stepsList}>
+                    {tool.steps.map((step, stepIndex) => (
+                        <li key={stepIndex}>{step}</li>
+                    ))}
+                </ol>
+            )}
+        </div>
+    );
+};
+
 const Main = () => {
     const [activeTab, setActiveTab] = useState('all');
 
     return (
         <div className={styles.mainContainer}>
-            <MainHelmet />
+            <MainPageHelmet />
 
             <header className={styles.heroSection}>
                 <h1>Streamline Your Documents & Images</h1>

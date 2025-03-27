@@ -13,6 +13,7 @@ import ReorderPDF from './pdf/ReorderPDF/ReorderPDF';
 import ImagesToPDF from './pdf/ImagesToPDF/ImagesToPDF';
 import SplitPDF from './pdf/SplitPDF/SplitPDF';
 import WatermarkPDF from './pdf/WatermarkPDF/WatermarkPDF';
+import EditMetadata from './pdf/EditMetadata/EditMetadata';
 
 export default {
     Main,
@@ -28,5 +29,6 @@ export default {
     ReorderPDF,
     ImagesToPDF,
     SplitPDF,
-    WatermarkPDF
+    WatermarkPDF,
+    EditMetadata
 }

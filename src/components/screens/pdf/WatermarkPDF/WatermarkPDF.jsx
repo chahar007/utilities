@@ -4,6 +4,8 @@ import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import useWatermark from './useWatermarkPDF';
+import { WatermarkPDFHelmet } from "../../seo/PdfHelmet";
+
 
 const WatermarkPDF = () => {
   // [Previous state declarations remain the same...]
@@ -159,8 +161,11 @@ const WatermarkPDF = () => {
 
   return (
     <div className={styles.watermarkContainer}>
+      <WatermarkPDFHelmet />
       <div className={styles.header}>
-        <h1>PDF Toolkit</h1>
+        <h1>Add Watermark in you PDF's</h1>
+        <p>Upload a PDF file and add text or image to the pdf pages</p>
+
       </div>
 
       <div className={styles.content}>

@@ -18,6 +18,7 @@ import {
 import SortableItem from "./SortableItem";
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import styles from "./ImagesToPDF.module.scss";
+import { ImageToPDFHelmet } from "../../seo/PdfHelmet";
 
 // Enhanced mobile detection
 const isMobile = () => {
@@ -336,6 +337,8 @@ const ImagesToPDF = () => {
   return (
     <div className={styles.container}>
       {/* Header */}
+      <ImageToPDFHelmet />
+
       <div className={styles.header}>
         <h1>Images to PDF Converter</h1>
         <p>Upload, arrange, and convert your images to a single PDF file</p>
