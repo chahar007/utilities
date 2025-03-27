@@ -112,7 +112,7 @@ const useWatermark = () => {
               y = textHeight;
               break;
             default: // Center
-              x = (width - maxTextWidth) / 2;
+              x = (width - (maxTextWidth-20)) / 2;
               y = (height + textHeight) / 2;
           }
 

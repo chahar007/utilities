@@ -5,35 +5,33 @@ import { saveAs } from 'file-saver';
 import UploadFileHandling from "../../Home/components/UploadFileHandling";
 import useWatermark from './useWatermarkPDF';
 
-
 const WatermarkPDF = () => {
-  // PDF state
+  // [Previous state declarations remain the same...]
   const [pdfFile, setPdfFile] = useState(null);
   const [originalPdfUrl, setOriginalPdfUrl] = useState(null);
   const [previewPdfUrl, setPreviewPdfUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('watermark');
-  
+
   // Watermark state
   const [watermarkOptions, setWatermarkOptions] = useState({
     watermarkType: 'text',
     watermarkText: 'CONFIDENTIAL',
     watermarkImage: null,
     opacity: 50,
-    rotation: 45,
+    rotation: 0,
     position: 'center',
     size: 'medium',
-    color: '#ffffff',
-    fontSize: 48
+    color: '#000000',
+    fontSize: 32
   });
 
   // Watermark hook
-  const { 
-    applyWatermark, 
-    modifiedPdfUrl, 
-    isApplying, 
-    applyError 
+  const {
+    applyWatermark,
+    modifiedPdfUrl,
+    isApplying,
+    applyError
   } = useWatermark();
 
   // Handle PDF file upload
@@ -158,6 +156,7 @@ const WatermarkPDF = () => {
     };
   }, [originalPdfUrl, previewPdfUrl, watermarkOptions.watermarkImage]);
 
+
   return (
     <div className={styles.watermarkContainer}>
       <div className={styles.header}>
@@ -167,206 +166,219 @@ const WatermarkPDF = () => {
       <div className={styles.content}>
         {/* Left Panel - Controls */}
         <div className={styles.leftPanel}>
-          {activeTab === 'watermark' ? (
-            <>
-              <div className={styles.uploadSection}>
-                <h3>Upload PDF</h3>
-                <div 
-                  className={styles.dropArea}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop}
+
+          <div className={styles.uploadSection}>
+            <div className={styles.sectionHeader}>
+              <h3>Upload PDF</h3>
+              {pdfFile && (
+                <button
+                  onClick={resetForm}
+                  className={styles.clearButton}
+                  disabled={isLoading}
                 >
-                  <UploadFileHandling 
-                    acceptedFormats={['application/pdf']}  
-                    onFileUpload={handlePdfUpload} 
+                  Clear
+                </button>
+              )}
+            </div>
+            <div
+              className={styles.dropArea}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+            >
+              <UploadFileHandling
+                acceptedFormats={['application/pdf']}
+                onFileUpload={handlePdfUpload}
+              />
+              {pdfFile && (
+                <div className={styles.fileInfo}>
+                  <span>{pdfFile.name}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.watermarkOptions}>
+            <h3>Watermark Settings</h3>
+
+            <div className={styles.optionRow}>
+              <div className={styles.optionGroup}>
+                <label>Watermark Type</label>
+                <div className={styles.radioGroup}>
+                  <label className={styles.radioOption}>
+                    <input
+                      type="radio"
+                      name="watermarkType"
+                      checked={watermarkOptions.watermarkType === 'text'}
+                      onChange={() => setWatermarkOptions(prev => ({
+                        ...prev,
+                        watermarkType: 'text'
+                      }))}
+                      disabled={isLoading || !pdfFile}
+                    />
+                    <span>Text</span>
+                  </label>
+                  <label className={styles.radioOption}>
+                    <input
+                      type="radio"
+                      name="watermarkType"
+                      checked={watermarkOptions.watermarkType === 'image'}
+                      onChange={() => setWatermarkOptions(prev => ({
+                        ...prev,
+                        watermarkType: 'image'
+                      }))}
+                      disabled={isLoading || !pdfFile}
+                    />
+                    <span>Image</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className={styles.optionGroup}>
+                <label>Position</label>
+                <select
+                  value={watermarkOptions.position}
+                  onChange={(e) => setWatermarkOptions(prev => ({
+                    ...prev,
+                    position: e.target.value
+                  }))}
+                  disabled={isLoading || !pdfFile}
+                >
+                  <option value="top-left">Top Left</option>
+                  <option value="top-right">Top Right</option>
+                  <option value="center">Center</option>
+                  <option value="bottom-left">Bottom Left</option>
+                  <option value="bottom-right">Bottom Right</option>
+                </select>
+              </div>
+            </div>
+
+            {watermarkOptions.watermarkType === 'text' ? (
+              <div className={styles.optionRow}>
+                <div className={styles.optionGroup}>
+                  <label>Watermark Text</label>
+                  <input
+                    type="text"
+                    value={watermarkOptions.watermarkText}
+                    onChange={(e) => setWatermarkOptions(prev => ({
+                      ...prev,
+                      watermarkText: e.target.value
+                    }))}
+                    placeholder="Enter text"
+                    disabled={isLoading || !pdfFile}
                   />
-                  {pdfFile && (
-                    <div className={styles.fileInfo}>
-                      <span>{pdfFile.name}</span>
-                      <button 
-                        onClick={resetForm}
-                        className={styles.clearButton}
-                        disabled={isLoading}
+                </div>
+                <div className={styles.optionGroup}>
+                  <label>Text Color</label>
+                  <div className={styles.colorPicker}>
+                    <input
+                      type="color"
+                      value={watermarkOptions.color}
+                      onChange={(e) => setWatermarkOptions(prev => ({
+                        ...prev,
+                        color: e.target.value
+                      }))}
+                      disabled={isLoading || !pdfFile}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.optionGroup}>
+                <label>Watermark Image</label>
+                <div className={styles.imageUpload}>
+                  {watermarkOptions.watermarkImage ? (
+                    <div className={styles.imagePreviewRow}>
+                      <div className={styles.imagePreviewContainer}>
+                        <img
+                          src={URL.createObjectURL(watermarkOptions.watermarkImage)}
+                          alt="Watermark preview"
+                          className={styles.imagePreview}
+                        />
+                      </div>
+                      <button
+                        onClick={() => setWatermarkOptions(prev => ({
+                          ...prev,
+                          watermarkImage: null
+                        }))}
+                        className={styles.removeButton}
+                        disabled={isLoading || !pdfFile}
                       >
-                        Clear
+                        Remove
                       </button>
+                    </div>
+                  ) : (
+                    <div className={styles.uploadArea}>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e.target.files[0])}
+                        disabled={isLoading || !pdfFile}
+                        id="fileupload"
+                        className={styles.fileInput}
+                      />
+                      <label htmlFor="fileupload" className={styles.fileLabel}>
+                        Upload watermark image
+                      </label>
                     </div>
                   )}
                 </div>
               </div>
+            )}
 
-              <div className={styles.watermarkOptions}>
-                <h3>Watermark Settings</h3>
-                
+            <div className={styles.optionRow}>
+              <div className={styles.optionGroup}>
+                <label>Opacity: {watermarkOptions.opacity}%</label>
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={watermarkOptions.opacity}
+                  onChange={(e) => setWatermarkOptions(prev => ({
+                    ...prev,
+                    opacity: Number(e.target.value)
+                  }))}
+                  disabled={isLoading || !pdfFile}
+                />
+              </div>
+
+              <div className={styles.optionGroup}>
+                <label>Rotation: {watermarkOptions.rotation}°</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  value={watermarkOptions.rotation}
+                  onChange={(e) => setWatermarkOptions(prev => ({
+                    ...prev,
+                    rotation: Number(e.target.value)
+                  }))}
+                  disabled={isLoading || !pdfFile}
+                />
+              </div>
+            </div>
+
+            {watermarkOptions.watermarkType === 'text' && (
+
+              <div className={styles.optionRow}>
                 <div className={styles.optionGroup}>
-                  <label>Watermark Type</label>
-                  <div className={styles.radioGroup}>
-                    <label className={styles.radioOption}>
-                      <input
-                        type="radio"
-                        name="watermarkType"
-                        checked={watermarkOptions.watermarkType === 'text'}
-                        onChange={() => setWatermarkOptions(prev => ({
-                          ...prev,
-                          watermarkType: 'text'
-                        }))}
-                        disabled={isLoading || !pdfFile}
-                      />
-                      <span>Text Watermark</span>
-                    </label>
-                    <label className={styles.radioOption}>
-                      <input
-                        type="radio"
-                        name="watermarkType"
-                        checked={watermarkOptions.watermarkType === 'image'}
-                        onChange={() => setWatermarkOptions(prev => ({
-                          ...prev,
-                          watermarkType: 'image'
-                        }))}
-                        disabled={isLoading || !pdfFile}
-                      />
-                      <span>Image Watermark</span>
-                    </label>
-                  </div>
-                </div>
-
-                {watermarkOptions.watermarkType === 'text' ? (
-                  <>
-                    <div className={styles.optionGroup}>
-                      <label>Watermark Text</label>
-                      <input
-                        type="text"
-                        value={watermarkOptions.watermarkText}
-                        onChange={(e) => setWatermarkOptions(prev => ({
-                          ...prev,
-                          watermarkText: e.target.value
-                        }))}
-                        placeholder="Enter watermark text"
-                        disabled={isLoading || !pdfFile}
-                      />
-                    </div>
-                    <div className={styles.optionGroup}>
-                      <label>Text Color</label>
-                      <div className={styles.colorPicker}>
-                        <input
-                          type="color"
-                          value={watermarkOptions.color}
-                          onChange={(e) => setWatermarkOptions(prev => ({
-                            ...prev,
-                            color: e.target.value
-                          }))}
-                          disabled={isLoading || !pdfFile}
-                        />
-                        <span>{watermarkOptions.color}</span>
-                      </div>
-                    </div>
-                    <div className={styles.optionGroup}>
-                      <label>Font Size: {watermarkOptions.fontSize}px</label>
-                      <input
-                        type="range"
-                        min="12"
-                        max="120"
-                        value={watermarkOptions.fontSize}
-                        onChange={(e) => setWatermarkOptions(prev => ({
-                          ...prev,
-                          fontSize: parseInt(e.target.value)
-                        }))}
-                        disabled={isLoading || !pdfFile}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <div className={styles.optionGroup}>
-                    <label>Watermark Image</label>
-                    <div className={styles.imageUpload}>
-                      {watermarkOptions.watermarkImage ? (
-                        <>
-                          <div className={styles.imagePreviewContainer}>
-                            <img 
-                              src={URL.createObjectURL(watermarkOptions.watermarkImage)} 
-                              alt="Watermark preview" 
-                              className={styles.imagePreview}
-                            />
-                          </div>
-                          <button 
-                            onClick={() => setWatermarkOptions(prev => ({
-                              ...prev,
-                              watermarkImage: null
-                            }))}
-                            className={styles.removeButton}
-                            disabled={isLoading || !pdfFile}
-                          >
-                            Remove Image
-                          </button>
-                        </>
-                      ) : (
-                        <div className={styles.uploadArea}>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload(e.target.files[0])}
-                            disabled={isLoading || !pdfFile}
-                          />
-                          <p>Click to upload watermark image</p>
-                          <small>PNG or JPG recommended</small>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                <div className={styles.optionGroup}>
-                  <label>Opacity: {watermarkOptions.opacity}%</label>
+                  <label>Font Size: {watermarkOptions.fontSize}px</label>
                   <input
                     type="range"
-                    min="1"
-                    max="100"
-                    value={watermarkOptions.opacity}
+                    min="12"
+                    max="120"
+                    value={watermarkOptions.fontSize}
                     onChange={(e) => setWatermarkOptions(prev => ({
                       ...prev,
-                      opacity: Number(e.target.value)
+                      fontSize: parseInt(e.target.value)
                     }))}
-                    disabled={isLoading || !pdfFile}
+                    disabled={isLoading || !pdfFile || watermarkOptions.watermarkType === 'image'}
                   />
-                </div>
-
-                <div className={styles.optionGroup}>
-                  <label>Rotation: {watermarkOptions.rotation}°</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="360"
-                    value={watermarkOptions.rotation}
-                    onChange={(e) => setWatermarkOptions(prev => ({
-                      ...prev,
-                      rotation: Number(e.target.value)
-                    }))}
-                    disabled={isLoading || !pdfFile}
-                  />
-                </div>
-
-                <div className={styles.optionGroup}>
-                  <label>Position</label>
-                  <select 
-                    value={watermarkOptions.position} 
-                    onChange={(e) => setWatermarkOptions(prev => ({
-                      ...prev,
-                      position: e.target.value
-                    }))}
-                    disabled={isLoading || !pdfFile}
-                  >
-                    <option value="top-left">Top Left</option>
-                    <option value="top-right">Top Right</option>
-                    <option value="center">Center</option>
-                    <option value="bottom-left">Bottom Left</option>
-                    <option value="bottom-right">Bottom Right</option>
-                  </select>
                 </div>
 
                 <div className={styles.optionGroup}>
                   <label>Size</label>
-                  <select 
-                    value={watermarkOptions.size} 
+                  <select
+                    value={watermarkOptions.size}
                     onChange={(e) => setWatermarkOptions(prev => ({
                       ...prev,
                       size: e.target.value
@@ -376,70 +388,59 @@ const WatermarkPDF = () => {
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
                     <option value="large">Large</option>
-                    <option value="cover">Cover Entire Page</option>
+                    <option value="cover">Cover</option>
                   </select>
                 </div>
               </div>
 
-              <div className={styles.actions}>
-                <button 
-                  className={styles.applyButton}
-                  onClick={previewWatermark}
-                  disabled={isLoading || !pdfFile || 
-                    (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
-                >
-                  {isLoading ? (
-                    <span className={styles.loading}>
-                      <span className={styles.spinner}></span>
-                      Previewing...
-                    </span>
-                  ) : (
-                    'Preview Watermark'
-                  )}
-                </button>
-                {(error || applyError) && <div className={styles.error}>{error || applyError}</div>}
-              </div>
-            </>
-          ) : (
-            <div className={styles.splitControls}>
-              <h3>Split PDF</h3>
-              <p>Feature coming soon!</p>
-            </div>
-          )}
+            )}
+          </div>
+
+          <div className={styles.actionRow}>
+            <button
+              className={styles.previewButton}
+              onClick={previewWatermark}
+              disabled={isLoading || !pdfFile ||
+                (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
+            >
+              {isLoading ? (
+                <span className={styles.loading}>
+                  <span className={styles.spinner}></span>
+                  Previewing...
+                </span>
+              ) : (
+                'Preview'
+              )}
+            </button>
+            <button
+              className={styles.downloadButton}
+              onClick={downloadWatermarkedPdf}
+              disabled={isLoading || !pdfFile ||
+                (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
+            >
+              Download
+            </button>
+          </div>
+          {(error || applyError) && <div className={styles.error}>{error || applyError}</div>}
         </div>
 
         {/* Right Panel - Preview */}
         <div className={styles.rightPanel}>
           {previewPdfUrl ? (
             <div className={styles.previewContainer}>
-               <button 
-                  className={styles.applyButton}
-                  onClick={downloadWatermarkedPdf}
-                  disabled={isLoading || !pdfFile || 
-                    (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
-                >
-                  {isLoading ? (
-                    <span className={styles.loading}>
-                      <span className={styles.spinner}></span>
-                      Applying...
-                    </span>
-                  ) : (
-                    'Download Watermarked PDF'
-                  )}
-                </button>
-              <iframe 
-                src={previewPdfUrl} 
+              <iframe
+                src={previewPdfUrl}
                 title="PDF Preview"
                 className={styles.pdfPreview}
               />
               <div className={styles.previewOverlay}>
                 <p>Preview of your watermarked PDF</p>
                 {previewPdfUrl !== originalPdfUrl && (
-                  <button 
+                  <button
                     className={styles.resetPreviewButton}
                     onClick={() => setPreviewPdfUrl(originalPdfUrl)}
                   >
-                    Reset Preview
+                    Reset
                   </button>
                 )}
               </div>

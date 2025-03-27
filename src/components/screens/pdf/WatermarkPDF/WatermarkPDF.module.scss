@@ -7,47 +7,17 @@
   color: #e0e0e0;
 
   .header {
-    padding: 20px;
+    padding: 15px 20px;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
     border-bottom: 1px solid #333;
 
     h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 22px;
       color: #58a6ff;
-    }
-
-    .tabControls {
-      display: flex;
-      gap: 10px;
-
-      .tabButton {
-        padding: 8px 16px;
-        border: none;
-        color: #e0e0e0;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-
-        &:hover:not(:disabled) {
-          background: #444;
-        }
-
-        &.active {
-          background: #58a6ff;
-          color: #121212;
-        }
-
-        &:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-      }
     }
   }
 
@@ -63,109 +33,111 @@
   }
 
   .leftPanel {
-    width: 35%;
-    padding: 20px;
+    width: 380px;
+    padding: 15px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     border-right: 1px solid #333;
+    // background: #1a1a1a;
 
     @media (max-width: 768px) {
       width: 100%;
-      padding: 15px;
+      padding: 12px;
       border-right: none;
       border-bottom: 1px solid #333;
     }
 
     h3 {
-      margin: 0 0 15px 0;
+      margin: 0 0 12px 0;
       color: #58a6ff;
-      font-size: 18px;
+      font-size: 16px;
     }
 
-    .uploadSection, .watermarkOptions, .actions {
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    .uploadSection, .watermarkOptions {
+      padding: 12px;
+      border-radius: 6px;
+      // background: #252525;
       border: 1px solid #333;
+    }
+
+    .sectionHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .clearButton {
+        background: #cf6679;
+        padding: 4px 8px;
+        font-size: 12px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background: #b00020;
+        }
+      }
     }
 
     .dropArea {
       border: 2px dashed #444;
-      border-radius: 8px;
-      padding: 20px;
+      border-radius: 6px;
+      padding: 15px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      position: relative;
-      background: #252525;
+      // background: #252525;
 
       &:hover {
         border-color: #58a6ff;
       }
 
-      input[type="file"] {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
-      p {
-        margin: 0;
-        color: #a0a0a0;
-      }
-
       .fileInfo {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px;
-        background: #333;
+        margin-top: 8px;
+        padding: 6px;
+        // background: #333;
         border-radius: 4px;
+        font-size: 13px;
 
         span {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 70%;
-        }
-
-        .clearButton {
-          background: #cf6679;
-          padding: 4px 8px;
-          font-size: 12px;
-          color: white;
-
-          &:hover {
-            background: #b00020;
-          }
+          display: block;
         }
       }
     }
 
+    .optionRow {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+
+      .optionGroup {
+        flex: 1;
+      }
+    }
+
     .optionGroup {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
 
       label {
         display: block;
-        margin-bottom: 8px;
-        font-weight: 500;
+        margin-bottom: 6px;
+        font-size: 13px;
         color: #e0e0e0;
-        font-size: 14px;
       }
 
       input[type="text"], select {
         width: 100%;
-        padding: 8px 12px;
+        padding: 6px 10px;
         border: 1px solid #444;
         border-radius: 4px;
-        font-size: 14px;
+        font-size: 13px;
         background: #333;
         color: #e0e0e0;
 
@@ -177,15 +149,16 @@
 
       input[type="range"] {
         width: 100%;
-        height: 6px;
-        background: #333;
-        border-radius: 3px;
+        height: 4px;
+        background: #bdbcbc;
+        border-radius: 2px;
         -webkit-appearance: none;
+        margin-top: 8px;
 
         &::-webkit-slider-thumb {
           -webkit-appearance: none;
-          width: 16px;
-          height: 16px;
+          width: 14px;
+          height: 14px;
           background: #58a6ff;
           border-radius: 50%;
           cursor: pointer;
@@ -198,22 +171,19 @@
 
       .radioGroup {
         display: flex;
-        gap: 15px;
-        margin-top: 8px;
+        gap: 10px;
+        margin-top: 6px;
 
         .radioOption {
           display: flex;
           align-items: center;
           gap: 6px;
           cursor: pointer;
+          font-size: 13px;
 
           input {
             margin: 0;
             accent-color: #58a6ff;
-          }
-
-          span {
-            font-size: 14px;
           }
         }
       }
@@ -221,20 +191,15 @@
       .colorPicker {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
 
         input[type="color"] {
-          width: 40px;
+          width: 30px;
           height: 30px;
           padding: 0;
           border: 1px solid #444;
           cursor: pointer;
           background: #333;
-        }
-
-        span {
-          font-family: monospace;
-          font-size: 14px;
         }
       }
     }
@@ -243,34 +208,46 @@
       .uploadArea {
         border: 2px dashed #444;
         border-radius: 6px;
-        padding: 15px;
+        padding: 12px;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s ease;
         background: #252525;
-
+        position: relative; // Add this
+        overflow: hidden; // Add this
+      
         &:hover {
           border-color: #58a6ff;
         }
-
-        input[type="file"] {
-          display: none;
+      
+        .fileInput {
+          position: absolute;
+          width: 0.1px;
+          height: 0.1px;
+          opacity: 0;
+          overflow: hidden;
+          z-index: -1;
+          // visibility: hidden;
         }
-
-        p {
-          margin: 0 0 5px 0;
+      
+        .fileLabel {
+          display: block;
+          margin: 0;
+          font-size: 13px;
           color: #a0a0a0;
-        }
-
-        small {
-          color: #666;
-          font-size: 12px;
+          cursor: pointer;
         }
       }
 
+      .imagePreviewRow {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
       .imagePreviewContainer {
-        margin-bottom: 10px;
-        max-height: 150px;
+        flex: 1;
+        max-height: 80px;
         overflow: hidden;
         display: flex;
         justify-content: center;
@@ -281,16 +258,19 @@
 
         .imagePreview {
           max-width: 100%;
-          max-height: 150px;
+          max-height: 80px;
           object-fit: contain;
         }
       }
 
       .removeButton {
-        width: 100%;
+        padding: 6px 10px;
         background: #cf6679;
-        padding: 8px;
         color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
 
         &:hover {
           background: #b00020;
@@ -298,29 +278,47 @@
       }
     }
 
-    .applyButton {
-      width: 100%;
-      padding: 12px;
-      background: #58a6ff;
-      color: #121212;
-      border: none;
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
+    .actionRow {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
 
-      &:hover:not(:disabled) {
-        background: #9a67ea;
+      button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:disabled {
+          background: #333;
+          color: #666;
+          cursor: not-allowed;
+        }
       }
 
-      &:disabled {
-        background: #333;
-        color: #666;
-        cursor: not-allowed;
+      .previewButton {
+        background: #58a6ff;
+        color: #121212;
+
+        &:hover:not(:disabled) {
+          background: #3d8eff;
+        }
+      }
+
+      .downloadButton {
+        background: #2ea043;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background: #238636;
+        }
       }
 
       .loading {
@@ -330,8 +328,8 @@
       }
 
       .spinner {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         border: 2px solid rgba(255, 255, 255, 0.3);
         border-radius: 50%;
         border-top-color: #fff;
@@ -345,7 +343,7 @@
 
     .error {
       color: #cf6679;
-      font-size: 14px;
+      font-size: 13px;
       margin-top: 10px;
       padding: 8px;
       background: rgba(207, 102, 121, 0.1);
@@ -355,27 +353,25 @@
   }
 
   .rightPanel {
-    width: 65%;
-    padding: 20px;
-    background: #121212;
+    flex: 1;
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    // background: #1e1e1e;
 
     @media (max-width: 768px) {
-      width: 100%;
       min-height: 300px;
     }
 
     .previewContainer {
       width: 100%;
       height: 100%;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
       position: relative;
       overflow: hidden;
       border: 1px solid #333;
+      background: #252525;
 
       .pdfPreview {
         width: 100%;
@@ -391,8 +387,24 @@
         background: rgba(30, 30, 30, 0.8);
         color: #e0e0e0;
         padding: 8px;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: 12px;
+
+        .resetPreviewButton {
+          background: none;
+          border: 1px solid #666;
+          color: #e0e0e0;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          cursor: pointer;
+
+          &:hover {
+            background: #333;
+          }
+        }
       }
     }
 
@@ -402,9 +414,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
       border: 1px solid #333;
 
       .placeholderContent {
@@ -413,20 +423,21 @@
         color: #666;
 
         .placeholderIcon {
-          width: 60px;
-          height: 60px;
+          width: 50px;
+          height: 50px;
           fill: #444;
-          margin-bottom: 15px;
+          margin-bottom: 12px;
         }
 
         h3 {
-          margin: 0 0 10px 0;
+          margin: 0 0 8px 0;
           color: #58a6ff;
+          font-size: 16px;
         }
 
         p {
           margin: 0;
-          font-size: 14px;
+          font-size: 13px;
         }
       }
     }
