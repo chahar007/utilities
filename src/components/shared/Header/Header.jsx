@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React, { useEffect, useState } from 'react';
 import styles from './Header.module.scss'; // Import the CSS for the header
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { imageMappings } from '../../../assets/images/ImageKeyMapping';
 import { GAME_SUMMARY } from '../../../assets/constants/app.constant';
 
@@ -11,11 +11,21 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = (slug = '/') => {
     setSearchOpen(false);
     navigate(slug);
   };
+
+
+  useEffect(() => {
+    const outlet = document.querySelector(".outlet");
+    if (outlet) {
+      outlet.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.pathname]);
+
 
   const handleSearchSubmit = () => {
     // Assuming GAME_DETAILS is an object, and we need to filter over the values of the object
@@ -53,6 +63,7 @@ const Header = () => {
           onClick={() => setSearchOpen(true)}
         />
         <a onClick={() => handleNavigation('/all-games')}>Games</a>
+        <a onClick={() => handleNavigation('/blogs')}>Blogs</a>
         {/* <a>Help</a> */}
       </nav>
       {searchOpen && (

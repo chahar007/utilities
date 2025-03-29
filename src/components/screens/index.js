@@ -7,6 +7,8 @@ import DetailedScreen from './DetailScreen/DetailScreen';
 import AboutUs from './About/About';
 import AllGamesListing from './Games/GameListing';
 import ComingSoonGame from './Games/ComingSoonGame';
+import Blogs from './Blogs/Blogs';
+import BlogDetails from './Blogs/BlogDetails';
 
 export default {
     Main,
@@ -18,4 +20,6 @@ export default {
     AboutUs,
     AllGamesListing,
     ComingSoonGame,
+    Blogs,
+    BlogDetails
 }

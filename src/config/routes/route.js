@@ -16,6 +16,12 @@ const AUTH_ROUTES = [
     },
     {
         path: 'games/:id', component: pages.ComingSoonGame
+    },
+    {
+        path: '/blogs', component: pages.Blogs
+    },
+    {
+        path: '/blog/:id', component: pages.BlogDetails
     }
 ];
 
