@@ -53,7 +53,7 @@ const HowToUseSection = () => {
         <section className={styles.howToUseSection}>
             <h2 className={styles.sectionTitle}>📌 How To Use Our Tools</h2>
             <p className={styles.sectionDescription}>
-                Follow these **easy steps** to use our **Image & PDF tools** efficiently.
+                Follow these <b>easy steps</b> to use our <b>Image & PDF tools</b> efficiently.
             </p>
             
             <div className={styles.howToColumns}>

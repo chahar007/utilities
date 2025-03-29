@@ -140,7 +140,10 @@ const useSplitPDF = () => {
           continue;
         }
 
-        const newPdfBytes = await newPdfDoc.save();
+        const newPdfBytes = await newPdfDoc.save({
+          useObjectStreams: true,
+          updateFieldAppearances: false,
+        });
 
         // ✅ Assign custom names if available
         let fileName = `split_part_${i + 1}.pdf`;
