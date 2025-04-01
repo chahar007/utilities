@@ -157,4 +157,4 @@ export const GAMES_LIST = {
 
 
 
-export const FALLBACK_IMAGE = "https://via.placeholder.com/300x200.png?text=Coming+Soon";
+export const FALLBACK_IMAGE = "";

@@ -4,6 +4,7 @@ import styles from './Header.module.scss'; // Import the CSS for the header
 import { useNavigate, useLocation } from 'react-router-dom';
 import { imageMappings } from '../../../assets/images/ImageKeyMapping';
 import { GAME_SUMMARY } from '../../../assets/constants/app.constant';
+import AdBanner  from '../GoogleAds/AdBanner';
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -108,6 +109,8 @@ const Header = () => {
               <div className={styles.noResults}>Search your query ...</div>
             )}
           </div>
+
+          <AdBanner id={301} />
         </div>
       )}
     </header>
