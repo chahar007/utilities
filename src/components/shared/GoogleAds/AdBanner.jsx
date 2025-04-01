@@ -41,7 +41,8 @@ const AdBanner = ({ id }) => {
         padding: "0 20px",
         height: "250px", // Fixed height instead of minHeight
         overflow: "hidden",
-        position: "relative" // Helps contain the ad
+        position: "relative", // Helps contain the ad
+        textAlign: "center"
       }}
       key={`ad-${id}`}
     >

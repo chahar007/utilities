@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styles from './styles/ComingSoonGame.module.scss';
 import { GAMES_LIST, FALLBACK_IMAGE } from '../../../assets/constants/games.constant';
+import AdBanner from '../../shared/GoogleAds/AdBanner';
 
 const ComingSoonGame = () => {
     const { id: slug } = useParams(); // Extract slug from URL params
@@ -44,6 +45,8 @@ const ComingSoonGame = () => {
                 </div>
                 <p className={styles.message}>Stay tuned for updates. We're working hard to bring you the best gaming experience.</p>
             </div>
+
+            <AdBanner id={101} />
         </div>
     );
 };

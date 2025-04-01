@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { GAME_DETAILS } from '../../../assets/constants/app.constant';
 import GameHubHelmet from '../seo/GameHubHelmet';
 import useIsMobile from '../../../config/hooks/useIsMobile';
+import AdBanner from '../../shared/GoogleAds/AdBanner';
+import MultipleFlexAd from '../../shared/GoogleAds/MultipleFlexAd';
 
 const DetailedScreen = () => {
   // Static Data for the DetailedScreen
@@ -104,6 +106,8 @@ const DetailedScreen = () => {
               extraClass={styles.gameDetailsCard}
             />
 
+            <AdBanner id={201} />
+
             {/* System Requirements */}
             <GameCard
               title="System Requirements"
@@ -150,6 +154,13 @@ const DetailedScreen = () => {
                 ))}
               </div>
             </section>
+
+
+            <MultipleFlexAd
+              client="ca-pub-3758217602745916"
+              slot="4265384347"
+              format="auto"
+            />
           </div>
         </>
 
