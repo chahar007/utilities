@@ -41,7 +41,7 @@ export default function RockPaperScissors() {
     <div className={styles.layout}>
       {/* Left Ad Banner - Desktop Only */}
       <div className={styles.adContainerLeft}>
-       <VerticalSideAd id={151} />
+       {/* <VerticalSideAd id={151} /> */}
       </div>
 
       {/* Main Game Content */}
@@ -122,7 +122,7 @@ export default function RockPaperScissors() {
 
       {/* Right Ad Banner - Desktop Only */}
       <div className={styles.adContainerRight}>
-        <VerticalSideAd id={152} />
+        {/* <VerticalSideAd id={152} /> */}
       </div>
 
     </div>
