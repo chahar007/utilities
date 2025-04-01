@@ -15,6 +15,8 @@ const AdBanner = ({ id }) => {
         }
       }
     }, []);
+
+    // return null;
   
     return (
       <div

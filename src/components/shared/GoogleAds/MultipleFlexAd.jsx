@@ -31,6 +31,9 @@ const MultipleFlexAd = ({ client, slot, format = "auto", className = "" }) => {
     return () => observer.disconnect(); // Cleanup observer on unmount
   }, []);
 
+
+  return null;  
+
   return (
     <div
       ref={adRef}
