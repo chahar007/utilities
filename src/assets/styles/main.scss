@@ -3,3 +3,11 @@
 @import "./helpers/mixins.scss";
 @import "./layout/structure.scss";
 @import "./helpers/animation.scss";
+
+
+
+.adsbygoogle {
+    min-height: 250px !important; /* Prevents auto height collapse */
+    height: 250px !important; /* Ensures consistent height */
+    display: block !important; /* Keeps ad visible */
+  }

@@ -2,6 +2,29 @@ export const HOME_PAGE_DATA = {
   heading: 'React Js Project Base Setup'
 }
 
+export const LATEST_NEWS = [
+  {
+    id: 1,
+    title: "New Game Update Released",
+    excerpt: "The latest patch brings new features and bug fixes to your favorite game.",
+    date: "2023-05-15",
+    image: "https://via.placeholder.com/300x200?text=News+1"
+  },
+  {
+    id: 2,
+    title: "Upcoming Game Announcement",
+    excerpt: "The developers have revealed the release date for their highly anticipated title.",
+    date: "2023-05-10",
+    image: "https://via.placeholder.com/300x200?text=News+2"
+  },
+  {
+    id: 3,
+    title: "Esports Tournament Results",
+    excerpt: "See which team took home the championship in the latest tournament.",
+    date: "2023-05-05",
+    image: "https://via.placeholder.com/300x200?text=News+3"
+  }
+];
 
 export const IMAGE_EXTENSIONS = [
   'png', 'jpg', 'webp', 'svg'
