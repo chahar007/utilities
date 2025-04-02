@@ -14,11 +14,11 @@ const AUTH_ROUTES = [
   { path: 'about-us', component: screens.LazyAboutUs },
   { path: 'all-games', component: screens.LazyAllGamesListing },
   { path: 'games/:id', component: screens.LazyComingSoonGame },
-  { path: '/blogs', component: screens.LazyBlogs },
-  { path: '/blog/:id', component: screens.LazyBlogDetails },
-  { path: '/games/rock-paper-scissors', component: gameScreen.LazyRockPaperScissors },
-  { path: '/games/tic-tac-toe', component: gameScreen.LazyTicTacToe },
-];
+  { path: 'blogs', component: screens.LazyBlogs },
+  { path: 'blog/:id', component: screens.LazyBlogDetails },
+  { path: 'games/rock-paper-scissors', component: gameScreen.LazyRockPaperScissors },
+  { path: 'games/tic-tac-toe', component: gameScreen.LazyTicTacToe },
+];  
 
 const WITHOUT_AUTH_ROUTES = [
   { path: '/fallback', component: screens.LazyHome },
