@@ -64,7 +64,7 @@ const Header = () => {
           onClick={() => setSearchOpen(true)}
         />
         <a onClick={() => handleNavigation('/all-games')}>Games</a>
-        {/* <a onClick={() => handleNavigation('/blogs')}>Blogs</a> */}
+        <a onClick={() => handleNavigation('/blogs')}>Blogs</a>
         {/* <a>Help</a> */}
       </nav>
       {searchOpen && (

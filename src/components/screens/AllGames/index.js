@@ -1,7 +1,10 @@
 import { lazy } from 'react';
 
-export const LazyRockPaperScissors = lazy(() => import('./RockPaperScissors/RockPaperScissors'));
-export const LazyTicTacToe = lazy(() => import('./TicTacToe/TicTacToe'));
+import LazyRockPaperScissors from './RockPaperScissors/RockPaperScissors'
+import LazyTicTacToe from './TicTacToe/TicTacToe';
+
+// export const LazyRockPaperScissors = lazy(() => import('./RockPaperScissors/RockPaperScissors'));
+// export const LazyTicTacToe = lazy(() => import('./TicTacToe/TicTacToe'));
 // export const LazyMatchingTiles = lazy(() => import('./matching-tiles'));
 // export const LazyGame2048 = lazy(() => import('./2048'));
 // export const LazyMinesweeper = lazy(() => import('./minesweeper'));
@@ -16,3 +19,8 @@ export const LazyTicTacToe = lazy(() => import('./TicTacToe/TicTacToe'));
 // export const LazyLudo = lazy(() => import('./ludo'));
 // export const LazyTowerDefense = lazy(() => import('./tower-defense'));
 // export const LazyPoker = lazy(() => import('./poker')); 
+
+export default { 
+    LazyRockPaperScissors,
+    LazyTicTacToe
+}

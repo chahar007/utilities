@@ -6,8 +6,9 @@ import Footer from '../../components/shared/Footer/Footer';
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 // import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import * as screens from '../../components/screens';
-import * as gameScreen from '../../components/screens/AllGames';
-
+// import LazyRockPaperScissors from '../../components/screens/AllGames';
+// import LazyTicTacToe from '../../components/screens/AllGames';
+import gameScreen from '../../components/screens/AllGames';
 const AUTH_ROUTES = [
   { path: '/', component: screens.LazyHome },
   { path: 'game-detail/:slug', component: screens.LazyDetailedScreen },
