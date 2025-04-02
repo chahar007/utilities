@@ -105,7 +105,7 @@ const DetailedScreen = () => {
               extraClass={styles.gameDetailsCard}
             />
 
-            <AdBanner id={201} />
+            <AdBanner id={201} adConfig="game_detail_screen_1" />
 
             {/* System Requirements */}
             <GameCard
@@ -161,7 +161,7 @@ const DetailedScreen = () => {
               format="auto"
             /> */}
 
-            <AdBanner id={202} />
+            <AdBanner id={202} adConfig='game_detail_screen_2' />
 
           </div>
         </>

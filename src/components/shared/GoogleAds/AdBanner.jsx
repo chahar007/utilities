@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import {AD_CONFIG} from "../../../assets/constants/ad.constant";
 
-const AdBanner = ({ id }) => {
+
+const AdBanner = ({ id, adConfig }) => {
   const adRef = useRef(null);
   const containerRef = useRef(null);
-
+  const adConfigData = AD_CONFIG[adConfig] || AD_CONFIG["default"];
+  const { client, slot, format, responsive } = adConfigData;
   useEffect(() => {
     const handleAdLoad = () => {
       // Fix for height issues after ad loads
@@ -44,7 +47,7 @@ const AdBanner = ({ id }) => {
         position: "relative", // Helps contain the ad
         textAlign: "center"
       }}
-      key={`ad-${id}`}
+      key={`ad-${new Date().getTime()}`} // Unique key to force re-render
     >
       <ins
         ref={adRef}
@@ -55,10 +58,10 @@ const AdBanner = ({ id }) => {
           width: "100%",
           position: "absolute" // Prevents layout shifts
         }}
-        data-ad-client="ca-pub-3758217602745916"
-        data-ad-slot="6025785041"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-ad-client={client}
+        data-ad-slot={slot}
+        data-ad-format={format}
+        data-full-width-responsive={responsive}
       ></ins>
     </div>
   );
