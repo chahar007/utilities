@@ -135,13 +135,16 @@ const Home = () => {
                 </section>
 
                 {/* Show ad after every 2 sections */}
-                {(index + 1) % 2 === 0 && (
-                  <MultipleFlexAd
-                    client="ca-pub-3758217602745916"
-                    slot="4265384347"
-                    format="auto"
-                  />
+                {(index) % 2 === 0 && (
+                  // <MultipleFlexAd
+                  //   client="ca-pub-3758217602745916"
+                  //   slot="4265384347"
+                  //   format="auto"
+                  // />
+                  <AdBanner id={(index*0.22)} />
                 )}
+
+
               </React.Fragment>
             )
           ))}

@@ -2,7 +2,7 @@ import styles from './styles/Games.module.scss';
 import { GAMES_LIST } from '../../../assets/constants/games.constant';
 import { useNavigate } from 'react-router-dom';
 import MultipleFlexAd from '../../shared/GoogleAds/MultipleFlexAd';
-
+import AdBanner from '../../shared/GoogleAds/AdBanner';
 const AllGamesListing = () => {
   const navigate = useNavigate();
 
@@ -47,12 +47,14 @@ const AllGamesListing = () => {
                 ))}
               </div>
             </div>
-            {(categoryIndex + 1) % 2 === 0 && (
-              <MultipleFlexAd
-                client="ca-pub-3758217602745916"
-                slot="4265384347"
-                format="auto"
-              />
+            {(categoryIndex) % 2 === 0 && (
+              // <MultipleFlexAd
+              //   client="ca-pub-3758217602745916"
+              //   slot="4265384347"
+              //   format="auto"
+              // />
+              <AdBanner id={(categoryIndex*0.332)} />
+
             )}
           </div>
         ))}

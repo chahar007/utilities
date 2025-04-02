@@ -6,7 +6,6 @@ import GameHubHelmet from '../seo/GameHubHelmet';
 import useIsMobile from '../../../config/hooks/useIsMobile';
 import AdBanner from '../../shared/GoogleAds/AdBanner';
 import MultipleFlexAd from '../../shared/GoogleAds/MultipleFlexAd';
-
 const DetailedScreen = () => {
   // Static Data for the DetailedScreen
   const isMobile = useIsMobile();
@@ -156,11 +155,14 @@ const DetailedScreen = () => {
             </section>
 
 
-            <MultipleFlexAd
+            {/* <MultipleFlexAd
               client="ca-pub-3758217602745916"
               slot="4265384347"
               format="auto"
-            />
+            /> */}
+
+            <AdBanner id={202} />
+
           </div>
         </>
 
