@@ -5,9 +5,11 @@ import {AD_CONFIG} from "../../../assets/constants/ad.constant";
 const AdBanner = ({ id, adConfig }) => {
   const adRef = useRef(null);
   const containerRef = useRef(null);
-  const adConfigData = AD_CONFIG[adConfig] || AD_CONFIG["default"];
+  const adConfigData = AD_CONFIG["default"];
   const { client, slot, format, responsive } = adConfigData;
   useEffect(() => {
+
+    console.log("AdBanner mounted with ID:", adConfigData);
     const handleAdLoad = () => {
       // Fix for height issues after ad loads
       if (adRef.current) {
