@@ -37,9 +37,18 @@ const Footer = () => {
         {/* Other External Tools */}
         <div className={styles.footerSection}>
           <h2>More Tools</h2>
-          <a href="https://gameplay.in.net/" target="_blank" rel="noopener noreferrer">
-            GameInfo & Game Hub
-          </a>
+          <ul className={styles.footerLinks} >
+            <li>
+              <a href="https://gameplay.in.net/" target="_blank" rel="noopener noreferrer">
+                GameInfo & Game Hub
+              </a>
+            </li>
+            <li>
+              <a href="https://dynamiccalculator.com/" target="_blank" rel="noopener noreferrer">
+                Dynamic Calculator
+              </a>
+            </li>
+          </ul>
         </div>
 
         {/* Legal & Copyright */}
@@ -58,6 +67,28 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         <p>&copy; {new Date().getFullYear()} Image Utility Tool. All rights reserved.</p>
       </div>
+
+
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Dynamic Calculator",
+          "url": "https://dynamiccalculator.com/",
+          "description": "Dynamic Calculator brings together the most useful calculators for daily life—from finance tools like investment and loan EMI calculators, modern sip calculator, Can I Afford, Interest Calculation, No Cost EMI Calculator to everyday math, BMI checkers, and more.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Dynamic Calculator",
+            "url": "https://dynamiccalculator.com/"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://dynamiccalculator.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        })}
+      </script>
+
     </footer>
   );
 };
