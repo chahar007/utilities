@@ -28,6 +28,7 @@
     "start": "PORT=4200 react-scripts start",
     "build": "react-scripts build .env.development.local",
     "build:prod": "react-scripts build .env.production.local",
+    "postbuild": "cp public/ads.txt build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

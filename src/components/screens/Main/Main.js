@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Main.module.scss';
 import { useState } from "react";
-import { MainHelmet } from '../seo/TabsHelment';
 import { IMAGE_FEATURES, PDF_FEATURES, FAQs, HOW_TO_USE_DATA } from '../../../assets/constants/app.constant';
 import { MainPageHelmet } from '../seo/MainHelmet';
 
