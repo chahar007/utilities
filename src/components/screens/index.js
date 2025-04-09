@@ -15,6 +15,8 @@ import SplitPDF from './pdf/SplitPDF/SplitPDF';
 import WatermarkPDF from './pdf/WatermarkPDF/WatermarkPDF';
 import EditMetadata from './pdf/EditMetadata/EditMetadata';
 import MergePDF from './pdf/MergePDF/MergePDF';
+import AboutUs from './About/About';
+import ContactUs from './Contact/Contact';
 
 export default {
     Main,
@@ -33,4 +35,6 @@ export default {
     WatermarkPDF,
     EditMetadata,
     MergePDF,
+    AboutUs,
+    ContactUs
 }

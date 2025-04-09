@@ -175,6 +175,10 @@ const Header = () => {
               <li><Link to="/rotate-image" onClick={handleLinkClick} className={location.pathname.includes('/rotate-image') ? styles.active : ''}>Rotate Image</Link></li>
             </ul>
           </li>
+
+          <li  className={`${styles.singleItem} ${activeDropdown === "other" ? styles.active : ''} `} >
+              <Link to="/about-us" onClick={handleLinkClick} className={location.pathname.includes('/about-us') ? styles.active : ''}>About Us</Link>
+            </li>
         </ul>
       </nav>
     </header>

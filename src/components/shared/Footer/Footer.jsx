@@ -46,8 +46,10 @@ const Footer = () => {
         <div className={styles.footerSection}>
           <h2>Legal</h2>
           <ul className={styles.footerLinks}>
-            <li onClick={() => navigate("/terms-of-service")}>Terms of Service</li>
+            <li onClick={() => navigate("/about-us")}>About Us</li>
+            <li onClick={() => navigate("/contact-us")}>Contact Us</li>
             <li onClick={() => navigate("/privacy-policy")}>Privacy Policy</li>
+            <li onClick={() => navigate("/terms-of-service")}>Terms of Service</li>
           </ul>
         </div>
       </div>

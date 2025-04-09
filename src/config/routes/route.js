@@ -7,6 +7,8 @@ import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
 const AUTH_ROUTES = [
     { path: '/', component: pages.Main },
+    { path: '/about-us', component: pages.AboutUs},
+    { path: '/contact-us', component: pages.ContactUs},
     {
         path: '/image-conversion', component: pages.Home
     },
@@ -52,7 +54,7 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/merge-pdf', component: pages.MergePDF,
-    }
+    },
 ];
 
 const WITHOUT_AUTH_ROUTES = [
