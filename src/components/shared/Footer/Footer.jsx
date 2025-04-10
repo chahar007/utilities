@@ -38,6 +38,9 @@ const Footer = () => {
             <a href="https://utilix.pro/" target="_blank" rel="noopener noreferrer">
               Optimize Your Images
             </a>
+            <a href="https://dynamiccalculator.com/" target="_blank" rel="noopener noreferrer">
+              Dynamic Calculator
+            </a>
           </div>
         </div>
 
@@ -89,6 +92,25 @@ const Footer = () => {
               "fileFormatSupport": ["PDF", "JPG", "JPEG", "SVG", "PNG", "WebP"]
             }
             )}
+
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Dynamic Calculator",
+            "url": "https://dynamiccalculator.com/",
+            "description": "Dynamic Calculator brings together the most useful calculators for daily life—from finance tools like investment and loan EMI calculators, modern sip calculator, Can I Afford, Interest Calculation, No Cost EMI Calculator to everyday math, BMI checkers, and more.",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Dynamic Calculator",
+              "url": "https://dynamiccalculator.com/"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://dynamiccalculator.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+
           </script>
         </Helmet>
       </footer>
