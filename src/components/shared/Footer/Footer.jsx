@@ -92,7 +92,9 @@ const Footer = () => {
               "fileFormatSupport": ["PDF", "JPG", "JPEG", "SVG", "PNG", "WebP"]
             }
             )}
+          </script>
 
+          <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
@@ -110,9 +112,9 @@ const Footer = () => {
               "query-input": "required name=search_term_string"
             }
           })}
-
-          </script>
-        </Helmet>
+        </script>
+       
+      </Helmet>
       </footer>
     </>
   );
