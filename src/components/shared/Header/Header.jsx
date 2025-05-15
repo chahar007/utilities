@@ -40,6 +40,10 @@ const Header = () => {
   };
   
 
+  const goToBrainGame = () => {
+    window.open('https://brain.gameplay.in.net', '_blank');
+  }
+
 
   useEffect(() => {
     if(searchQuery) {
@@ -63,7 +67,7 @@ const Header = () => {
           className={styles.searchIcon}
           onClick={() => setSearchOpen(true)}
         />
-        <a onClick={() => handleNavigation('/all-games')}>Games</a>
+        <a onClick={goToBrainGame}>Games</a>
         {/* <a onClick={() => handleNavigation('/blogs')}>Blogs</a> */}
         {/* <a>Help</a> */}
       </nav>
