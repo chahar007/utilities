@@ -46,7 +46,7 @@ const ComingSoonGame = () => {
                 <p className={styles.message}>Stay tuned for updates. We're working hard to bring you the best gaming experience.</p>
             </div>
 
-            <AdBanner id={101} />
+            {/* <AdBanner id={101} /> */}
         </div>
     );
 };

@@ -123,7 +123,7 @@ const Home = () => {
         </section> */}
 
         {/* First Ad Banner - After 2 sections (News + Top Games) */}
-        <AdBanner id={1} />
+        {/* <AdBanner id={1} /> */}
 
         {/* Display ads after every 2 category sections */}
         {cards?.length > 0 &&
@@ -135,14 +135,14 @@ const Home = () => {
                 </section>
 
                 {/* Show ad after every 2 sections */}
-                {(index) % 2 === 0 && (
+                {/* {(index) % 2 === 0 && (
                   // <MultipleFlexAd
                   //   client="ca-pub-3758217602745916"
                   //   slot="4265384347"
                   //   format="auto"
                   // />
                   <AdBanner id={(index*0.22)} />
-                )}
+                )} */}
 
 
               </React.Fragment>

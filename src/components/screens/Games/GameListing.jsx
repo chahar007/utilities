@@ -47,7 +47,7 @@ const AllGamesListing = () => {
                 ))}
               </div>
             </div>
-            {(categoryIndex) % 2 === 0 && (
+            {/* {(categoryIndex) % 2 === 0 && (
               // <MultipleFlexAd
               //   client="ca-pub-3758217602745916"
               //   slot="4265384347"
@@ -55,7 +55,7 @@ const AllGamesListing = () => {
               // />
               <AdBanner id={(categoryIndex*0.332)} />
 
-            )}
+            )} */}
           </div>
         ))}
       </div>

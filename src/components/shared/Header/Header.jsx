@@ -114,7 +114,7 @@ const Header = () => {
             )}
           </div>
 
-          <AdBanner id={301} />
+          {/* <AdBanner id={301} /> */}
         </div>
       )}
     </header>
