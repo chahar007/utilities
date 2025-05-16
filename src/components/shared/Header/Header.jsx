@@ -67,7 +67,8 @@ const Header = () => {
           className={styles.searchIcon}
           onClick={() => setSearchOpen(true)}
         />
-        <a onClick={goToBrainGame}>Games</a>
+        <a onClick={() => handleNavigation('/all-games')}>Games</a>
+        {/* <a onClick={goToBrainGame}>Games</a> */}
         {/* <a onClick={() => handleNavigation('/blogs')}>Blogs</a> */}
         {/* <a>Help</a> */}
       </nav>

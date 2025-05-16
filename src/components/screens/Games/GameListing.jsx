@@ -21,7 +21,15 @@ const AllGamesListing = () => {
   return (
     <div className={styles.gamesContainer}>
       <div className={styles.gamesContainerWrapper}>
-        <h2 className={styles.sectionTitle}>All Games</h2>
+        <iframe
+          src='https://brain.gameplay.in.net?utm_source=mobile&utm_medium=web&utm_campaign=brain_games'
+          frameBorder={0} 
+          title='Brain Games'
+          className={styles.iframeGame}
+        ></iframe>
+
+
+        {/* <h2 className={styles.sectionTitle}>All Games</h2>
         {Object.entries(GAMES_LIST).map(([category, games], categoryIndex) => (
           <div key={categoryIndex}>
             <div className={styles.categorySection}>
@@ -46,7 +54,7 @@ const AllGamesListing = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
             {/* {(categoryIndex) % 2 === 0 && (
               // <MultipleFlexAd
               //   client="ca-pub-3758217602745916"
@@ -56,8 +64,8 @@ const AllGamesListing = () => {
               <AdBanner id={(categoryIndex*0.332)} />
 
             )} */}
-          </div>
-        ))}
+          {/* </div>
+        ))} */}
       </div>
     </div>
   );
