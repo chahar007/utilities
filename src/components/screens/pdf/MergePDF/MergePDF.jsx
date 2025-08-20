@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import usePdfMerger from "./usePDFMerger";
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,

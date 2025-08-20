@@ -53,10 +53,13 @@ const UploadFileHandling = ({
         />
         <div className={styles.uploadContent}>
           <i className={`fas fa-cloud-upload-alt ${styles.uploadIcon}`}></i>
-          <h3 className={styles.uploadText}>Drag & drop your file(s) here</h3>
+          <h3 className={styles.uploadText}>
+            {isDragging ? "Drop your files here" : "Drag & drop your file(s) here"}
+          </h3>
           <p className={styles.uploadSubtext}>or</p>
           <label className={styles.uploadLink} htmlFor="uploadFile">
-            <i className="fas fa-file-alt fa-icon"></i> Browse files
+            <i className="fas fa-folder-open fa-icon"></i> 
+            Choose Files
           </label>
         </div>
       </div>

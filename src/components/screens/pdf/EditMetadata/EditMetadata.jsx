@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./EditMetadata.module.scss";
 import { extractMetadata, updateMetadata } from "./useEditMetadata";
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import { EditPDFMetadataHelmet } from "../../seo/PdfHelmet";
 
 const EditMetadata = () => {

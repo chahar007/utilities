@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { PDFDocument } from "pdf-lib";
 import useSplitPDF from "./useSplitPDF";
 import styles from "./SplitPDF.module.scss";
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import { SplitPDFHelmet } from "../../seo/PdfHelmet";
 
 const SplitPDFComponent = () => {

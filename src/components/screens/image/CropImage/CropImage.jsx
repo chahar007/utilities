@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import UploadFileHandling from "../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import styles from "./CropImage.module.scss";
-import { CropImageHelmet } from "../seo/TabsHelment";
+import { CropImageHelmet } from "../../seo/TabsHelment";
 
 const CropImage = () => {
   const [imageSrc, setImageSrc] = useState(null);

@@ -12,12 +12,12 @@ const Footer = () => {
         <div className={styles.footerSection}>
           <h2>Image Tools</h2>
           <ul className={styles.footerLinks}>
-            <li onClick={() => navigate("/image-conversion")}>Image Conversion</li>
-            <li onClick={() => navigate("/image-compression")}>Image Compression</li>
-            <li onClick={() => navigate("/image-resizer")}>Image Resizing</li>
-            <li onClick={() => navigate("/image-base64-converter")}>Base64 Converter</li>
-            <li onClick={() => navigate("/crop-image")}>Crop Image</li>
-            <li onClick={() => navigate("/rotate-image")}>Rotate Image</li>
+            <li onClick={() => navigate("/image/conversion")}>Image Conversion</li>
+            <li onClick={() => navigate("/image/compression")}>Image Compression</li>
+            <li onClick={() => navigate("/image/resizing")}>Image Resizing</li>
+            <li onClick={() => navigate("/image/base64-converter")}>Base64 Converter</li>
+            <li onClick={() => navigate("/image/crop-image")}>Crop Image</li>
+            <li onClick={() => navigate("/image/rotate-image")}>Rotate Image</li>
           </ul>
         </div>
 

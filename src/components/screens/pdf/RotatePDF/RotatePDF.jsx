@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { _rotatePDF } from "./useRotatePDF";
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import styles from './RotatePDF.module.scss';
 import { RotatePDFHelmet } from "../../seo/PdfHelmet";
 

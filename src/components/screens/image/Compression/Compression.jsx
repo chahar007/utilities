@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from './styles/Compression.module.scss';
-import UploadFileHandling from '../components/UploadFileHandling';
+import styles from './Compression.module.scss';
+import UploadFileHandling from '../../../shared/UploadFileHandling/UploadFileHandling';
 import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
 import { CompressionHelmet } from '../../seo/TabsHelment';
 

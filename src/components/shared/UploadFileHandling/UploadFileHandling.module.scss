@@ -1,0 +1,255 @@
+/* Professional UploadFileHandling - Matching Home/AllTools light theme */
+
+.uploadContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dropZone {
+  border: 2px dashed #CED4DA;
+  padding: 2rem 1.5rem;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  min-height: 160px;
+  
+  /* Subtle gradient background */
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  
+  /* Professional shadow */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    border-color: #007BFF;
+    background: linear-gradient(135deg, #F8F9FA 0%, #E3F2FD 100%);
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+    transform: translateY(-2px);
+    
+    .uploadIcon {
+      color: #007BFF;
+      transform: scale(1.1);
+    }
+    
+    .uploadText {
+      color: #007BFF;
+    }
+  }
+
+  &.dragging {
+    border-color: #007BFF;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.2);
+    transform: scale(1.02);
+    
+    .uploadIcon {
+      color: #007BFF;
+      transform: translateY(-8px) scale(1.15);
+      animation: bounce 0.6s ease-in-out;
+    }
+    
+    .uploadText {
+      color: #007BFF;
+      font-weight: 600;
+    }
+  }
+
+  .uploadInput {
+    display: none;
+  }
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.uploadIcon {
+  font-size: 2.5rem;
+  color: #6C757D;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.uploadText {
+  font-size: 1.2rem;
+  color: #212529;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  transition: all 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.uploadSubtext {
+  font-size: 1rem;
+  color: #6C757D;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.uploadLink {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #007BFF 0%, #0056B3 100%);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+  font-size: 0.95rem;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(135deg, #0056B3 0%, #003D82 100%);
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .fa-icon {
+    font-size: 0.9rem;
+  }
+}
+
+.fileTypes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.fileType {
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: #F8F9FA;
+  color: #495057;
+  border-radius: 20px;
+  border: 1px solid #E9ECEF;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #E9ECEF;
+    color: #212529;
+  }
+}
+
+/* Upload progress indicator */
+.uploadProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #E9ECEF;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #007BFF, #28A745);
+    animation: progress 2s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(-8px) scale(1.15);
+  }
+  40% {
+    transform: translateY(-12px) scale(1.2);
+  }
+  60% {
+    transform: translateY(-6px) scale(1.1);
+  }
+}
+
+@keyframes progress {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dropZone {
+    padding: 1.5rem 1rem;
+    min-height: 140px;
+    
+    .uploadIcon {
+      font-size: 2rem;
+    }
+    
+    .uploadText {
+      font-size: 1rem;
+    }
+    
+    .uploadSubtext {
+      font-size: 0.85rem;
+    }
+    
+    .uploadLink {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .fileTypes {
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    
+    .fileType {
+      font-size: 0.7rem;
+      padding: 0.35rem 0.7rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dropZone {
+    padding: 1.25rem 0.75rem;
+    min-height: 120px;
+    
+    .uploadIcon {
+      font-size: 1.75rem;
+    }
+    
+    .uploadText {
+      font-size: 0.95rem;
+    }
+    
+    .uploadSubtext {
+      font-size: 0.8rem;
+    }
+  }
+}

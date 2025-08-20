@@ -1,0 +1,119 @@
+@import '../../../../assets/styles/helpers/variables.scss';
+@import '../../../../assets/styles/helpers/mixins.scss';
+
+.base64 {
+  .uploadSection {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .imageSection {
+    display: flex;
+    justify-content: center;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .outputSection {
+    background: var(--color-canvas-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border-default);
+
+    .outputHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-fg-default);
+        margin: 0;
+      }
+    }
+
+    .base64Container {
+      position: relative;
+    }
+
+    .base64Output {
+      width: 100%;
+      min-height: 200px;
+      padding: 1rem;
+      background: var(--color-canvas-default);
+      border: 1px solid var(--color-border-default);
+      border-radius: 8px;
+      color: var(--color-fg-default);
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      resize: vertical;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent-fg);
+        box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+      }
+
+      &::placeholder {
+        color: var(--color-fg-muted);
+        font-style: italic;
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .content {
+      gap: 1.5rem;
+    }
+
+    .controls {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .outputSection {
+      padding: 1rem;
+
+      .outputHeader {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+
+        h3 {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .base64Output {
+        font-size: 0.8rem;
+        min-height: 150px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .outputSection {
+      .base64Output {
+        font-size: 0.75rem;
+        min-height: 120px;
+      }
+    }
+  }
+}
+  

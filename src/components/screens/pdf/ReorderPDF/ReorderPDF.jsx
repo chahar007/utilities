@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableItem from "./SortableItem";
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import styles from "./ReorderPDF.module.scss";
 import { ReorderPDFHelmet } from "../../seo/PdfHelmet";
 

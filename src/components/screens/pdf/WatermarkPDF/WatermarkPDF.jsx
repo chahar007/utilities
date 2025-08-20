@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './WatermarkPDF.module.scss';
 import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
-import UploadFileHandling from "../../Home/components/UploadFileHandling";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import useWatermark from './useWatermarkPDF';
 import { WatermarkPDFHelmet } from "../../seo/PdfHelmet";
 

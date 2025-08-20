@@ -1,0 +1,128 @@
+@import '../../../assets/styles/helpers/variables.scss';
+@import '../../../assets/styles/helpers/mixins.scss';
+
+.imagePreview {
+  .imageContainer {
+    background: var(--color-canvas-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border-default);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(1, 4, 9, 0.15);
+      border-color: var(--color-border-muted);
+    }
+  }
+
+  .imageTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-fg-default);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(1, 4, 9, 0.1);
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    background: var(--color-canvas-default);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .imageDetails {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border-muted);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .detailLabel {
+    font-weight: 500;
+    color: var(--color-fg-muted);
+  }
+
+  .detailValue {
+    font-weight: 600;
+    color: var(--color-fg-default);
+  }
+
+  // Variants
+  &.original {
+    .imageContainer {
+      border-left: 4px solid var(--color-accent-fg);
+    }
+
+    .imageTitle {
+      color: var(--color-accent-fg);
+    }
+  }
+
+  &.processed {
+    .imageContainer {
+      border-left: 4px solid var(--color-success-fg);
+    }
+
+    .imageTitle {
+      color: var(--color-success-fg);
+    }
+  }
+
+  &.error {
+    .imageContainer {
+      border-left: 4px solid var(--color-danger-fg);
+    }
+
+    .imageTitle {
+      color: var(--color-danger-fg);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .imagePreview {
+    .imageContainer {
+      padding: 1rem;
+    }
+
+    .imageWrapper {
+      max-width: 250px;
+    }
+
+    .image {
+      max-height: 200px;
+    }
+  }
+}

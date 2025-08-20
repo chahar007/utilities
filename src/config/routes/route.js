@@ -6,26 +6,36 @@ import AuthProvider, { useAuth } from '../utils/AuthProvider';
 import Header from '../../components/shared/Header/Header';
 import Footer from '../../components/shared/Footer/Footer';
 const AUTH_ROUTES = [
-    { path: '/', component: pages.Main },
+    { path: '/', component: pages.Home },
+    { path: '/main', component: pages.Main },
     { path: '/about-us', component: pages.AboutUs},
     { path: '/contact-us', component: pages.ContactUs},
     {
-        path: '/image-conversion', component: pages.Home
+        path: '/all-tools', component: pages.AllTools
     },
     {
-        path: '/image-compression', component: pages.Home
+        path: '/image-tools', component: pages.Home
     },
     {
-        path: '/image-resizer', component: pages.Home
+        path: '/pdf-tools', component: pages.Home
     },
     {
-        path: '/crop-image', component: pages.CropImage,
+        path: '/image/conversion', component: pages.Conversion
     },
     {
-        path: '/rotate-image', component: pages.RotateImage,
+        path: '/image/compression', component: pages.Compression
     },
     {
-        path: '/image-base64-converter', component: pages.Home
+        path: '/image/resizing', component: pages.Resizing
+    },
+    {
+        path: '/image/crop-image', component: pages.CropImage,
+    },
+    {
+        path: '/image/rotate-image', component: pages.RotateImage,
+    },
+    {
+        path: '/image/base64-converter', component: pages.Base64
     },
     {   path: '/main', component: pages.Main },
     {
