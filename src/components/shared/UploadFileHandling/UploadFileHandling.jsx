@@ -66,7 +66,7 @@ const UploadFileHandling = ({
       <div className={styles.fileTypes}>
         {acceptedFormats.map((format, index) => (
           <span key={index} className={styles.fileType}>
-            {format.split("/")[0].toUpperCase()}
+            {format.split("/")[1].toUpperCase()}
           </span>
         ))}
       </div>

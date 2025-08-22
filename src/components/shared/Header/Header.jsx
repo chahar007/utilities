@@ -73,7 +73,7 @@ const Header = () => {
 
       <div className={styles.logo} onClick={() => navigate('/')}>
         {/* <i className="fas fa-image"></i> */}
-        <img src={imageKeyMappings.appLogo} alt="" srcset="" />
+        {/* <img src={imageKeyMappings.appLogo} alt="" srcset="" /> */}
         <span>Utilix Pro</span>
       </div>
 
@@ -82,6 +82,11 @@ const Header = () => {
       </div>
 
       <nav className={`${styles.navbar} ${menuOpen ? styles.open : ''}`}>
+        {/* Mobile Close Button */}
+        <div className={styles.mobileCloseButton} onClick={closeAll}>
+          <i className="fas fa-times"></i>
+        </div>
+        
         <ul className={styles.navLinks}>
           <li className={styles.navItem}>
             <Link to="/all-tools" onClick={handleLinkClick} className={location.pathname === '/all-tools' ? styles.active : ''}>
