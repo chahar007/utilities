@@ -92,35 +92,43 @@ const useWatermark = () => {
           const textLines = wrapText(watermarkText, maxTextWidth);
           const textHeight = textSize * textLines.length * 1.2; // Line spacing
 
-          // Determine x, y position
-          let x, y;
-          switch (position) {
-            case 'top-left':
-              x = width * 0.1;
-              y = height - textSize;
-              break;
-            case 'top-right':
-              x = width * 0.9 - maxTextWidth;
-              y = height - textSize;
-              break;
-            case 'bottom-left':
-              x = width * 0.1;
-              y = textHeight;
-              break;
-            case 'bottom-right':
-              x = width * 0.9 - maxTextWidth;
-              y = textHeight;
-              break;
-            default: // Center
-              x = (width - (maxTextWidth-20)) / 2;
-              y = (height + textHeight) / 2;
-          }
-
-          // Draw each line of text
+          // Draw each line of text with proper positioning
           textLines.forEach((line, index) => {
+            // Calculate actual width of this line
+            const lineWidth = font.widthOfTextAtSize(line, textSize);
+            
+            // Determine x, y position for this line
+            let x, y;
+            
+            // Base Y position (center of all lines)
+            const baseY = (height - textHeight) / 2 + textHeight - textSize;
+            y = baseY - index * textSize * 1.2;
+            
+            switch (position) {
+              case 'top-left':
+                x = width * 0.1;
+                y = height - textSize - index * textSize * 1.2;
+                break;
+              case 'top-right':
+                x = width * 0.9 - lineWidth;
+                y = height - textSize - index * textSize * 1.2;
+                break;
+              case 'bottom-left':
+                x = width * 0.1;
+                y = textHeight - index * textSize * 1.2;
+                break;
+              case 'bottom-right':
+                x = width * 0.9 - lineWidth;
+                y = textHeight - index * textSize * 1.2;
+                break;
+              default: // Center - use actual line width for perfect centering
+                x = (width - lineWidth) / 2;
+                // y already calculated above
+            }
+
             page.drawText(line, {
               x,
-              y: y - index * textSize * 1.2, // Adjust for line breaks
+              y,
               size: textSize,
               color: colorRgb,
               rotate: degrees(rotationNum),

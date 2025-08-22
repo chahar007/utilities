@@ -90,6 +90,12 @@ const Header = () => {
           </li>
           
           <li className={styles.navItem}>
+            <Link to="/blog" onClick={handleLinkClick} className={location.pathname.includes('/blog') ? styles.active : ''}>
+              Blog
+            </Link>
+          </li>
+          
+          <li className={styles.navItem}>
             <Link to="/about-us" onClick={handleLinkClick} className={location.pathname.includes('/about-us') ? styles.active : ''}>
               About Us
             </Link>

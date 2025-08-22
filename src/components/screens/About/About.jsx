@@ -1,232 +1,147 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+import styles from './About.module.scss';
 
 const About = () => {
-  return (
-    <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.heading}>About Utilix Pro</h1>
-        <p style={styles.tagline}>Your Free Online Toolkit for Smarter File Management</p>
-      </header>
+  const navigate = useNavigate();
 
-      <main style={styles.main}>
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Our Mission</h2>
-          <p style={styles.paragraph}>
+  return (
+    <div className={styles.about}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>About Utilix Pro</h1>
+          <p className={styles.heroSubtitle}>Your Free Online Toolkit for Smarter File Management</p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <main className={styles.main}>
+        {/* Mission Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Our Mission</h2>
+            <p>Transforming complex file processing into simple, accessible solutions</p>
+          </div>
+          <p className={styles.paragraph}>
             At <strong>Utilix Pro</strong>, we transform complex file processing into simple, one-click solutions. 
             Designed for students, professionals, and businesses, our platform helps <strong>over 100,000 users monthly</strong> 
-            optimize their document workflows.
+            optimize their document workflows with professional-grade tools that are completely free to use.
           </p>
         </section>
 
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Core Features</h2>
-          <div style={styles.featuresGrid}>
-            <div style={styles.featureCard}>
-              <h3 style={styles.featureTitle}>PDF Power Tools</h3>
-              <ul style={styles.featureList}>
+        {/* Core Features Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Core Features</h2>
+            <p>Professional-grade tools designed for every file processing need</p>
+          </div>
+          <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+              <h3>PDF Power Tools</h3>
+              <ul>
                 <li>Compress PDFs (up to 90% size reduction)</li>
                 <li>Merge/Split documents seamlessly</li>
                 <li>Add/remove watermarks</li>
                 <li>Edit metadata & permissions</li>
+                <li>Rotate and reorder pages</li>
+                <li>Extract text and images</li>
               </ul>
             </div>
 
-            <div style={styles.featureCard}>
-              <h3 style={styles.featureTitle}>Image Optimization</h3>
-              <ul style={styles.featureList}>
-                <li>Compress JPG, PNG, WEBP</li>
-                <li>Batch convert formats</li>
+            <div className={styles.featureCard}>
+              <h3>Image Optimization</h3>
+              <ul>
+                <li>Compress JPG, PNG, WEBP formats</li>
+                <li>Batch convert between formats</li>
                 <li>Resize & rotate images</li>
-                <li>Quality adjustment</li>
+                <li>Quality adjustment controls</li>
+                <li>Base64 encoding/decoding</li>
+                <li>Crop and edit images</li>
               </ul>
             </div>
 
-            <div style={styles.featureCard}>
-              <h3 style={styles.featureTitle}>Security & Privacy</h3>
-              <ul style={styles.featureList}>
+            <div className={styles.featureCard}>
+              <h3>Security & Privacy</h3>
+              <ul>
                 <li>All processing in your browser</li>
                 <li>No file uploads to servers</li>
                 <li>Military-grade encryption</li>
                 <li>Automatic file deletion</li>
+                <li>No registration required</li>
+                <li>GDPR compliant</li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Why Choose Us?</h2>
-          <div style={styles.benefits}>
-            <div style={styles.benefitItem}>
-              <span style={styles.benefitIcon}>🚀</span>
-              <h3 style={styles.benefitTitle}>Instant Processing</h3>
-              <p>Files process in under 5 seconds – no waiting queues</p>
+        {/* Why Choose Us Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Why Choose Utilix Pro?</h2>
+            <p>Discover the advantages that make our tools the preferred choice worldwide</p>
+          </div>
+          <div className={styles.benefitsGrid}>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>🚀</span>
+              <h3 className={styles.benefitTitle}>Instant Processing</h3>
+              <p className={styles.benefitDescription}>Files process in under 5 seconds with our optimized algorithms. No waiting queues or processing delays.</p>
             </div>
-            <div style={styles.benefitItem}>
-              <span style={styles.benefitIcon}>💰</span>
-              <h3 style={styles.benefitTitle}>100% Free</h3>
-              <p>No hidden costs or premium paywalls</p>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>💰</span>
+              <h3 className={styles.benefitTitle}>100% Free</h3>
+              <p className={styles.benefitDescription}>No hidden costs, subscriptions, or premium paywalls. All features available to everyone, always.</p>
             </div>
-            <div style={styles.benefitItem}>
-              <span style={styles.benefitIcon}>🌐</span>
-              <h3 style={styles.benefitTitle}>Browser-Based</h3>
-              <p>Works on all devices without installation</p>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>🌐</span>
+              <h3 className={styles.benefitTitle}>Universal Access</h3>
+              <p className={styles.benefitDescription}>Works on all devices and operating systems. Access from any modern browser without installation.</p>
+            </div>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>🔒</span>
+              <h3 className={styles.benefitTitle}>Privacy First</h3>
+              <p className={styles.benefitDescription}>Your files never leave your device. All processing happens locally with advanced client-side technology.</p>
+            </div>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>⚡</span>
+              <h3 className={styles.benefitTitle}>Lightning Fast</h3>
+              <p className={styles.benefitDescription}>Experience instant conversions with our browser-based technology. Handle files of any size efficiently.</p>
+            </div>
+            <div className={styles.benefitCard}>
+              <span className={styles.benefitIcon}>🎯</span>
+              <h3 className={styles.benefitTitle}>User-Friendly</h3>
+              <p className={styles.benefitDescription}>Intuitive interface designed for simplicity. No technical knowledge required - just upload, convert, and download.</p>
             </div>
           </div>
         </section>
 
-        <section style={styles.ctaSection}>
-          <h2 style={styles.ctaTitle}>Ready to Simplify Your Workflow?</h2>
-          <div style={styles.buttonGroup}>
-            <a href="/" style={styles.primaryButton}>Explore All Tools</a>
-            <a href="/contact-us" style={styles.secondaryButton}>Contact Our Team</a>
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle}>Ready to Simplify Your Workflow?</h2>
+            <p className={styles.ctaDescription}>
+              Join millions of users who trust our tools for their daily file processing needs. 
+              Start converting and optimizing your files today!
+            </p>
+            <div className={styles.buttonGroup}>
+              <button 
+                className={styles.primaryButton}
+                onClick={() => navigate('/all-tools')}
+              >
+                Explore All Tools <i className="fas fa-arrow-right"></i>
+              </button>
+              <button 
+                className={styles.secondaryButton}
+                onClick={() => navigate('/contact')}
+              >
+                Contact Our Team <i className="fas fa-envelope"></i>
+              </button>
+            </div>
           </div>
         </section>
       </main>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
-    lineHeight: 1.6,
-    color: "#c9d1d9",
-    backgroundColor: "#0d1117",
-    minHeight: "100vh"
-  },
-  header: {
-    // background: "linear-gradient(135deg, #2563eb 0%, #1e40af 100%)",
-    color: "#fff",
-    padding: "2rem 1rem",
-    textAlign: "center"
-  },
-  heading: {
-    fontSize: "2.5rem",
-    margin: "0 0 0.5rem",
-    fontWeight: "700",
-    background: "linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%)",
-    backgroundClip: "text",
-    color: "transparent",
-  },
-  tagline: {
-    fontSize: "1.25rem",
-    opacity: 0.85,
-    margin: 0
-  },
-  main: {
-    maxWidth: "1200px",
-    margin: "1rem auto",
-    padding: "0 1rem"
-  },
-  section: {
-    backgroundColor: "#161b22",
-    borderRadius: "8px",
-    padding: "2rem",
-    marginBottom: "2rem"
-  },
-  sectionTitle: {
-    color: "#58a6ff",
-    fontSize: "1.5rem",
-    marginTop: 0,
-    marginBottom: "1.5rem",
-    fontWeight: "600"
-  },
-  paragraph: {
-    fontSize: "1.1rem",
-    margin: "0 0 1.5rem"
-  },
-  featuresGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "1.5rem",
-    marginTop: "1rem"
-  },
-  featureCard: {
-    border: "1px solid #30363d",
-    borderRadius: "8px",
-    padding: "1.5rem",
-    backgroundColor: "#0d1117"
-  },
-  featureTitle: {
-    color: "#79c0ff",
-    fontSize: "1.25rem",
-    marginTop: 0,
-    marginBottom: "1rem"
-  },
-  featureList: {
-    paddingLeft: "1.25rem",
-    margin: 0
-  },
-  benefits: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "1.5rem",
-    marginTop: "1rem"
-  },
-  benefitItem: {
-    textAlign: "center",
-    padding: "1rem"
-  },
-  benefitIcon: {
-    fontSize: "2rem",
-    marginBottom: "0.5rem",
-    display: "block"
-  },
-  benefitTitle: {
-    color: "#58a6ff",
-    margin: "0.5rem 0"
-  },
-  ctaSection: {
-    textAlign: "center",
-    padding: "3rem 1rem",
-    background: "linear-gradient(135deg, #2563eb 0%, #1e40af 100%)",
-    color: "#fff",
-    borderRadius: "8px"
-  },
-  ctaTitle: {
-    fontSize: "1.75rem",
-    margin: "0 0 1.5rem"
-  },
-  buttonGroup: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "1rem",
-    flexWrap: "wrap"
-  },
-  primaryButton: {
-    backgroundColor: "#58a6ff",
-    color: "#0d1117",
-    padding: "0.75rem 1.5rem",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600"
-  },
-  secondaryButton: {
-    backgroundColor: "transparent",
-    color: "#fff",
-    border: "2px solid #fff",
-    padding: "0.75rem 1.5rem",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600"
-  },
-  footer: {
-    backgroundColor: "#161b22",
-    color: "#8b949e",
-    padding: "1.5rem",
-    textAlign: "center"
-  },
-  footerText: {
-    margin: 0
-  },
-  footerLinks: {
-    marginLeft: "1rem"
-  },
-  footerLink: {
-    color: "#58a6ff",
-    textDecoration: "none",
-    margin: "0 0.5rem"
-  }
 };
 
 export default About;

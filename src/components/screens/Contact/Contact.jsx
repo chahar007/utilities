@@ -1,138 +1,156 @@
 import React from "react";
+import styles from './Contact.module.scss';
 
 const Contact = () => {
   return (
-    <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.heading}>Contact Us</h1>
-        <p style={styles.tagline}>Let’s connect – we’d love to hear from you</p>
-      </header>
+    <div className={styles.contact}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Contact Us</h1>
+          <p className={styles.heroSubtitle}>Let's connect – we'd love to hear from you</p>
+        </div>
+      </section>
 
-      <main style={styles.main}>
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>We’re Here to Help</h2>
-          <p style={styles.paragraph}>
-            Whether you have a question about a feature, found a bug, or just want to collaborate, our team is here and happy to assist.
-          </p>
-          <p style={styles.paragraph}>
-            <strong>Support Hours:</strong> Monday to Friday, 10:00 AM – 6:00 PM IST
-          </p>
-          <p style={styles.paragraph}>
-            Most queries are answered within 24–48 hours. Feel free to drop us a line – we truly appreciate your feedback and ideas!
-          </p>
+      {/* Main Content */}
+      <main className={styles.main}>
+        {/* Help Section */}
+        <section className={styles.section}>
+          <div className={styles.contentCard}>
+            <h2 className={styles.cardTitle}>
+              <i className="fas fa-headset"></i>
+              We're Here to Help
+            </h2>
+            <div className={styles.cardContent}>
+              <p>
+                Whether you have a question about a feature, found a bug, or just want to collaborate, 
+                our dedicated team is here and happy to assist you with any inquiries.
+              </p>
+              <p>
+                <strong>Support Hours:</strong> Monday to Friday, 10:00 AM – 6:00 PM IST
+              </p>
+              <div className={styles.responseTime}>
+                <i className="fas fa-clock"></i>
+                <span>Most queries are answered within 24–48 hours</span>
+              </div>
+              <p>
+                Feel free to drop us a line – we truly appreciate your feedback, suggestions, and ideas! 
+                Your input helps us improve and grow our platform.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Reasons to Contact Us</h2>
-          <ul style={styles.bulletList}>
-            <li>💡 Got a suggestion for a new tool or feature?</li>
-            <li>🐞 Spotted a bug or error on the platform?</li>
-            <li>🤝 Want to partner or collaborate with us?</li>
-            <li>📣 Interested in promoting your product through Utilix Pro?</li>
-            <li>❓ Just want to say hi or give feedback? We’re all ears!</li>
-          </ul>
+        {/* Contact Information */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Get In Touch</h2>
+            <p>Ready to reach out? Here's how you can contact our team</p>
+          </div>
+          
+          <div className={styles.contactInfo}>
+            <a href="mailto:utilix.pro@gmail.com" className={styles.contactMethod}>
+              <div className={styles.contactIcon}>
+                <i className="fas fa-envelope"></i>
+              </div>
+              <div className={styles.contactDetails}>
+                <p className={styles.contactLabel}>Email us at</p>
+                <p className={styles.contactValue}>utilix.pro@gmail.com</p>
+              </div>
+            </a>
+          </div>
         </section>
 
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Contact Email</h2>
-          <p style={styles.paragraph}>
-            📧 Email us at: <a href="mailto:utilix.pro@gmail.com" style={styles.emailLink}>utilix.pro@gmail.com</a>
-          </p>
+        {/* Reasons to Contact */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Why Reach Out to Us?</h2>
+            <p>Here are some great reasons to get in touch with our team</p>
+          </div>
+          
+          <div className={styles.reasonsGrid}>
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>💡</div>
+              <div className={styles.reasonContent}>
+                <h4>Feature Suggestions</h4>
+                <p>Got an idea for a new tool or feature? We'd love to hear your suggestions and feedback!</p>
+              </div>
+            </div>
+            
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>🐞</div>
+              <div className={styles.reasonContent}>
+                <h4>Bug Reports</h4>
+                <p>Spotted an error or bug on the platform? Help us improve by reporting any issues you encounter.</p>
+              </div>
+            </div>
+            
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>🤝</div>
+              <div className={styles.reasonContent}>
+                <h4>Partnerships</h4>
+                <p>Interested in collaborating or partnering with us? Let's explore opportunities together.</p>
+              </div>
+            </div>
+            
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>📣</div>
+              <div className={styles.reasonContent}>
+                <h4>Business Inquiries</h4>
+                <p>Want to promote your product or service through Utilix Pro? Get in touch for business opportunities.</p>
+              </div>
+            </div>
+            
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>❓</div>
+              <div className={styles.reasonContent}>
+                <h4>General Questions</h4>
+                <p>Have questions about our tools or just want to say hi? We're all ears and love hearing from users!</p>
+              </div>
+            </div>
+            
+            <div className={styles.reasonCard}>
+              <div className={styles.reasonIcon}>🌟</div>
+              <div className={styles.reasonContent}>
+                <h4>Feedback & Reviews</h4>
+                <p>Share your experience using our tools. Your feedback helps us improve and serve you better.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Team Section */}
+        <section className={styles.teamSection}>
+          <div className={styles.teamContent}>
+            <h2 className={styles.teamTitle}>Our Commitment to You</h2>
+            <p className={styles.teamDescription}>
+              We're passionate about providing the best file processing experience. 
+              Our team is dedicated to helping you succeed with our tools.
+            </p>
+            
+            <div className={styles.teamFeatures}>
+              <div className={styles.teamFeature}>
+                <i className="fas fa-reply"></i>
+                <span>Quick Response</span>
+              </div>
+              <div className={styles.teamFeature}>
+                <i className="fas fa-users"></i>
+                <span>Friendly Team</span>
+              </div>
+              <div className={styles.teamFeature}>
+                <i className="fas fa-lightbulb"></i>
+                <span>Expert Solutions</span>
+              </div>
+              <div className={styles.teamFeature}>
+                <i className="fas fa-heart"></i>
+                <span>User-Focused</span>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
-    lineHeight: 1.6,
-    color: "#c9d1d9",
-    backgroundColor: "#0d1117",
-    minHeight: "100vh"
-  },
-  header: {
-    // backgroundColor: "#1f6feb",
-    color: "#fff",
-    padding: "2rem 1rem",
-    textAlign: "center",
-    // background: "linear-gradient(135deg, #2563eb 0%, #1e40af 100%)"
-    background: "linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%)",
-    backgroundClip: "text",
-    color: "transparent",
-  },
-  heading: {
-    fontSize: "2.5rem",
-    margin: "0 0 0.5rem",
-    fontWeight: "700"
-  },
-  tagline: {
-    fontSize: "1.25rem",
-    color: "#8b949e",
-  },
-  main: {
-    maxWidth: "800px",
-    margin: "1rem auto",
-    padding: "0 1rem"
-  },
-  section: {
-    backgroundColor: "#161b22",
-    borderRadius: "8px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
-    padding: "2rem",
-    marginBottom: "2rem"
-  },
-  sectionTitle: {
-    color: "#58a6ff",
-    fontSize: "1.5rem",
-    marginTop: 0,
-    marginBottom: "1rem",
-    fontWeight: "600"
-  },
-  paragraph: {
-    fontSize: "1.1rem",
-    margin: "0 0 1rem"
-  },
-  emailLink: {
-    color: "#58a6ff",
-    textDecoration: "none"
-  },
-  bulletList: {
-    fontSize: "1.05rem",
-    paddingLeft: "1.2rem",
-    listStyle: "none",
-    lineHeight: 1.8
-  },
-  socialList: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0
-  },
-  socialLink: {
-    display: "inline-block",
-    marginBottom: "0.5rem",
-    color: "#58a6ff",
-    textDecoration: "none",
-    fontSize: "1.1rem"
-  },
-  footer: {
-    backgroundColor: "#161b22",
-    color: "#8b949e",
-    padding: "1.5rem",
-    textAlign: "center"
-  },
-  footerText: {
-    margin: 0
-  },
-  footerLinks: {
-    marginLeft: "1rem"
-  },
-  footerLink: {
-    color: "#58a6ff",
-    textDecoration: "none",
-    margin: "0 0.5rem"
-  }
 };
 
 export default Contact;

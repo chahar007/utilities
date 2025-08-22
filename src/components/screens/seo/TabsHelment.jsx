@@ -83,3 +83,73 @@ export const RotateImageHelmet = () => {
         </Helmet>
     );
 };
+
+export const ImageFiltersHelmet = () => {
+    return (
+        <Helmet>
+            <title>Image Filters & Effects - Apply Stunning Filters Online | Utilix Pro</title>
+            <meta name="description" content="Apply beautiful filters and effects to images with Utilix Pro. Brightness, contrast, saturation, blur, sepia, and more filters available online." />
+            <meta name="keywords" content="image filters, photo effects, online image editor, brightness, contrast, saturation, blur, sepia, grayscale, vintage filters" />
+            <meta property="og:title" content="Image Filters & Effects Online - Utilix Pro" />
+            <meta property="og:description" content="Transform your images with stunning filters and effects. Apply Instagram-style filters instantly and for free." />
+            <meta property="og:url" content={window.location.origin + '/image/filters'} />
+            <link rel="canonical" href={window.location.origin + '/image/filters'} />
+        </Helmet>
+    );
+};
+
+export const WatermarkHelmet = () => {
+    return (
+        <Helmet>
+            <title>Add Watermark to Images - Protect Your Photos Online | Utilix Pro</title>
+            <meta name="description" content="Add watermarks to your images with Utilix Pro. Protect your photos with text or logo watermarks. Customizable transparency and positioning." />
+            <meta name="keywords" content="add watermark, image watermark, protect images, photo watermark, text watermark, logo watermark, copyright protection" />
+            <meta property="og:title" content="Add Watermark to Images Online - Utilix Pro" />
+            <meta property="og:description" content="Protect your images with custom watermarks. Add text or logo watermarks with adjustable transparency and positioning." />
+            <meta property="og:url" content={window.location.origin + '/image/watermark'} />
+            <link rel="canonical" href={window.location.origin + '/image/watermark'} />
+        </Helmet>
+    );
+};
+
+export const ImageMergerHelmet = () => {
+    return (
+        <Helmet>
+            <title>Merge Images Online - Create Collages & Combinations | Utilix Pro</title>
+            <meta name="description" content="Merge multiple images into one with Utilix Pro. Create collages, side-by-side comparisons, and custom layouts online for free." />
+            <meta name="keywords" content="merge images, combine images, image collage, photo merger, side by side images, grid layout, before after comparison" />
+            <meta property="og:title" content="Merge Images Online - Utilix Pro" />
+            <meta property="og:description" content="Combine multiple images into beautiful collages and layouts. Perfect for before/after comparisons and social media posts." />
+            <meta property="og:url" content={window.location.origin + '/image/merger'} />
+            <link rel="canonical" href={window.location.origin + '/image/merger'} />
+        </Helmet>
+    );
+};
+
+export const BackgroundToolsHelmet = () => {
+    return (
+        <Helmet>
+            <title>Background Remover & Blur Tool - Edit Image Backgrounds | Utilix Pro</title>
+            <meta name="description" content="Remove, blur, or replace image backgrounds with Utilix Pro. Advanced edge detection for professional results. Perfect for profile photos and product images." />
+            <meta name="keywords" content="remove background, blur background, background remover, transparent background, edge detection, profile photo editor, product photos" />
+            <meta property="og:title" content="Background Remover & Blur Tool - Utilix Pro" />
+            <meta property="og:description" content="Professional background editing tools. Remove, blur, or replace backgrounds with advanced edge detection technology." />
+            <meta property="og:url" content={window.location.origin + '/image/background-tools'} />
+            <link rel="canonical" href={window.location.origin + '/image/background-tools'} />
+        </Helmet>
+    );
+};
+
+export const ColorPaletteHelmet = () => {
+    return (
+        <Helmet>
+            <title>Color Palette Extractor - Extract Colors from Images | Utilix Pro</title>
+            <meta name="description" content="Extract beautiful color palettes from images with Utilix Pro. Get dominant colors in HEX, RGB, and HSL formats for design projects." />
+            <meta name="keywords" content="color palette, extract colors, dominant colors, color picker, color scheme, design colors, hex colors, rgb colors, hsl colors" />
+            <meta property="og:title" content="Color Palette Extractor - Utilix Pro" />
+            <meta property="og:description" content="Extract beautiful color palettes from any image. Perfect for designers and developers looking for color inspiration." />
+            <meta property="og:url" content={window.location.origin + '/image/color-palette'} />
+            <link rel="canonical" href={window.location.origin + '/image/color-palette'} />
+        </Helmet>
+    );
+};

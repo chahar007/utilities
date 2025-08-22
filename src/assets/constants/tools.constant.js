@@ -70,6 +70,33 @@ export const POPULAR_IMAGE_CONVERSIONS = [
     tag: 'IMAGE',
     route: '/image/crop-image',
     color: '#DC3545'
+  },
+  {
+    id: 'image-filters',
+    title: 'Image Filters',
+    description: 'Apply stunning effects and filters to images',
+    icon: '🎨',
+    tag: 'IMAGE',
+    route: '/image/filters',
+    color: '#8B5CF6'
+  },
+  {
+    id: 'add-watermark',
+    title: 'Add Watermark',
+    description: 'Protect images with watermarks',
+    icon: '🛡️',
+    tag: 'IMAGE',
+    route: '/image/watermark',
+    color: '#10B981'
+  },
+  {
+    id: 'background-tools',
+    title: 'Background Tools',
+    description: 'Remove or blur image backgrounds',
+    icon: '🎭',
+    tag: 'IMAGE',
+    route: '/image/background-tools',
+    color: '#EF4444'
   }
 ];
 
@@ -286,6 +313,46 @@ export const ALL_TOOLS_DATA = [
         description: 'Convert images to Base64 string format',
         route: '/image/base64-converter',
         icon: '🔢',
+        tag: 'IMAGE'
+      },
+      {
+        id: 'image-filters',
+        title: 'Image Filters & Effects',
+        description: 'Apply stunning filters and effects to images',
+        route: '/image/filters',
+        icon: '🎨',
+        tag: 'IMAGE'
+      },
+      {
+        id: 'add-watermark',
+        title: 'Add Watermark',
+        description: 'Protect images with text or logo watermarks',
+        route: '/image/watermark',
+        icon: '🛡️',
+        tag: 'IMAGE'
+      },
+      {
+        id: 'merge-images',
+        title: 'Merge Images',
+        description: 'Combine multiple images into collages',
+        route: '/image/merger',
+        icon: '🖼️',
+        tag: 'IMAGE'
+      },
+      {
+        id: 'background-tools',
+        title: 'Background Tools',
+        description: 'Remove, blur, or replace image backgrounds',
+        route: '/image/background-tools',
+        icon: '🎭',
+        tag: 'IMAGE'
+      },
+      {
+        id: 'color-palette',
+        title: 'Color Palette Extractor',
+        description: 'Extract beautiful color palettes from images',
+        route: '/image/color-palette',
+        icon: '🎨',
         tag: 'IMAGE'
       }
     ]

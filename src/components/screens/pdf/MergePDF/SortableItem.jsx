@@ -1,25 +1,60 @@
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import styles from "./MergePDF.module.scss";
 
-const SortableItem = ({ id, name }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+const SortableItem = ({ id, name, size, index, onRemove }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    padding: "10px",
-    margin: "5px",
-    background: "#f8f8f8",
-    border: "1px solid #ddd",
-    cursor: "grab",
-    listStyleType: "none",
   };
 
   return (
-    <li ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {name}
-    </li>
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`${styles.sortableItem} ${isDragging ? styles.dragging : ''}`}
+    >
+      <div className={styles.itemIndex}>
+        {index}
+      </div>
+      <div className={styles.pdfContainer}>
+        <div className={styles.pdfIcon}>
+          <i className="fas fa-file-pdf"></i>
+        </div>
+        <div className={styles.pdfInfo}>
+          <span className={styles.fileName}>{name}</span>
+          <div className={styles.fileMeta}>
+            <span className={styles.fileTypeBadge}>PDF</span>
+            <span className={styles.fileSize}>{size} KB</span>
+          </div>
+        </div>
+      </div>
+      <div className={styles.itemActions}>
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+          className={styles.removeButton}
+          title="Remove PDF"
+        >
+          <i className="fas fa-times"></i>
+        </button>
+        <div className={styles.dragHandle} {...attributes} {...listeners}>
+          <i className="fas fa-grip-vertical"></i>
+        </div>
+      </div>
+    </div>
   );
 };
 

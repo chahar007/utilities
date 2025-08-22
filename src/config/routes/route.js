@@ -37,6 +37,21 @@ const AUTH_ROUTES = [
     {
         path: '/image/base64-converter', component: pages.Base64
     },
+    {
+        path: '/image/filters', component: pages.ImageFilters
+    },
+    {
+        path: '/image/watermark', component: pages.Watermark
+    },
+    {
+        path: '/image/merger', component: pages.ImageMerger
+    },
+    {
+        path: '/image/background-tools', component: pages.BackgroundTools
+    },
+    {
+        path: '/image/color-palette', component: pages.ColorPalette
+    },
     {   path: '/main', component: pages.Main },
     {
         path: '/privacy-policy', component: pages.PrivacyPolicy
@@ -64,6 +79,12 @@ const AUTH_ROUTES = [
     },
     {
         path: '/pdf/merge-pdf', component: pages.MergePDF,
+    },
+    {
+        path: '/blog', component: pages.Blog,
+    },
+    {
+        path: '/blog/:slug', component: pages.BlogPost,
     },
 ];
 

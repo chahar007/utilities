@@ -18,7 +18,13 @@ const usePdfMerger = () => {
     return await mergedPdf.save(); // Returns merged PDF bytes
   };
 
-  return { mergePDFs };
+  // Helper function to detect mobile devices
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           window.innerWidth <= 768;
+  };
+
+  return { mergePDFs, isMobile };
 };
 
 export default usePdfMerger;

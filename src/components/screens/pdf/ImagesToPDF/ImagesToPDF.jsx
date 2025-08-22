@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import {
@@ -17,78 +17,117 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItem from "./SortableItem";
 import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
+import UsefulLinks from "../../../shared/UsefulLinks/UsefulLinks";
+import QuickTips from "../../../shared/QuickTips/QuickTips";
 import styles from "./ImagesToPDF.module.scss";
 import { ImageToPDFHelmet } from "../../seo/PdfHelmet";
-
-// Enhanced mobile detection
-const isMobile = () => {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
-         window.innerWidth < 768;
-};
+import useImagesToPDF from "./useImagesToPDF";
 
 const ImagesToPDF = () => {
+  // Core processing states
+  const [originalSize, setOriginalSize] = useState(null);
+  const [pdfSize, setPdfSize] = useState(null);
+  const [sizeReduction, setSizeReduction] = useState(null);
+  
+  // Image handling
   const [images, setImages] = useState([]);
+  const [imageDetails, setImageDetails] = useState({
+    count: 0,
+    totalSize: "",
+    formats: [],
+  });
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
+  
+  // UI state management
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isCalculating, setIsCalculating] = useState(false);
+  
+  // Feature-specific states
+  const [pdfOptions, setPdfOptions] = useState({
+    quality: 80,
+    pageSize: "auto",
+    orientation: "auto",
+    margin: 10
+  });
+  
   const [hasReordered, setHasReordered] = useState(false);
   const [lastGeneratedOrder, setLastGeneratedOrder] = useState([]);
   const previewWindowRef = useRef(null);
 
-  const supportedFormats = [
-    'image/png', 
-    'image/jpeg', 
-    'image/jpg', 
-    'image/webp',
-    'image/gif',
-    'image/bmp',
-    'image/tiff',
-    'image/svg+xml'
-  ];
-
-  // Track if images have changed since last generation
-  useEffect(() => {
-    if (images.length === 0) {
-      setHasReordered(false);
-      return;
-    }
-
-    // Check if order has changed since last generation
-    const currentOrder = images.map(img => img.id);
-    const hasChanged = !arraysEqual(currentOrder, lastGeneratedOrder);
-    setHasReordered(hasChanged);
-  }, [images, lastGeneratedOrder]);
-
-  // Clean up object URLs on unmount
-  useEffect(() => {
-    return () => {
-      images.forEach(image => URL.revokeObjectURL(image.url));
-      if (pdfPreviewUrl) URL.revokeObjectURL(pdfPreviewUrl);
-      if (previewWindowRef.current && !previewWindowRef.current.closed) {
-        previewWindowRef.current.close();
-      }
-    };
-  }, [images, pdfPreviewUrl]);
+  const { 
+    convertImagesToPDF, 
+    supportedFormats,
+    isMobile 
+  } = useImagesToPDF();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 5,
-        delay: isMobile() ? 300 : 250, // Longer delay for mobile
-        tolerance: 10, // More tolerance for touch devices
+        delay: isMobile() ? 300 : 250,
+        tolerance: 10,
       },
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-  
-  const handleImageUpload = (uploadedFiles) => {
+
+  // Auto-calculate PDF size when options change
+  useEffect(() => {
+    if (images.length > 0 && currentStep >= 2) {
+      calculatePdfSize();
+    }
+  }, [images, pdfOptions.quality, pdfOptions.pageSize]);
+
+  // Calculate estimated PDF size
+  const calculatePdfSize = useCallback(async () => {
+    if (images.length === 0) return;
+    
+    setIsCalculating(true);
+    
+    try {
+      // Estimate based on quality and number of images
+      const totalImageSize = images.reduce((acc, img) => acc + parseFloat(img.size), 0);
+      const qualityFactor = pdfOptions.quality / 100;
+      const estimatedSize = (totalImageSize * qualityFactor * 0.8).toFixed(2); // PDF overhead factor
+      
+      setPdfSize(estimatedSize);
+      
+      // Calculate size comparison
+      if (originalSize) {
+        const original = parseFloat(originalSize);
+        const processed = parseFloat(estimatedSize);
+        const reduction = ((original - processed) / original) * 100;
+        setSizeReduction(reduction.toFixed(2));
+      }
+      
+      setIsCalculating(false);
+    } catch (error) {
+      setIsCalculating(false);
+    }
+  }, [images, pdfOptions.quality, originalSize]);
+
+  // File upload handler
+  const handleFileUpload = useCallback((uploadedFiles) => {
+    setError(null);
+    setSuccessMessage(null);
+    setPdfPreviewUrl(null);
+    
     const validFiles = uploadedFiles?.filter(file => 
       supportedFormats.includes(file.type.toLowerCase())
     );
 
     if (validFiles.length !== uploadedFiles.length) {
-      alert(`Some files were not supported. Only ${supportedFormats.join(', ')} formats are supported.`);
+      setError(`Some files were not supported. Only ${supportedFormats.join(', ')} formats are supported.`);
+    }
+
+    if (validFiles.length === 0) {
+      setError("Please upload valid image files (PNG, JPG, JPEG, WebP, GIF, BMP, TIFF, SVG).");
+      return;
     }
 
     const newImages = validFiles?.map((file, index) => ({
@@ -96,16 +135,33 @@ const ImagesToPDF = () => {
       file,
       url: URL.createObjectURL(file),
       name: file.name,
+      size: (file.size / 1024).toFixed(2),
       type: file.type.split('/')[1]?.toLowerCase() || 
            (file.name.endsWith('.svg') ? 'svg' : 'unknown')
     }));
 
     setImages((prevImages) => [...prevImages, ...newImages]);
-    setPdfPreviewUrl(null);
-    setHasReordered(true); // New uploads require generation
-  };
+    
+    // Calculate total size and update details
+    const totalSize = [...images, ...newImages].reduce((acc, img) => acc + parseFloat(img.size), 0);
+    const formats = [...new Set([...images, ...newImages].map(img => img.type.toUpperCase()))];
+    
+    setOriginalSize(totalSize.toFixed(2));
+    setImageDetails({
+      count: images.length + newImages.length,
+      totalSize: totalSize >= 1024 ? (totalSize / 1024).toFixed(2) + ' MB' : totalSize.toFixed(2) + ' KB',
+      formats: formats.join(', '),
+    });
+    
+    setCurrentStep(2);
+    // Only set hasReordered if we already have a PDF generated
+    if (pdfPreviewUrl) {
+      setHasReordered(true);
+    }
+  }, [images, supportedFormats, pdfPreviewUrl]);
 
-  const handleDragEnd = (event) => {
+  // Drag and drop handler
+  const handleDragEnd = useCallback((event) => {
     const { active, over } = event;
     if (active?.id !== over?.id) {
       setImages((items) => {
@@ -113,7 +169,6 @@ const ImagesToPDF = () => {
         const newIndex = items.findIndex((item) => item?.id === over?.id);
         const newItems = arrayMove(items, oldIndex, newIndex);
         
-        // Mark as reordered only if we already had a generated PDF
         if (pdfPreviewUrl) {
           setHasReordered(true);
         }
@@ -121,175 +176,100 @@ const ImagesToPDF = () => {
         return newItems;
       });
     }
-  };
+  }, [pdfPreviewUrl]);
 
-  const generatePDF = async () => {
-    if (images.length === 0) return;
-
-    setIsProcessing(true);
-    try {
-      // Clean up previous PDF if exists
-      if (pdfPreviewUrl) {
-        URL.revokeObjectURL(pdfPreviewUrl);
-        setPdfPreviewUrl(null);
-      }
-
-      const pdfDoc = await PDFDocument.create();
+  // Remove image handler
+  const removeImage = useCallback((imageId) => {
+    setImages(prev => {
+      const updated = prev.filter(img => img.id !== imageId);
       
-      for (const imageObj of images) {
-        try {
-          const imageBytes = await imageObj.file.arrayBuffer();
-          let embeddedImage;
-          
-          switch(imageObj.type) {
-            case 'png':
-              embeddedImage = await pdfDoc.embedPng(imageBytes);
-              break;
-            case 'jpg':
-            case 'jpeg':
-              embeddedImage = await pdfDoc.embedJpg(imageBytes);
-              break;
-            case 'webp':
-            case 'gif':
-            case 'bmp':
-            case 'tiff':
-              embeddedImage = await convertViaCanvas(imageBytes, pdfDoc);
-              break;
-            case 'svg':
-            case 'svg+xml':
-              embeddedImage = await convertSvgToPdf(imageBytes, pdfDoc);
-              break;
-            default:
-              console.warn(`Unsupported image format: ${imageObj.type}`);
-              continue;
-          }
-
-          const page = pdfDoc.addPage([embeddedImage.width, embeddedImage.height]);
-          page.drawImage(embeddedImage, { 
-            x: 0, 
-            y: 0, 
-            width: embeddedImage.width, 
-            height: embeddedImage.height 
-          });
-        } catch (error) {
-          console.error(`Error processing image ${imageObj.name}:`, error);
-          continue;
+      if (updated.length === 0) {
+        setCurrentStep(1);
+        setPdfPreviewUrl(null);
+        setPdfSize(null);
+        setOriginalSize(null);
+        setImageDetails({ count: 0, totalSize: "", formats: [] });
+        setHasReordered(false);
+        setLastGeneratedOrder([]);
+      } else {
+        // Recalculate totals
+        const totalSize = updated.reduce((acc, img) => acc + parseFloat(img.size), 0);
+        const formats = [...new Set(updated.map(img => img.type.toUpperCase()))];
+        
+        setOriginalSize(totalSize.toFixed(2));
+        setImageDetails({
+          count: updated.length,
+          totalSize: totalSize >= 1024 ? (totalSize / 1024).toFixed(2) + ' MB' : totalSize.toFixed(2) + ' KB',
+          formats: formats.join(', '),
+        });
+        // Only set hasReordered if we already have a PDF generated
+        if (pdfPreviewUrl) {
+          setHasReordered(true);
         }
       }
+      
+      return updated;
+    });
+  }, [pdfPreviewUrl]);
 
-      const pdfBytes = await pdfDoc.save();
-      const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
-      const pdfUrl = URL.createObjectURL(pdfBlob);
+  // Convert and Download handler
+  const handleConvertAndDownload = useCallback(async () => {
+    if (images.length === 0) {
+      setError("Please upload images first.");
+      return;
+    }
 
-      setPdfPreviewUrl(pdfUrl);
-      setHasReordered(false);
-      setLastGeneratedOrder(images.map(img => img.id));
+    setIsProcessing(true);
+    setError(null);
+    setCurrentStep(3);
+
+    try {
+      const result = await convertImagesToPDF(images, pdfOptions);
+      
+      if (result.pdfUrl) {
+        setPdfPreviewUrl(result.pdfUrl);
+        setPdfSize(result.size);
+        setHasReordered(false);
+        setLastGeneratedOrder(images.map(img => img.id));
+        
+        // Auto-download
+        saveAs(result.pdfUrl, "converted_images.pdf");
+        setSuccessMessage(`🎉 Successfully converted ${images.length} images to PDF and downloaded!`);
+      }
     } catch (error) {
-      console.error("PDF generation error:", error);
-      alert("Error generating PDF. Please try again.");
+      setError("Error converting images to PDF. Please try again.");
+      console.error("PDF conversion error:", error);
     } finally {
       setIsProcessing(false);
     }
-  };
+  }, [images, pdfOptions, convertImagesToPDF]);
 
-  const convertViaCanvas = async (imageBytes, pdfDoc) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const url = URL.createObjectURL(new Blob([imageBytes]));
-      
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        
-        // Draw image to canvas
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        // Convert canvas to PNG blob
-        canvas.toBlob(async (blob) => {
-          try {
-            const pngBytes = await blob.arrayBuffer();
-            const embeddedImage = await pdfDoc.embedPng(pngBytes);
-            URL.revokeObjectURL(url);
-            resolve(embeddedImage);
-          } catch (err) {
-            reject(new Error(`Failed to convert image: ${err.message}`));
-          }
-        }, 'image/png');
-      };
-      
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        reject(new Error('Failed to load image for conversion'));
-      };
-      
-      img.src = url;
+  // Reset function
+  const resetProcessor = useCallback(() => {
+    // Clean up object URLs
+    images.forEach(image => URL.revokeObjectURL(image.url));
+    if (pdfPreviewUrl) URL.revokeObjectURL(pdfPreviewUrl);
+    
+    setImages([]);
+    setOriginalSize(null);
+    setPdfPreviewUrl(null);
+    setPdfSize(null);
+    setSizeReduction(null);
+    setError(null);
+    setSuccessMessage(null);
+    setCurrentStep(1);
+    setImageDetails({ count: 0, totalSize: "", formats: [] });
+    setIsCalculating(false);
+    setIsProcessing(false);
+    setHasReordered(false);
+    setLastGeneratedOrder([]);
+    setPdfOptions({
+      quality: 80,
+      pageSize: "auto", 
+      orientation: "auto",
+      margin: 10
     });
-  };
-
-  const convertSvgToPdf = async (svgBytes, pdfDoc) => {
-    return new Promise((resolve, reject) => {
-      const svgBlob = new Blob([svgBytes], { type: 'image/svg+xml' });
-      const url = URL.createObjectURL(svgBlob);
-      
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        // Set reasonable default dimensions if not specified
-        canvas.width = img.width || 800;
-        canvas.height = img.height || 600;
-        
-        const ctx = canvas.getContext('2d');
-        
-        // Ensure SVG has proper dimensions
-        const svgContent = new TextDecoder().decode(svgBytes);
-        const svgWithDimensions = svgContent.includes('viewBox') ? 
-          svgContent : 
-          svgContent.replace('<svg', `<svg viewBox="0 0 ${canvas.width} ${canvas.height}"`);
-        
-        const svgBlob = new Blob([svgWithDimensions], { type: 'image/svg+xml' });
-        const newUrl = URL.createObjectURL(svgBlob);
-        
-        // Create new image with updated SVG
-        const newImg = new Image();
-        newImg.onload = () => {
-          try {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-            
-            canvas.toBlob(async (blob) => {
-              try {
-                const pngBytes = await blob.arrayBuffer();
-                const embeddedImage = await pdfDoc.embedPng(pngBytes);
-                URL.revokeObjectURL(url);
-                URL.revokeObjectURL(newUrl);
-                resolve(embeddedImage);
-              } catch (err) {
-                reject(err);
-              }
-            }, 'image/png');
-          } catch (err) {
-            reject(err);
-          }
-        };
-        
-        newImg.onerror = () => {
-          URL.revokeObjectURL(newUrl);
-          reject(new Error('Failed to load processed SVG'));
-        };
-        
-        newImg.src = newUrl;
-      };
-      
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        reject(new Error('Failed to load SVG'));
-      };
-      
-      img.src = url;
-    });
-  };
+  }, [images, pdfPreviewUrl]);
 
   // Helper function to compare arrays
   const arraysEqual = (a, b) => {
@@ -303,191 +283,253 @@ const ImagesToPDF = () => {
     return true;
   };
 
-  const handleViewPDF = () => {
-    if (!pdfPreviewUrl) return;
-    
-    if (isMobile()) {
-      // For mobile devices, open in new tab
-      previewWindowRef.current = window.open(pdfPreviewUrl, '_blank');
-      if (!previewWindowRef.current) {
-        alert('Pop-up blocked. Please allow pop-ups for this site to view the PDF.');
-      }
-    } else {
-      // For desktop, keep the iframe preview
-      setPdfPreviewUrl(pdfPreviewUrl); // Refresh if needed
-    }
-  };
-
-  const handleDownloadPDF = () => {
-    if (!pdfPreviewUrl) return;
-    saveAs(pdfPreviewUrl, "converted_images.pdf");
-  };
-
-  const handleReupload = () => {
-    // Clean up object URLs
-    images.forEach(image => URL.revokeObjectURL(image.url));
-    if (pdfPreviewUrl) URL.revokeObjectURL(pdfPreviewUrl);
-    
-    setImages([]);
-    setPdfPreviewUrl(null);
-    setHasReordered(false);
-    setLastGeneratedOrder([]);
-  };
-
   return (
-    <div className={styles.container}>
-      {/* Header */}
+    <div className={styles.imagesToPDF}>
       <ImageToPDFHelmet />
+      
+      {/* Header */}
+      <section className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            <i className="fas fa-images"></i>
+            Images to PDF Converter
+          </h1>
+          <p className={styles.subtitle}>
+            Convert multiple images into a single PDF document • 100% Private • Fast & Secure
+          </p>
+        </div>
+      </section>
 
-      <div className={styles.header}>
-        <h1>Images to PDF Converter</h1>
-        <p>Upload, arrange, and convert your images to a single PDF file</p>
-        <p className={styles.supportedFormats}>
-          Supported formats: PNG, JPG, JPEG, WEBP, GIF, BMP, TIFF, SVG
-        </p>
-      </div>
-
-      {/* Main Content */}
-      <div className={styles.content}>
-        {/* Left Panel - Upload & Preview */}
-        <div className={styles.leftPanel}>
-          <div className={styles.uploadSection}>
-            <UploadFileHandling 
-              onFileUpload={handleImageUpload} 
-              multiple={true}
-            />
+      {/* Main Processing Section */}
+      <section className={styles.main}>
+        <div className={styles.container}>
+          
+          {/* Progress Steps */}
+          <div className={styles.progressIndicator}>
+            <div className={styles.progressSteps}>
+              <div className={`${styles.progressStep} ${currentStep >= 1 ? styles.active : ''} ${currentStep > 1 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 1 ? <i className="fas fa-check"></i> : '1'}
+                </div>
+                <span className={styles.stepLabel}>Upload Images</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 1 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 2 ? styles.active : ''} ${currentStep > 2 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 2 ? <i className="fas fa-check"></i> : '2'}
+                </div>
+                <span className={styles.stepLabel}>Arrange & Configure</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 2 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 3 ? styles.active : ''}`}>
+                <div className={styles.stepNumber}>3</div>
+                <span className={styles.stepLabel}>Download PDF</span>
+              </div>
+            </div>
+            
             {images.length > 0 && (
-              <button onClick={handleReupload} className={styles.reuploadBtn}>
-                <i className="fas fa-redo"></i> Clear All Images
+              <button onClick={resetProcessor} className={styles.resetButton}>
+                <i className="fas fa-redo"></i>
+                Start Over
               </button>
             )}
           </div>
 
-          <div className={styles.previewSection}>
-            <h3>PDF Preview {hasReordered && <span className={styles.unsavedChanges}>(Unsaved Changes)</span>}</h3>
-            {pdfPreviewUrl ? (
-              isMobile() ? (
-                <div className={styles.mobilePreview}>
-                  <p>PDF preview is not available on mobile. Please download or open in new tab.</p>
-                  <button 
-                    onClick={handleViewPDF}
-                    className={styles.viewBtn}
-                  >
-                    <i className="fas fa-external-link-alt"></i> Open PDF
+          {/* Alert Messages */}
+          {error && (
+            <div className={styles.alertMessage}>
+              <div className={styles.errorAlert}>
+                <i className="fas fa-exclamation-triangle"></i>
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {successMessage && (
+            <div className={styles.alertMessage}>
+              <div className={styles.successAlert}>
+                <i className="fas fa-check-circle"></i>
+                <span>{successMessage}</span>
+                <button onClick={() => setSuccessMessage(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Upload Step */}
+          {currentStep === 1 && (
+            <div className={styles.uploadStep}>
+              <UploadFileHandling 
+                onFileUpload={handleFileUpload}
+                multiple={true}
+                acceptedFormats={supportedFormats}
+              />
+              <div className={styles.uploadInfo}>
+                <div className={styles.formatSupport}>
+                  <span>Supported: PNG, JPG, JPEG, WebP, GIF, BMP, TIFF, SVG</span>
+                  <span>Max: 10MB per image</span>
+                  <span>🔒 Private & Secure</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Processing Step */}
+          {currentStep >= 2 && images.length > 0 && (
+            <div className={styles.processingStep}>
+              
+              {/* Image List */}
+              <div className={styles.imageSection}>
+                <div className={styles.sectionHeader}>
+                  <span className={styles.fileName}>{imageDetails.count} images selected</span>
+                  <button onClick={resetProcessor} className={styles.changeBtn}>
+                    <i className="fas fa-upload"></i> Add More
                   </button>
                 </div>
-              ) : (
-                <iframe 
-                  src={`${pdfPreviewUrl}#toolbar=1&navpanes=0`}
-                  title="PDF Preview" 
-                  className={styles.pdfPreview}
-                  // type="application/pdf"
-                />
-              )
-            ) : (
-              <div className={styles.previewPlaceholder}>
-                <i className="fas fa-file-pdf"></i>
-                <p>Your PDF preview will appear here</p>
-                {images.length > 0 && !pdfPreviewUrl && (
-                  <p className={styles.convertHint}>
-                    Click "Convert to PDF" to generate preview
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Panel - Image Sorting */}
-        <div className={styles.rightPanel}>
-          <div className={styles.sortingHeader}>
-            <h3>Arrange Images ({images.length})</h3>
-            <div className={styles.instructions}>
-              <i className="fas fa-info-circle"></i>
-              <p>Drag images to reorder them</p>
-              {hasReordered && (
-                <p className={styles.reorderWarning}>
-                  <i className="fas fa-exclamation-triangle"></i> Order changed - regenerate PDF
-                </p>
-              )}
-            </div>
-          </div>
-
-          {images.length > 0 ? (
-            <div className={styles.imageListContainer}>
-              <DndContext 
-                sensors={sensors} 
-                collisionDetection={closestCenter} 
-                onDragEnd={handleDragEnd}
-              >
-                <SortableContext 
-                  items={images} 
-                  strategy={verticalListSortingStrategy}
-                >
-                  <div className={styles.imageList}>
-                    {images.map((image) => (
-                      <SortableItem 
-                        key={image.id} 
-                        id={image.id} 
-                        imageUrl={image.url}
-                        fileName={image.name}
-                        fileType={image.type}
-                      />
-                    ))}
+                
+                <div className={styles.imageContainer}>
+                  {hasReordered && (
+                    <div className={styles.reorderNotice}>
+                      <i className="fas fa-info-circle"></i>
+                      <span>Images have been reordered - convert again to update PDF</span>
+                    </div>
+                  )}
+                  
+                  <DndContext 
+                    sensors={sensors} 
+                    collisionDetection={closestCenter} 
+                    onDragEnd={handleDragEnd}
+                  >
+                    <SortableContext 
+                      items={images} 
+                      strategy={verticalListSortingStrategy}
+                    >
+                      <div className={styles.imageList}>
+                        {images.map((image, index) => (
+                          <SortableItem 
+                            key={image.id} 
+                            id={image.id} 
+                            imageUrl={image.url}
+                            fileName={image.name}
+                            fileType={image.type}
+                            fileSize={image.size}
+                            index={index + 1}
+                            onRemove={() => removeImage(image.id)}
+                          />
+                        ))}
+                      </div>
+                    </SortableContext>
+                  </DndContext>
+                  
+                  <div className={styles.imageDetails}>
+                    <span>{imageDetails.totalSize}</span>
+                    <span>{imageDetails.formats}</span>
+                    <span>{imageDetails.count} images</span>
                   </div>
-                </SortableContext>
-              </DndContext>
-            </div>
-          ) : (
-            <div className={styles.emptyState}>
-              <i className="fas fa-images"></i>
-              <p>Upload images to begin</p>
-            </div>
-          )}
-        </div>
-      </div>
+                </div>
+              </div>
 
-      {/* Action Buttons */}
-      <div className={styles.actionButtons}>
-        <button 
-          onClick={generatePDF} 
-          disabled={images.length === 0 || (isProcessing && !hasReordered)}
-          className={styles.convertBtn}
-        >
-          {isProcessing ? (
-            <>
-              <i className="fas fa-spinner fa-spin"></i> {hasReordered ? 'Regenerating...' : 'Converting...'}
-            </>
-          ) : hasReordered ? (
-            <>
-              <i className="fas fa-sync-alt"></i> Generate PDF
-            </>
-          ) : (
-            <>
-              <i className="fas fa-file-pdf"></i> Convert to PDF
-            </>
+              {/* Settings Panel */}
+              <div className={styles.settingsPanel}>
+                
+                {/* PDF Options */}
+                <div className={styles.optionGroup}>
+                  <label htmlFor="quality">PDF Quality:</label>
+                  <div className={styles.sliderContainer}>
+                    <input
+                      type="range"
+                      id="quality"
+                      min="20"
+                      max="100"
+                      value={pdfOptions.quality}
+                      onChange={(e) => setPdfOptions(prev => ({
+                        ...prev,
+                        quality: parseInt(e.target.value)
+                      }))}
+                      className={styles.slider}
+                    />
+                    <span className={styles.sliderValue}>{pdfOptions.quality}%</span>
+                  </div>
+                </div>
+
+                <div className={styles.optionGroup}>
+                  <label htmlFor="pageSize">Page Size:</label>
+                  <select
+                    id="pageSize"
+                    value={pdfOptions.pageSize}
+                    onChange={(e) => setPdfOptions(prev => ({
+                      ...prev,
+                      pageSize: e.target.value
+                    }))}
+                    className={styles.formatSelector}
+                  >
+                    <option value="auto">Auto (fit image)</option>
+                    <option value="a4">A4</option>
+                    <option value="letter">Letter</option>
+                    <option value="legal">Legal</option>
+                  </select>
+                </div>
+
+                {/* Size Comparison */}
+                {originalSize && (
+                  <div className={styles.sizeComparison}>
+                    <div className={styles.sizeInfo}>
+                      <span>Original: {originalSize} KB</span>
+                      <span>→</span>
+                      {pdfSize ? (
+                        <>
+                          <span>PDF: {pdfSize} KB</span>
+                          {sizeReduction && !isCalculating ? (
+                            <span className={parseFloat(sizeReduction) > 0 ? styles.reduction : styles.increase}>
+                              ({parseFloat(sizeReduction) > 0 ? '-' : '+'}{Math.abs(parseFloat(sizeReduction)).toFixed(2)}%)
+                            </span>
+                          ) : (
+                            <span className={styles.calculating}>Calculating...</span>
+                          )}
+                        </>
+                      ) : (
+                        <span className={styles.calculating}>Calculating...</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Convert Button */}
+                <button 
+                  onClick={handleConvertAndDownload} 
+                  className={styles.convertButton}
+                  disabled={isProcessing || images.length === 0}
+                >
+                  {isProcessing ? (
+                    <>
+                      <div className={styles.spinner}></div>
+                      Converting...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-file-pdf"></i>
+                      Convert & Download PDF
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
           )}
-        </button>
-        
-        {pdfPreviewUrl && (
-          <>
-            {!isMobile() && (
-              <button 
-                onClick={handleViewPDF}
-                className={styles.viewBtn}
-              >
-                <i className="fas fa-eye"></i> View Fullscreen
-              </button>
-            )}
-            <button 
-              onClick={handleDownloadPDF}
-              className={styles.downloadBtn}
-            >
-              <i className="fas fa-download"></i> Download PDF
-            </button>
-          </>
-        )}
-      </div>
+
+        </div>
+      </section>
+
+      {/* Useful Links & Quick Tips */}
+      <section className={styles.usefulSection}>
+        <div className={styles.usefulContent}>
+          <UsefulLinks currentTool="image-to-pdf" />
+          <QuickTips currentTool="image-to-pdf" />
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,155 +1,316 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './Compression.module.scss';
 import UploadFileHandling from '../../../shared/UploadFileHandling/UploadFileHandling';
-import imageCompression from 'browser-image-compression'; // Assuming you're using this library for compression
+import UsefulLinks from '../../../shared/UsefulLinks/UsefulLinks';
+import QuickTips from '../../../shared/QuickTips/QuickTips';
+import ProgressIndicator from '../../../shared/ProgressIndicator/ProgressIndicator';
+import AlertMessage from '../../../shared/AlertMessage/AlertMessage';
+import ImagePreviewPanel from '../../../shared/ImagePreviewPanel/ImagePreviewPanel';
+import SizeComparison from '../../../shared/SizeComparison/SizeComparison';
+import ProcessingButton from '../../../shared/ProcessingButton/ProcessingButton';
+import useImageProcessor from '../../../../hooks/useImageProcessor';
 import { CompressionHelmet } from '../../seo/TabsHelment';
 
 const Compression = () => {
-  const [error, setError] = useState(null);
-  const [originalSize, setOriginalSize] = useState(null);
-  const [compressedSize, setCompressedSize] = useState(null);
-  const [imageDetails, setImageDetails] = useState({
-    name: "",
-    dimensions: "",
-  });
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const [compressedPreviewUrl, setCompressedPreviewUrl] = useState(null);
+  // Use shared image processor hook
+  const {
+    originalSize,
+    processedSize,
+    sizeReduction,
+    imageDetails,
+    previewUrl,
+    error,
+    successMessage,
+    currentStep,
+    isProcessing,
+    isCalculating,
+    handleFileUpload: baseHandleFileUpload,
+    updateProcessedSize,
+    createDownloadLink,
+    resetProcessor: baseResetProcessor,
+    setError,
+    setSuccessMessage,
+    setIsProcessing,
+    setIsCalculating,
+    setOriginalSize,
+    setImageDetails,
+    setPreviewUrl,
+    setCurrentStep
+  } = useImageProcessor();
+  
+  // Compression-specific states
+  const [quality, setQuality] = useState(80);
+  const [compressionLevel, setCompressionLevel] = useState('medium');
 
-  const handleFileUpload = (file) => {
-    setError(null);
-    setCompressedPreviewUrl(null);
-    setOriginalSize(null);
-    setCompressedSize(null);
+  const handleFileUpload = useCallback((file) => {
+    baseHandleFileUpload(file);
+  }, [baseHandleFileUpload]);
 
-    if (file) {
-      const fileType = file.type.split('/')[0];
-      if (fileType !== 'image') {
-        setError("Please upload a valid image file.");
-        return;
-      }
+  // Custom reset processor for Compression specific states
+  const resetProcessor = useCallback(() => {
+    baseResetProcessor(); // Call shared reset
+    
+    // Reset compression-specific states
+    setQuality(80);
+    setCompressionLevel('medium');
+  }, [baseResetProcessor]);
 
-      const fileSizeInKB = (file.size / 1024).toFixed(2);
-      setOriginalSize(fileSizeInKB);
-
-      const img = new Image();
-      img.onload = () => {
-        setImageDetails({
-          name: file.name,
-          dimensions: `${img.width}x${img.height}px`,
-        });
-      };
-      img.onerror = () => {
-        setError("Error loading image.");
-      };
-      img.src = URL.createObjectURL(file);
-
-      setPreviewUrl(URL.createObjectURL(file));
-    } else {
-      setError("Please upload an image first.");
-    }
-  };
-
-  const handleCompression = async () => {
-    if (!previewUrl) {
-      setError("Please upload an image first.");
-      return;
-    }
-
+  const processImage = useCallback(async () => {
+    if (!previewUrl || !originalSize) return;
+    
+    setIsCalculating(true);
+    
     try {
-      // Set compression options
-      const options = {
-        maxSizeMB: 1, // Maximum file size in MB
-        maxWidthOrHeight: 800, // Maximum width or height (in px)
-        useWebWorker: true, // Enable Web Worker for better performance
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      
+      img.onload = () => {
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        // Apply compression based on quality setting
+        const compressedImageData = canvas.toDataURL('image/jpeg', quality / 100);
+        
+        // Calculate new size
+        const byteString = atob(compressedImageData.split(',')[1]);
+        const newSizeKB = (byteString.length / 1024).toFixed(2);
+        
+        setProcessedSize(newSizeKB);
+        
+        // Calculate percentage change
+        const original = parseFloat(originalSize);
+        const processed = parseFloat(newSizeKB);
+        const reduction = ((original - processed) / original) * 100;
+        setSizeReduction(reduction.toFixed(2));
+        
+        setIsCalculating(false);
       };
-
-      const file = await fetch(previewUrl).then(res => res.blob());
-      const compressedFile = await imageCompression(file, options);
-
-      const compressedFileSizeInKB = (compressedFile.size / 1024).toFixed(2);
-      setCompressedSize(compressedFileSizeInKB);
-
-      setCompressedPreviewUrl(URL.createObjectURL(compressedFile));
-    } catch (err) {
-      setError("Error compressing the image.");
+      
+      img.src = previewUrl;
+    } catch (error) {
+      setIsCalculating(false);
+      setError("Error processing image. Please try again.");
     }
-  };
+  }, [previewUrl, originalSize, quality]);
 
-  const handleDownloadCompressedImage = () => {
-    if (!compressedPreviewUrl) {
-      setError("No compressed image to download.");
+  const handleDownload = useCallback(() => {
+    if (!previewUrl) {
+      setError("No image selected for processing.");
       return;
     }
 
-    const link = document.createElement("a");
-    link.href = compressedPreviewUrl;
-    link.download = "compressed_image.jpg"; // Name of the downloaded image
-    link.click();
-  };
+    setIsProcessing(true);
+    setError(null);
+    setCurrentStep(3);
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+
+    img.src = previewUrl;
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      // Apply compression with current quality setting
+      const compressedImageData = canvas.toDataURL('image/jpeg', quality / 100);
+
+      const link = document.createElement("a");
+      link.href = compressedImageData;
+      link.download = `${imageDetails.name.split('.')[0]}_compressed.jpg`;
+      link.click();
+      
+      setSuccessMessage(`🎉 Successfully compressed your image!`);
+      setIsProcessing(false);
+    };
+    
+    img.onerror = () => {
+      setError("Error processing image. Please try again.");
+      setIsProcessing(false);
+    };
+  }, [previewUrl, imageDetails.name, quality]);
+
+
+
+  const setQualityPreset = useCallback((preset) => {
+    switch (preset) {
+      case 'low':
+        setQuality(50);
+        setCompressionLevel('low');
+        break;
+      case 'medium':
+        setQuality(80);
+        setCompressionLevel('medium');
+        break;
+      case 'high':
+        setQuality(95);
+        setCompressionLevel('high');
+        break;
+      default:
+        setCompressionLevel('custom');
+    }
+  }, []);
+
+  // Auto-trigger processing
+  useEffect(() => {
+    if (previewUrl && originalSize) {
+      processImage();
+    }
+  }, [previewUrl, originalSize, quality, processImage]);
 
   return (
     <div className={styles.compression}>
       <CompressionHelmet />
-
-      <h2 className={styles.headingTool} >Image Compression Tool</h2>
-      <p className={styles.instructions}>
-        Upload an image to reduce its file size while maintaining quality. 
-        <br />
-        This helps in saving storage space and improving website load time.
-      </p>
-
-      {/* File Upload Component */}
-      <UploadFileHandling onFileUpload={handleFileUpload} />
-
-      {/* No File Uploaded */}
-      {!previewUrl && (
-        <div className={styles.noFileMessage}>
-          <h4>No image uploaded yet. Please upload an image to compress.</h4>
+      
+      {/* 1. COMPACT HEADER */}
+      <section className={styles.pageHeader}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.pageTitle}>
+            <i className="fas fa-compress-alt"></i>
+            Image Compression Tool
+          </h1>
+          <p className={styles.pageDescription}>
+            Compress images to reduce file size • 100% Private • Fast & Secure
+          </p>
         </div>
-      )}
+      </section>
 
-      <div className={styles.imageContainer}>
-        {/* Original Image Section */}
-        {previewUrl && (
-          <div className={styles.originalImage}>
-            <img src={previewUrl} alt="Original" />
-            <div className={styles.imageDetails}>
-              <p><strong>Original Size:</strong> {originalSize} KB</p>
+      {/* 2. MAIN PROCESSING SECTION */}
+      <section className={styles.processingSection}>
+        <div className={styles.container}>
+          
+          {/* Progress Indicator */}
+          <ProgressIndicator 
+            currentStep={currentStep}
+            onReset={resetProcessor}
+            steps={[
+              { number: 1, label: 'Upload' },
+              { number: 2, label: 'Compress' },
+              { number: 3, label: 'Download' }
+            ]}
+          />
+
+          {/* Alert Messages */}
+          <AlertMessage 
+            type="error"
+            message={error}
+            onClose={() => setError(null)}
+            closeable={true}
+          />
+          
+          <AlertMessage 
+            type="success"
+            message={successMessage}
+            onClose={() => setSuccessMessage(null)}
+            closeable={true}
+            autoClose={true}
+          />
+
+          {/* 2.3 Upload Step */}
+          {currentStep === 1 && (
+            <div className={styles.uploadStep}>
+              <UploadFileHandling 
+                onFileUpload={handleFileUpload}
+                acceptedFormats={["image/*"]}
+              />
+              <div className={styles.uploadInfo}>
+                <div className={styles.formatSupport}>
+                  <span>Supported: JPG, PNG, WebP, GIF, BMP</span>
+                  <span>Max: 10MB</span>
+                  <span>🔒 Private & Secure</span>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Compressed Image Section */}
-        {compressedPreviewUrl && (
-          <div className={styles.compressedImage}>
-            <img src={compressedPreviewUrl} alt="Compressed" />
-            <div className={styles.imageDetails}>
-              <p><strong>Compressed Size:</strong> {compressedSize} KB</p>
+          {/* 2.4 Processing Workspace */}
+          {currentStep >= 2 && previewUrl && (
+            <div className={styles.processingWorkspace}>
+              {/* Image Preview Panel */}
+              <ImagePreviewPanel 
+                previewUrl={previewUrl}
+                imageDetails={imageDetails}
+                originalSize={originalSize}
+                onReset={resetProcessor}
+                showComparison={false}
+              />
+
+              {/* Settings Panel */}
+              <div className={styles.settingsPanel}>
+                {/* Quality Selector */}
+                <div className={styles.qualitySelector}>
+                  <label>Quality: <strong>{quality}%</strong></label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={quality}
+                    onChange={(e) => {
+                      setQuality(e.target.value);
+                      setCompressionLevel('custom');
+                    }}
+                    className={styles.qualitySlider}
+                  />
+                  <div className={styles.qualityPresets}>
+                    <button 
+                      className={compressionLevel === 'low' ? styles.active : ''}
+                      onClick={() => setQualityPreset('low')}
+                    >
+                      Low (50%)
+                    </button>
+                    <button 
+                      className={compressionLevel === 'medium' ? styles.active : ''}
+                      onClick={() => setQualityPreset('medium')}
+                    >
+                      Medium (80%)
+                    </button>
+                    <button 
+                      className={compressionLevel === 'high' ? styles.active : ''}
+                      onClick={() => setQualityPreset('high')}
+                    >
+                      High (95%)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Size Comparison */}
+                <SizeComparison
+                  originalSize={originalSize}
+                  processedSize={processedSize}
+                  sizeReduction={sizeReduction}
+                  isCalculating={isCalculating}
+                  customLabel="Compression Impact"
+                />
+
+                {/* Action Button */}
+                <ProcessingButton
+                  onClick={handleDownload}
+                  isProcessing={isProcessing}
+                  disabled={!processedSize}
+                  defaultText="Download Compressed Image"
+                  processingText="Processing..."
+                  icon="fas fa-download"
+                  variant="download"
+                  size="medium"
+                  fullWidth={true}
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
 
-      {/* Error Message */}
-      {error && <div className={styles.errorMessage}>{error}</div>}
+        </div>
+      </section>
 
-      {/* Compression Controls */}
-      <div className={styles.compressionControls}>
-        <button onClick={handleCompression} className={styles.uploadButton}>
-          Compress Image
-        </button>
-        {compressedPreviewUrl && (
-          <button onClick={handleDownloadCompressedImage} className={styles.downloadButton}>
-            Download Compressed Image
-          </button>
-        )}
-      </div>
-
-
-      <p className={styles.footerNote}>
-        Note: This tool compresses images by reducing their resolution and optimizing file size without significant quality loss.
-      </p>
-
+      {/* 3. USEFUL SECTION */}
+      <section className={styles.usefulSection}>
+        <div className={styles.usefulContent}>
+          <UsefulLinks currentTool="compression" />
+          <QuickTips currentTool="compression" />
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,57 +1,96 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { saveAs } from "file-saver";
 import { PDFDocument } from "pdf-lib";
+import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
+import UsefulLinks from "../../../shared/UsefulLinks/UsefulLinks";
+import QuickTips from "../../../shared/QuickTips/QuickTips";
 import useSplitPDF from "./useSplitPDF";
 import styles from "./SplitPDF.module.scss";
-import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
 import { SplitPDFHelmet } from "../../seo/PdfHelmet";
 
 const SplitPDFComponent = () => {
-  // State management
+  // Core processing states
+  const [originalSize, setOriginalSize] = useState(null);
+  const [splitSize, setSplitSize] = useState(null);
+  const [sizeReduction, setSizeReduction] = useState(null);
+  
+  // PDF handling
   const [pdfFile, setPdfFile] = useState(null);
+  const [pdfDetails, setPdfDetails] = useState({
+    name: "",
+    size: "",
+    pages: 0,
+  });
+  const [splitFiles, setSplitFiles] = useState([]);
+  
+  // UI state management
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Feature-specific states
   const [splitMethod, setSplitMethod] = useState("range");
   const [pageRanges, setPageRanges] = useState("");
   const [customNames, setCustomNames] = useState([]);
   const [numParts, setNumParts] = useState(2);
-  const [isMobile, setIsMobile] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-  const [previewPdf, setPreviewPdf] = useState(null);
-  const [activeTab, setActiveTab] = useState("original");
-  const { splitPdfFiles, splitPDF, isProcessing, error, reset } = useSplitPDF();
-
-  // Mobile detection
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
-    };
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
-
+  
+  const { splitPDF, isMobile } = useSplitPDF();
 
   // File upload handler
-  const handlePDFUpload = useCallback(async (uploadedFiles) => {
+  const handleFileUpload = useCallback(async (uploadedFiles) => {
+    setError(null);
+    setSuccessMessage(null);
+    setSplitFiles([]);
+    
+    // Handle both single file and array cases
+    const filesArray = Array.isArray(uploadedFiles) ? uploadedFiles : [uploadedFiles];
+    
+    const validFiles = filesArray?.filter(file => 
+      file && file.type === "application/pdf"
+    );
+
+    if (validFiles.length !== filesArray.length) {
+      setError("Some files were not supported. Only PDF files are allowed.");
+    }
+
+    if (validFiles.length === 0) {
+      setError("Please upload a valid PDF file.");
+      return;
+    }
+
     try {
-      const file = uploadedFiles;
+      const file = validFiles[0]; // Take first file since this is single upload
+      
       if (file.size > 25 * 1024 * 1024) {
-        throw new Error("File size exceeds 25MB limit");
+        setError("File size exceeds 25MB limit. Please choose a smaller file.");
+        return;
       }
 
       const arrayBuffer = await file.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pageCount = pdfDoc.getPageCount();
       
       setPdfFile(file);
-      setTotalPages(pdfDoc.getPageCount());
-      setActiveTab("original");
-      setPreviewPdf(null);
-      reset();
+      setTotalPages(pageCount);
+      
+      const fileSizeKB = (file.size / 1024).toFixed(2);
+      setOriginalSize(fileSizeKB);
+      setPdfDetails({
+        name: file.name,
+        size: file.size >= 1024 * 1024 ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' : fileSizeKB + ' KB',
+        pages: pageCount,
+      });
+      
+      setCurrentStep(2);
     } catch (err) {
       console.error("Upload error:", err);
-      alert(err.message || "Failed to process PDF");
+      setError(err.message || "Failed to process PDF file. Please ensure it's a valid PDF.");
       setPdfFile(null);
       setTotalPages(0);
     }
-  }, [reset]);
+  }, []);
 
   // Custom split management
   const addCustomSplit = useCallback(() => {
@@ -68,12 +107,16 @@ const SplitPDFComponent = () => {
     setCustomNames(prev => prev.filter((_, i) => i !== index));
   }, []);
 
-  // PDF splitting handler
-  const handleSplit = useCallback(async () => {
+  // Split and Download handler
+  const handleSplitAndDownload = useCallback(async () => {
     if (!pdfFile) {
-      alert("Please upload a PDF first");
+      setError("Please upload a PDF file first.");
       return;
     }
+
+    setIsProcessing(true);
+    setError(null);
+    setCurrentStep(3);
 
     try {
       let splitOptions = {};
@@ -110,430 +153,424 @@ const SplitPDFComponent = () => {
       if (validationErrors.length > 0) {
         throw new Error(validationErrors.join("\n"));
       }
-      await splitPDF(pdfFile, splitOptions);
-      setActiveTab("split");
+
+      const result = await splitPDF(pdfFile, splitOptions);
       
-      console.log("split options", splitPdfFiles);
-      // Auto-select the first split file for preview
-      if (splitPdfFiles.length > 0) {
-        setPreviewPdf(splitPdfFiles[0]);
+      if (result && result.length > 0) {
+        setSplitFiles(result);
+        
+        // Calculate total split size
+        const totalSplitSize = result.reduce((acc, file) => acc + file.bytes.length, 0);
+        const totalSplitSizeKB = (totalSplitSize / 1024).toFixed(2);
+        setSplitSize(totalSplitSizeKB);
+        
+        // Calculate size comparison
+        if (originalSize) {
+          const original = parseFloat(originalSize);
+          const split = parseFloat(totalSplitSizeKB);
+          const difference = ((split - original) / original) * 100;
+          setSizeReduction(difference.toFixed(2));
+        }
+        
+        // Auto-download all files
+        result.forEach(file => {
+          const blob = new Blob([file.bytes], { type: "application/pdf" });
+          saveAs(blob, file.name);
+        });
+        
+        setSuccessMessage(`🎉 Successfully split PDF into ${result.length} files and downloaded!`);
       }
     } catch (err) {
       console.error("Split error:", err);
-      alert(err.message || "Failed to split PDF");
+      setError(err.message || "Failed to split PDF. Please check your settings and try again.");
+    } finally {
+      setIsProcessing(false);
     }
+  }, [pdfFile, splitMethod, pageRanges, customNames, numParts, totalPages, splitPDF, originalSize]);
 
-    console.log("split options", splitPdfFiles);
-
-    
-  }, [pdfFile, splitMethod, pageRanges, customNames, numParts, totalPages, splitPDF, splitPdfFiles]);
-
-  // PDF handling utilities
-  const createBlobUrl = useCallback((pdfBytes) => {
-    if (!pdfBytes) return null;
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-    return URL.createObjectURL(blob);
-  }, []);
-
-  const downloadPDF = useCallback(async (pdfData, fileName) => {
-    try {
-      let pdfBytes;
-      if (pdfData instanceof Blob) {
-        pdfBytes = await pdfData.arrayBuffer();
-      } else {
-        pdfBytes = pdfData;
-      }
-
-      if (!pdfBytes) throw new Error("No PDF data available");
-      
-      const url = createBlobUrl(pdfBytes);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = fileName || `split-document-${Date.now()}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      
-      // Cleanup
-      setTimeout(() => {
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      }, 100);
-    } catch (err) {
-      console.error("Download error:", err);
-      alert("Failed to download file");
-    }
-  }, [createBlobUrl]);
-
-  const downloadAll = useCallback(() => {
-    if (!splitPdfFiles || splitPdfFiles.length === 0) {
-      alert("No files available to download");
-      return;
-    }
-    splitPdfFiles.forEach(pdf => {
-      downloadPDF(pdf.bytes, pdf.name);
-    });
-  }, [splitPdfFiles, downloadPDF]);
-
-  const openInNewTab = useCallback(async (pdfData) => {
-    try {
-      let url;
-      if (pdfData instanceof Blob) {
-        url = URL.createObjectURL(pdfData);
-      } else {
-        url = createBlobUrl(pdfData);
-      }
-      const newWindow = window.open(url, '_blank');
-      if (!newWindow) {
-        alert("Please allow pop-ups for this site to view PDFs");
-      }
-    } catch (err) {
-      console.error("Preview error:", err);
-      alert("Failed to open PDF");
-    }
-  }, [createBlobUrl]);
-
-  // Reset everything
-  const resetAll = useCallback(() => {
+  // Reset function
+  const resetProcessor = useCallback(() => {
     setPdfFile(null);
+    setSplitFiles([]);
+    setOriginalSize(null);
+    setSplitSize(null);
+    setSizeReduction(null);
+    setError(null);
+    setSuccessMessage(null);
+    setCurrentStep(1);
+    setPdfDetails({ name: "", size: "", pages: 0 });
+    setIsProcessing(false);
     setTotalPages(0);
     setPageRanges("");
     setCustomNames([]);
-    setActiveTab("original");
-    setPreviewPdf(null);
-    reset();
-  }, [reset]);
+    setNumParts(2);
+    setSplitMethod("range");
+  }, []);
 
-  // Auto-select first split when files change
-  useEffect(() => {
-    if (activeTab === "split" && splitPdfFiles?.length > 0 && !previewPdf) {
-      setPreviewPdf(splitPdfFiles[0]);
+  // Download individual file
+  const downloadFile = useCallback((file) => {
+    const blob = new Blob([file.bytes], { type: "application/pdf" });
+    saveAs(blob, file.name);
+  }, []);
+
+  // Download all files
+  const downloadAllFiles = useCallback(() => {
+    if (splitFiles.length === 0) {
+      setError("No files available to download");
+      return;
     }
-  }, [splitPdfFiles, activeTab, previewPdf]);
+    splitFiles.forEach(file => {
+      downloadFile(file);
+    });
+  }, [splitFiles, downloadFile]);
 
   return (
-    <div className={styles.container}>
-
+    <div className={styles.splitPDF}>
       <SplitPDFHelmet />
       
-      <div className={styles.header}>
-        <h1>Split PDF Files</h1>
-        <p>Upload a PDF file and split it by pages or ranges</p>
-      </div>
+      {/* Header */}
+      <section className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            <i className="fas fa-cut"></i>
+            PDF Splitter
+          </h1>
+          <p className={styles.subtitle}>
+            Split PDF files into separate documents by pages or ranges • 100% Private • Fast & Secure
+          </p>
+        </div>
+      </section>
 
-      <div className={styles.content}>
-        {/* Left Panel - Controls */}
-        <div className={styles.leftPanel}>
-          <div className={styles.uploadSection}>
-            {!pdfFile ? (
-              <UploadFileHandling 
-                onFileUpload={handlePDFUpload} 
-                acceptedFormats={["application/pdf"]}
-                multiple={false}
-                darkMode={true}
-              />
-            ) : (
-              <>
-                <div className={styles.fileInfo}>
-                  <span className={styles.fileName}>{pdfFile.name}</span>
-                  <span className={styles.fileDetails}>
-                    {totalPages} pages • {(pdfFile.size / (1024 * 1024)).toFixed(2)} MB
-                  </span>
+      {/* Main Processing Section */}
+      <section className={styles.main}>
+        <div className={styles.container}>
+          
+          {/* Progress Steps */}
+          <div className={styles.progressIndicator}>
+            <div className={styles.progressSteps}>
+              <div className={`${styles.progressStep} ${currentStep >= 1 ? styles.active : ''} ${currentStep > 1 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 1 ? <i className="fas fa-check"></i> : '1'}
                 </div>
-                <button onClick={resetAll} className={styles.reuploadBtn}>
-                  <i className="fas fa-redo"></i> Reupload
-                </button>
-              </>
+                <span className={styles.stepLabel}>Upload PDF</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 1 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 2 ? styles.active : ''} ${currentStep > 2 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 2 ? <i className="fas fa-check"></i> : '2'}
+                </div>
+                <span className={styles.stepLabel}>Configure Split</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 2 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 3 ? styles.active : ''}`}>
+                <div className={styles.stepNumber}>3</div>
+                <span className={styles.stepLabel}>Download Files</span>
+              </div>
+            </div>
+            
+            {pdfFile && (
+              <button onClick={resetProcessor} className={styles.resetButton}>
+                <i className="fas fa-redo"></i>
+                Start Over
+              </button>
             )}
           </div>
 
-          {/* Split Options */}
-          {pdfFile && (
-            <div className={styles.splitOptions}>
-              <div className={styles.methodSelector}>
-                {["range", "evenOdd", "custom", "equal"].map(method => (
-                  <label key={method} className={styles.methodOption}>
-                    <input
-                      type="radio"
-                      name="splitMethod"
-                      value={method}
-                      checked={splitMethod === method}
-                      onChange={() => setSplitMethod(method)}
-                    />
-                    <span>
-                      {method === "range" && "By Range"}
-                      {method === "evenOdd" && "Even/Odd"}
-                      {method === "custom" && "Custom"}
-                      {method === "equal" && "Equal Parts"}
-                    </span>
-                  </label>
-                ))}
+          {/* Alert Messages */}
+          {error && (
+            <div className={styles.alertMessage}>
+              <div className={styles.errorAlert}>
+                <i className="fas fa-exclamation-triangle"></i>
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
               </div>
+            </div>
+          )}
 
-              {/* Method-specific options */}
-              <div className={styles.methodOptions}>
-                {splitMethod === "range" && (
-                  <div className={styles.inputGroup}>
-                    <label>Page Ranges</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. 1,3,5-8"
-                      value={pageRanges}
-                      onChange={(e) => setPageRanges(e.target.value)}
-                    />
-                    <div className={styles.supportedFormats}>
-                      <i className="fas fa-info-circle"></i> Separate with commas (1,3,5-8)
-                    </div>
-                  </div>
-                )}
+          {successMessage && (
+            <div className={styles.alertMessage}>
+              <div className={styles.successAlert}>
+                <i className="fas fa-check-circle"></i>
+                <span>{successMessage}</span>
+                <button onClick={() => setSuccessMessage(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          )}
 
-                {splitMethod === "custom" && (
-                  <>
-                    <button onClick={addCustomSplit} className={styles.addButton}>
-                      <i className="fas fa-plus"></i> Add Custom Split
-                    </button>
-                    {customNames.map((item, index) => (
-                      <div key={index} className={styles.customSplitItem}>
-                        <input
-                          type="text"
-                          placeholder="Name this split"
-                          value={item.name}
-                          onChange={(e) => updateCustomSplit(index, "name", e.target.value)}
-                        />
-                        <input
-                          type="text"
-                          placeholder="Page range"
-                          value={item.range}
-                          onChange={(e) => updateCustomSplit(index, "range", e.target.value)}
-                        />
-                        <button 
-                          onClick={() => removeCustomSplit(index)}
-                          className={styles.removeSmallButton}
-                        >
-                          <i className="fas fa-times"></i>
+          {/* Upload Step */}
+          {currentStep === 1 && (
+            <div className={styles.uploadStep}>
+              <UploadFileHandling 
+                onFileUpload={handleFileUpload}
+                multiple={false}
+                acceptedFormats={['application/pdf']}
+              />
+              <div className={styles.uploadInfo}>
+                <div className={styles.formatSupport}>
+                  <span>Supported: PDF files only</span>
+                  <span>Max: 25MB per file</span>
+                  <span>🔒 Private & Secure</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Processing Step */}
+          {currentStep >= 2 && pdfFile && (
+            <div className={styles.processingStep}>
+              
+              {/* Split Results */}
+              <div className={styles.resultsSection}>
+                <div className={styles.sectionHeader}>
+                  <span className={styles.fileName}>{pdfDetails.name}</span>
+                  <button onClick={resetProcessor} className={styles.changeBtn}>
+                    <i className="fas fa-upload"></i> Change File
+                  </button>
+                </div>
+                
+                <div className={styles.resultsContainer}>
+                  {splitFiles.length > 0 ? (
+                    <>
+                      <div className={styles.resultsHeader}>
+                        <span>Split Results ({splitFiles.length} files)</span>
+                        <button onClick={downloadAllFiles} className={styles.downloadAllBtn}>
+                          <i className="fas fa-download"></i> Download All
                         </button>
                       </div>
-                    ))}
-                  </>
-                )}
-
-                {splitMethod === "equal" && (
-                  <div className={styles.inputGroup}>
-                    <label>Number of Parts</label>
-                    <div className={styles.equalPartsControl}>
-                      <button 
-                        onClick={() => setNumParts(p => Math.max(2, p - 1))}
-                        disabled={numParts <= 2}
-                      >
-                        <i className="fas fa-minus"></i>
-                      </button>
-                      <input
-                        type="number"
-                        min="2"
-                        max={totalPages}
-                        value={numParts}
-                        onChange={(e) => {
-                          const value = parseInt(e.target.value);
-                          if (!isNaN(value)) {
-                            setNumParts(Math.min(totalPages, Math.max(2, value)));
-                          }
-                        }}
-                      />
-                      <button 
-                        onClick={() => setNumParts(p => Math.min(totalPages, p + 1))}
-                        disabled={numParts >= totalPages}
-                      >
-                        <i className="fas fa-plus"></i>
-                      </button>
+                      <div className={styles.resultsList}>
+                        {splitFiles.map((file, index) => (
+                          <div key={index} className={styles.resultItem}>
+                            <div className={styles.resultInfo}>
+                              <div className={styles.pdfIcon}>
+                                <i className="fas fa-file-pdf"></i>
+                              </div>
+                              <div className={styles.fileInfo}>
+                                <span className={styles.fileName}>{file.name}</span>
+                                <div className={styles.fileMeta}>
+                                  <span className={styles.fileSize}>{(file.bytes.length / 1024).toFixed(1)} KB</span>
+                                  <span className={styles.pages}>{file.pages || 'N/A'} pages</span>
+                                </div>
+                              </div>
+                            </div>
+                            <button 
+                              onClick={() => downloadFile(file)}
+                              className={styles.downloadBtn}
+                            >
+                              <i className="fas fa-download"></i>
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <div className={styles.emptyResults}>
+                      <i className="fas fa-file-export"></i>
+                      <p>Configure split settings and click "Split & Download" to see results here</p>
                     </div>
-                    <div className={styles.supportedFormats}>
-                      <i className="fas fa-info-circle"></i> Max: {totalPages} pages
+                  )}
+                </div>
+              </div>
+
+              {/* Settings Panel */}
+              <div className={styles.settingsPanel}>
+                
+                {/* File Info */}
+                <div className={styles.fileDetails}>
+                  <div className={styles.detailItem}>
+                    <span>Pages:</span>
+                    <span>{pdfDetails.pages}</span>
+                  </div>
+                  <div className={styles.detailItem}>
+                    <span>Size:</span>
+                    <span>{pdfDetails.size}</span>
+                  </div>
+                </div>
+
+                {/* Split Method */}
+                <div className={styles.optionGroup}>
+                  <label>Split Method:</label>
+                  <div className={styles.methodSelector}>
+                    {[
+                      { value: "range", label: "By Range", icon: "fas fa-list-ol" },
+                      { value: "evenOdd", label: "Even/Odd", icon: "fas fa-divide" },
+                      { value: "equal", label: "Equal Parts", icon: "fas fa-equals" },
+                      { value: "custom", label: "Custom", icon: "fas fa-cog" }
+                    ].map(method => (
+                      <label key={method.value} className={`${styles.methodOption} ${splitMethod === method.value ? styles.active : ''}`}>
+                        <input
+                          type="radio"
+                          name="splitMethod"
+                          value={method.value}
+                          checked={splitMethod === method.value}
+                          onChange={() => setSplitMethod(method.value)}
+                        />
+                        <i className={method.icon}></i>
+                        <span>{method.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Method-specific options */}
+                <div className={styles.methodOptions}>
+                  {splitMethod === "range" && (
+                    <div className={styles.inputGroup}>
+                      <label htmlFor="pageRanges">Page Ranges:</label>
+                      <input
+                        id="pageRanges"
+                        type="text"
+                        placeholder="e.g. 1,3,5-8"
+                        value={pageRanges}
+                        onChange={(e) => setPageRanges(e.target.value)}
+                        className={styles.textInput}
+                      />
+                      <div className={styles.inputHint}>
+                        <i className="fas fa-info-circle"></i>
+                        Separate with commas (1,3,5-8)
+                      </div>
+                    </div>
+                  )}
+
+                  {splitMethod === "custom" && (
+                    <div className={styles.customSplits}>
+                      <button onClick={addCustomSplit} className={styles.addSplitBtn}>
+                        <i className="fas fa-plus"></i> Add Custom Split
+                      </button>
+                      {customNames.map((item, index) => (
+                        <div key={index} className={styles.customSplitItem}>
+                          <input
+                            type="text"
+                            placeholder="Name this split"
+                            value={item.name}
+                            onChange={(e) => updateCustomSplit(index, "name", e.target.value)}
+                            className={styles.textInput}
+                          />
+                          <input
+                            type="text"
+                            placeholder="Page range"
+                            value={item.range}
+                            onChange={(e) => updateCustomSplit(index, "range", e.target.value)}
+                            className={styles.textInput}
+                          />
+                          <button 
+                            onClick={() => removeCustomSplit(index)}
+                            className={styles.removeBtn}
+                          >
+                            <i className="fas fa-times"></i>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {splitMethod === "equal" && (
+                    <div className={styles.inputGroup}>
+                      <label htmlFor="numParts">Number of Parts:</label>
+                      <div className={styles.numberControl}>
+                        <button 
+                          onClick={() => setNumParts(p => Math.max(2, p - 1))}
+                          disabled={numParts <= 2}
+                          className={styles.controlBtn}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </button>
+                        <input
+                          id="numParts"
+                          type="number"
+                          min="2"
+                          max={totalPages}
+                          value={numParts}
+                          onChange={(e) => {
+                            const value = parseInt(e.target.value);
+                            if (!isNaN(value)) {
+                              setNumParts(Math.min(totalPages, Math.max(2, value)));
+                            }
+                          }}
+                          className={styles.numberInput}
+                        />
+                        <button 
+                          onClick={() => setNumParts(p => Math.min(totalPages, p + 1))}
+                          disabled={numParts >= totalPages}
+                          className={styles.controlBtn}
+                        >
+                          <i className="fas fa-plus"></i>
+                        </button>
+                      </div>
+                      <div className={styles.inputHint}>
+                        <i className="fas fa-info-circle"></i>
+                        Max: {totalPages} parts
+                      </div>
+                    </div>
+                  )}
+
+                  {splitMethod === "evenOdd" && (
+                    <div className={styles.infoGroup}>
+                      <div className={styles.methodInfo}>
+                        <i className="fas fa-info-circle"></i>
+                        <span>This will create two files: one with even pages and one with odd pages.</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Size Comparison */}
+                {originalSize && (
+                  <div className={styles.sizeComparison}>
+                    <div className={styles.sizeInfo}>
+                      <span>Original: {originalSize} KB</span>
+                      <span>→</span>
+                      {splitSize ? (
+                        <>
+                          <span>Split: {splitSize} KB</span>
+                          {sizeReduction && (
+                            <span className={parseFloat(sizeReduction) < 0 ? styles.reduction : styles.increase}>
+                              ({parseFloat(sizeReduction) < 0 ? '' : '+'}{sizeReduction}%)
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <span className={styles.calculating}>Ready to split</span>
+                      )}
                     </div>
                   </div>
                 )}
-              </div>
 
-              <div className={styles.actionButtons}>
+                {/* Split Button */}
                 <button 
-                  onClick={handleSplit} 
+                  onClick={handleSplitAndDownload} 
+                  className={styles.splitButton}
                   disabled={isProcessing || !pdfFile}
-                  className={styles.convertBtn}
                 >
                   {isProcessing ? (
                     <>
-                      <i className="fas fa-spinner fa-spin"></i> Processing...
+                      <div className={styles.spinner}></div>
+                      Splitting...
                     </>
                   ) : (
                     <>
-                      <i className="fas fa-cut"></i> Split PDF
+                      <i className="fas fa-cut"></i>
+                      Split & Download PDF
                     </>
                   )}
                 </button>
               </div>
-
-              {error && (
-                <div className={styles.error}>
-                  <i className="fas fa-exclamation-triangle"></i> {error}
-                </div>
-              )}
             </div>
           )}
+
         </div>
+      </section>
 
-        {/* Right Panel - Preview */}
-        <div className={styles.rightPanel}>
-          <div className={styles.previewSection}>
-            {pdfFile ? (
-              <>
-                <div className={styles.sortingHeader}>
-                  <h3>
-                    {activeTab === "original" ? "Original PDF" : "Split Results"}
-                    {activeTab === "split" && splitPdfFiles?.length > 0 && (
-                      <span> ({splitPdfFiles.length} files)</span>
-                    )}
-                  </h3>
-                  {activeTab === "split" && splitPdfFiles?.length > 0 && (
-                    <button 
-                      onClick={downloadAll}
-                      className={styles.downloadBtn}
-                    >
-                      <i className="fas fa-download"></i> Download All
-                    </button>
-                  )}
-                </div>
-
-                {activeTab === "original" ? (
-                  <div className={styles.pdfPreview}>
-                    {isMobile ? (
-                      <div className={styles.mobilePreview}>
-                        <i className="fas fa-file-pdf"></i>
-                        <p>PDF preview not available on mobile</p>
-                        <div className={styles.mobileActions}>
-                          <button 
-                            onClick={() => openInNewTab(pdfFile)}
-                            className={styles.viewBtn}
-                          >
-                            <i className="fas fa-external-link-alt"></i> Open
-                          </button>
-                          <button 
-                            onClick={() => downloadPDF(pdfFile, pdfFile.name.replace('.pdf', '') + '-original.pdf')}
-                            className={styles.downloadBtn}
-                          >
-                            <i className="fas fa-download"></i> Download
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <iframe
-                          src={URL.createObjectURL(pdfFile)}
-                          title="Original PDF Preview"
-                          className={styles.pdfIframe}
-                        />
-                        <div className={styles.previewActions}>
-                          <button 
-                            onClick={() => downloadPDF(pdfFile, pdfFile.name.replace('.pdf', '') + '-original.pdf')}
-                            className={styles.downloadBtn}
-                          >
-                            <i className="fas fa-download"></i> Download Original
-                          </button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  <>
-                    <div className={styles.splitResultsContainer}>
-                      {splitPdfFiles?.length > 0 ? (
-                        <div className={styles.splitResultsList}>
-                          {splitPdfFiles.map((pdf, index) => (
-                            <div
-                              key={index}
-                              className={`${styles.splitResultItem} ${previewPdf?.name === pdf.name ? styles.active : ''}`}
-                              onClick={() => setPreviewPdf(pdf)}
-                            >
-                              <div className={styles.splitResultInfo}>
-                                <i className="fas fa-file-pdf"></i>
-                                <div>
-                                  <div className={styles.splitResultName}>{pdf.name}</div>
-                                  <div className={styles.splitResultMeta}>
-                                    {pdf.pages} pages • {(pdf.bytes.length / 1024).toFixed(1)} KB
-                                  </div>
-                                </div>
-                              </div>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  downloadPDF(pdf.bytes, pdf.name);
-                                }}
-                                className={styles.downloadBtnSmall}
-                              >
-                                <i className="fas fa-download"></i>
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className={styles.emptyState}>
-                          <i className="fas fa-file-export"></i>
-                          <p>No split files yet</p>
-                          <p className={styles.convertHint}>Split your PDF to see results here</p>
-                        </div>
-                      )}
-                    </div>
-
-                    {previewPdf && (
-                      <div className={styles.pdfPreview}>
-                        {isMobile ? (
-                          <div className={styles.mobilePreview}>
-                            <i className="fas fa-file-pdf"></i>
-                            <p>Preview not available on mobile</p>
-                            <div className={styles.mobileActions}>
-                              <button 
-                                onClick={() => openInNewTab(previewPdf.bytes)}
-                                className={styles.viewBtn}
-                              >
-                                <i className="fas fa-external-link-alt"></i> Open
-                              </button>
-                              <button 
-                                onClick={() => downloadPDF(previewPdf.bytes, previewPdf.name)}
-                                className={styles.downloadBtn}
-                              >
-                                <i className="fas fa-download"></i> Download
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <>
-                            <iframe
-                              src={createBlobUrl(previewPdf.bytes)}
-                              title="PDF Preview"
-                              className={styles.pdfIframe}
-                            />
-                            <div className={styles.previewActions}>
-                              <button 
-                                onClick={() => downloadPDF(previewPdf.bytes, previewPdf.name)}
-                                className={styles.downloadBtn}
-                              >
-                                <i className="fas fa-download"></i> Download This File
-                              </button>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
-            ) : (
-              <div className={styles.previewPlaceholder}>
-                <i className="fas fa-file-upload"></i>
-                <p>Upload a PDF to preview</p>
-                <p className={styles.convertHint}>Supported format: .pdf</p>
-              </div>
-            )}
-          </div>
+      {/* Useful Links & Quick Tips */}
+      <section className={styles.usefulSection}>
+        <div className={styles.usefulContent}>
+          <UsefulLinks currentTool="split-pdf" />
+          <QuickTips currentTool="split-pdf" />
         </div>
-      </div>
+      </section>
     </div>
   );
 };

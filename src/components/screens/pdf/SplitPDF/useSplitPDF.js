@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { PDFDocument } from "pdf-lib";
 
 const useSplitPDF = () => {
-  const [splitPdfFiles, setSplitPdfFiles] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const parsePageRanges = (splitOptions, totalPages) => {
     console.log("🔹 Split Options:", splitOptions);
@@ -98,14 +95,11 @@ const useSplitPDF = () => {
   const splitPDF = async (pdfFile, splitOptions) => {
     if (!pdfFile) {
       console.error("❌ No PDF file provided!");
-      return;
+      throw new Error("No PDF file provided!");
     }
 
     console.log("📂 Received PDF File:", pdfFile.name);
     console.log("📑 Split Options:", splitOptions);
-
-    setIsProcessing(true);
-    setSplitPdfFiles([]);
 
     try {
       const pdfBytes = await pdfFile.arrayBuffer();
@@ -118,8 +112,7 @@ const useSplitPDF = () => {
 
       if (!parsedRanges.length) {
         console.error("❌ No valid page ranges found!");
-        alert("Error: No valid page ranges found.");
-        return;
+        throw new Error("No valid page ranges found!");
       }
 
       const newPdfFiles = [];
@@ -149,31 +142,32 @@ const useSplitPDF = () => {
         let fileName = `split_part_${i + 1}.pdf`;
         if (splitOptions.type === "custom" && splitOptions.names && splitOptions.names[i]) {
           fileName = `${splitOptions.names[i]}.pdf`;
+        } else if (splitOptions.type === "evenOdd") {
+          fileName = i === 0 ? "odd_pages.pdf" : "even_pages.pdf";
         }
 
         newPdfFiles.push({
           name: fileName,
           bytes: newPdfBytes,
+          pages: newPdfDoc.getPageCount(),
         });
       }
 
       console.log("✅ Final Split PDFs:", newPdfFiles);
-      setSplitPdfFiles(newPdfFiles);
+      return newPdfFiles;
     } catch (error) {
       console.error("❌ Error splitting PDF:", error);
-      alert("Failed to split PDF. Please try again.");
-    } finally {
-      setIsProcessing(false);
+      throw error;
     }
   };
 
-  // Reset function
-  const reset = () => {
-    setSplitPdfFiles([]);
-    setIsProcessing(false);
+  // Helper function to detect mobile devices
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           window.innerWidth <= 768;
   };
 
-  return { splitPdfFiles, splitPDF, isProcessing, reset };
+  return { splitPDF, isMobile };
 };
 
 export default useSplitPDF;

@@ -12,6 +12,11 @@ import Base64 from './image/Base64/Base64';
 import Compression from './image/Compression/Compression';
 import Conversion from './image/Conversion/Conversion';
 import Resizing from './image/Resizing/Resizing';
+import ImageFilters from './image/ImageFilters/ImageFilters';
+import Watermark from './image/Watermark/Watermark';
+import ImageMerger from './image/ImageMerger/ImageMerger';
+import BackgroundTools from './image/BackgroundTools/BackgroundTools';
+import ColorPalette from './image/ColorPalette/ColorPalette';
 import TermsOfUse from './TermsOfUse/TermsOfUse';
 import RotatePDF from './pdf/RotatePDF/RotatePDF';
 import ReorderPDF from './pdf/ReorderPDF/ReorderPDF';
@@ -22,6 +27,8 @@ import EditMetadata from './pdf/EditMetadata/EditMetadata';
 import MergePDF from './pdf/MergePDF/MergePDF';
 import AboutUs from './About/About';
 import ContactUs from './Contact/Contact';
+import Blog from './Blog/Blog';
+import BlogPost from './Blog/BlogPost';
 import ToolCard from '../shared/ToolCard/ToolCard';
 
 export default {
@@ -38,6 +45,11 @@ export default {
     Compression,
     Conversion,
     Resizing,
+    ImageFilters,
+    Watermark,
+    ImageMerger,
+    BackgroundTools,
+    ColorPalette,
     TermsOfUse,
     RotatePDF,
     ReorderPDF,
@@ -48,5 +60,7 @@ export default {
     MergePDF,
     AboutUs,
     ContactUs,
+    Blog,
+    BlogPost,
     ToolCard
 }

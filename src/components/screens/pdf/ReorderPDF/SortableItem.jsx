@@ -24,12 +24,19 @@ const SortableItem = ({ id, number, currentPosition }) => {
       style={style}
       className={`${styles.sortableItem} ${isDragging ? styles.dragging : ''}`}
     >
+      <div className={styles.currentPosition}>
+        <span className={styles.positionNumber}>{currentPosition}</span>
+      </div>
       <div className={styles.pageInfo}>
-        <span className={styles.positionIndicator}>{currentPosition}</span>
+        <div className={styles.pageIcon}>
+          <i className="fas fa-file-alt"></i>
+        </div>
         <span className={styles.pageNumber}>Page {number}</span>
       </div>
-      <div className={styles.dragHandle} {...attributes} {...listeners}>
-        <i className="fas fa-grip-vertical"></i>
+      <div className={styles.itemActions}>
+        <div className={styles.dragHandle} {...attributes} {...listeners}>
+          <i className="fas fa-grip-vertical"></i>
+        </div>
       </div>
     </div>
   );

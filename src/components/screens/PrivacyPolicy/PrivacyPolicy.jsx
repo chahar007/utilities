@@ -1,12 +1,23 @@
 
-import classes from './PrivacyPolicy.module.scss';
+import React from "react";
+import styles from './PrivacyPolicy.module.scss';
 
 const PrivacyPolicy = () => {
     return (
-        <div className={classes.PrivacyPolicyPage} >
-            <div className={classes.ppcontainer}>
-                <h1>Privacy Policy</h1>
-                <p>Last updated: March 18, 2025</p>
+        <div className={styles.privacyPolicy}>
+            {/* Hero Section */}
+            <section className={styles.hero}>
+                <div className={styles.heroContent}>
+                    <h1 className={styles.heroTitle}>Privacy Policy</h1>
+                    <p className={styles.heroSubtitle}>Your privacy and data protection are our top priorities</p>
+                    <p className={styles.lastUpdated}>Last updated: March 18, 2025</p>
+                </div>
+            </section>
+
+            {/* Main Content */}
+            <main className={styles.main}>
+                <div className={styles.container}>
+                    <div className={styles.content}>
                 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
                 <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
                 <h2>Interpretation and Definitions</h2>
@@ -167,16 +178,32 @@ const PrivacyPolicy = () => {
                 <h2>Changes to this Privacy Policy</h2>
                 <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
                 <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.</p>
-                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-                <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy, You can contact us:</p>
-                <ul>
-                    <li>By email: utilix.pro@gmail.com</li>
-                </ul>
-            </div>
+                        <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                        
+                        <h2>Contact Us</h2>
+                        <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+                        <ul>
+                            <li>By email: utilix.pro@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                {/* Contact Section */}
+                <div className={styles.contactSection}>
+                    <div className={styles.contactContent}>
+                        <h2>Questions About Our Privacy Policy?</h2>
+                        <p>
+                            We're committed to transparency and protecting your privacy. 
+                            If you have any questions or concerns about how we handle your data, we're here to help.
+                        </p>
+                        <ul>
+                            <li>Email: utilix.pro@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
         </div>
-    )
-}
+    );
+};
 
-
-export default PrivacyPolicy
+export default PrivacyPolicy;

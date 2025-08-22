@@ -1,33 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import styles from './WatermarkPDF.module.scss';
-import { PDFDocument, rgb, degrees } from 'pdf-lib';
+import React, { useState, useCallback, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import UploadFileHandling from "../../../shared/UploadFileHandling/UploadFileHandling";
+import UsefulLinks from "../../../shared/UsefulLinks/UsefulLinks";
+import QuickTips from "../../../shared/QuickTips/QuickTips";
 import useWatermark from './useWatermarkPDF';
+import styles from './WatermarkPDF.module.scss';
 import { WatermarkPDFHelmet } from "../../seo/PdfHelmet";
 
-
 const WatermarkPDF = () => {
-  // [Previous state declarations remain the same...]
+  // Core processing states
+  const [originalSize, setOriginalSize] = useState(null);
+  const [watermarkedSize, setWatermarkedSize] = useState(null);
+  const [sizeReduction, setSizeReduction] = useState(null);
+  
+  // PDF handling
   const [pdfFile, setPdfFile] = useState(null);
-  const [originalPdfUrl, setOriginalPdfUrl] = useState(null);
-  const [previewPdfUrl, setPreviewPdfUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [pdfDetails, setPdfDetails] = useState({
+    name: "",
+    size: "",
+    pages: 0,
+  });
+  
+  // UI state management
   const [error, setError] = useState(null);
-
-  // Watermark state
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Feature-specific watermark state
   const [watermarkOptions, setWatermarkOptions] = useState({
     watermarkType: 'text',
     watermarkText: 'CONFIDENTIAL',
     watermarkImage: null,
     opacity: 50,
-    rotation: 0,
+    rotation: 45,
     position: 'center',
     size: 'medium',
-    color: '#000000',
-    fontSize: 32
+    color: '#ff0000',
+    fontSize: 48
   });
-
+  
   // Watermark hook
   const {
     applyWatermark,
@@ -35,20 +47,62 @@ const WatermarkPDF = () => {
     isApplying,
     applyError
   } = useWatermark();
-
-  // Handle PDF file upload
-  const handlePdfUpload = (file) => {
-    if (!file) return;
-    setError(null);
-    setPdfFile(file);
-    // Create preview URL
-    const url = URL.createObjectURL(file);
-    setOriginalPdfUrl(url);
-    setPreviewPdfUrl(url);
+  
+  // Helper function to detect mobile devices
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           window.innerWidth <= 768;
   };
 
-  // Handle image upload
-  const handleImageUpload = (file) => {
+  // File upload handler
+  const handleFileUpload = useCallback(async (uploadedFiles) => {
+    setError(null);
+    setSuccessMessage(null);
+    
+    // Handle both single file and array cases
+    const filesArray = Array.isArray(uploadedFiles) ? uploadedFiles : [uploadedFiles];
+    
+    const validFiles = filesArray?.filter(file => 
+      file && file.type === "application/pdf"
+    );
+
+    if (validFiles.length !== filesArray.length) {
+      setError("Some files were not supported. Only PDF files are allowed.");
+    }
+
+    if (validFiles.length === 0) {
+      setError("Please upload a valid PDF file.");
+      return;
+    }
+
+    try {
+      const file = validFiles[0]; // Take first file since this is single upload
+      
+      if (file.size > 25 * 1024 * 1024) {
+        setError("File size exceeds 25MB limit. Please choose a smaller file.");
+        return;
+      }
+
+      setPdfFile(file);
+      
+      const fileSizeKB = (file.size / 1024).toFixed(2);
+      setOriginalSize(fileSizeKB);
+      setPdfDetails({
+        name: file.name,
+        size: file.size >= 1024 * 1024 ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' : fileSizeKB + ' KB',
+        pages: 'N/A', // PDF watermarking doesn't need page count
+      });
+      
+      setCurrentStep(2);
+    } catch (err) {
+      console.error("Upload error:", err);
+      setError(err.message || "Failed to process PDF file. Please ensure it's a valid PDF.");
+      setPdfFile(null);
+    }
+  }, []);
+
+  // Handle image upload for watermark
+  const handleImageUpload = useCallback((file) => {
     if (!file.type.match('image.*')) {
       setError('Please upload an image file');
       return;
@@ -57,13 +111,61 @@ const WatermarkPDF = () => {
       ...prev,
       watermarkImage: file
     }));
-  };
+  }, []);
 
-  // Clear all selections
-  const resetForm = () => {
+  // Watermark and Download handler
+  const handleWatermarkAndDownload = useCallback(async () => {
+    if (!pdfFile) {
+      setError("Please upload a PDF file first.");
+      return;
+    }
+
+    if (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage) {
+      setError('Please upload a watermark image');
+      return;
+    }
+
+    setIsProcessing(true);
+    setError(null);
+    setCurrentStep(3);
+
+    try {
+      const blob = await applyWatermark(pdfFile, watermarkOptions);
+      if (blob) {
+        const watermarkedSizeKB = (blob.size / 1024).toFixed(2);
+        setWatermarkedSize(watermarkedSizeKB);
+        
+        // Calculate size comparison
+        if (originalSize) {
+          const original = parseFloat(originalSize);
+          const watermarked = parseFloat(watermarkedSizeKB);
+          const difference = ((watermarked - original) / original) * 100;
+          setSizeReduction(difference.toFixed(2));
+        }
+        
+        // Auto-download
+        saveAs(blob, `watermarked-${pdfFile.name}`);
+        setSuccessMessage(`🎉 Successfully added watermark and downloaded PDF!`);
+      }
+    } catch (error) {
+      console.error("Watermark error:", error);
+      setError("Failed to add watermark to PDF. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [pdfFile, watermarkOptions, originalSize, applyWatermark]);
+
+  // Reset function
+  const resetProcessor = useCallback(() => {
     setPdfFile(null);
-    setOriginalPdfUrl(null);
-    setPreviewPdfUrl(null);
+    setOriginalSize(null);
+    setWatermarkedSize(null);
+    setSizeReduction(null);
+    setError(null);
+    setSuccessMessage(null);
+    setCurrentStep(1);
+    setPdfDetails({ name: "", size: "", pages: 0 });
+    setIsProcessing(false);
     setWatermarkOptions({
       watermarkType: 'text',
       watermarkText: 'CONFIDENTIAL',
@@ -72,398 +174,389 @@ const WatermarkPDF = () => {
       rotation: 45,
       position: 'center',
       size: 'medium',
-      color: '#ffffff',
+      color: '#ff0000',
       fontSize: 48
     });
-    setError(null);
-  };
-
-  // Preview watermark changes
-  const previewWatermark = async () => {
-    if (!pdfFile) {
-      setError('Please upload a PDF file first');
-      return;
-    }
-
-    if (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage) {
-      setError('Please upload a watermark image');
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const blob = await applyWatermark(pdfFile, watermarkOptions);
-      if (blob) {
-        setPreviewPdfUrl(URL.createObjectURL(blob));
-      }
-    } catch (err) {
-      console.error('Error previewing watermark:', err);
-      setError('Failed to preview watermark. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Download watermarked PDF
-  const downloadWatermarkedPdf = async () => {
-    if (!pdfFile) {
-      setError('Please upload a PDF file first');
-      return;
-    }
-
-    if (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage) {
-      setError('Please upload a watermark image');
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const blob = await applyWatermark(pdfFile, watermarkOptions);
-      if (blob) {
-        saveAs(blob, `watermarked_${pdfFile.name}`);
-      }
-    } catch (err) {
-      console.error('Error downloading watermarked PDF:', err);
-      setError('Failed to download watermarked PDF. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Handle drag and drop for PDF
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      handlePdfUpload(file);
-    } else {
-      setError('Please drop a valid PDF file');
-    }
-  };
+  }, []);
 
   // Clean up object URLs on unmount
   useEffect(() => {
     return () => {
-      if (originalPdfUrl) URL.revokeObjectURL(originalPdfUrl);
-      if (previewPdfUrl) URL.revokeObjectURL(previewPdfUrl);
-      if (watermarkOptions.watermarkImage) URL.revokeObjectURL(URL.createObjectURL(watermarkOptions.watermarkImage));
+      if (watermarkOptions.watermarkImage) {
+        URL.revokeObjectURL(URL.createObjectURL(watermarkOptions.watermarkImage));
+      }
     };
-  }, [originalPdfUrl, previewPdfUrl, watermarkOptions.watermarkImage]);
+  }, [watermarkOptions.watermarkImage]);
 
 
   return (
-    <div className={styles.watermarkContainer}>
+    <div className={styles.watermarkPDF}>
       <WatermarkPDFHelmet />
-      <div className={styles.header}>
-        <h1>Add Watermark in you PDF's</h1>
-        <p>Upload a PDF file and add text or image to the pdf pages</p>
-
-      </div>
-
-      <div className={styles.content}>
-        {/* Left Panel - Controls */}
-        <div className={styles.leftPanel}>
-
-          <div className={styles.uploadSection}>
-            <div className={styles.sectionHeader}>
-              <h3>Upload PDF</h3>
-              {pdfFile && (
-                <button
-                  onClick={resetForm}
-                  className={styles.clearButton}
-                  disabled={isLoading}
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <div
-              className={styles.dropArea}
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-            >
-              <UploadFileHandling
-                acceptedFormats={['application/pdf']}
-                onFileUpload={handlePdfUpload}
-              />
-              {pdfFile && (
-                <div className={styles.fileInfo}>
-                  <span>{pdfFile.name}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className={styles.watermarkOptions}>
-            <h3>Watermark Settings</h3>
-
-            <div className={styles.optionRow}>
-              <div className={styles.optionGroup}>
-                <label>Watermark Type</label>
-                <div className={styles.radioGroup}>
-                  <label className={styles.radioOption}>
-                    <input
-                      type="radio"
-                      name="watermarkType"
-                      checked={watermarkOptions.watermarkType === 'text'}
-                      onChange={() => setWatermarkOptions(prev => ({
-                        ...prev,
-                        watermarkType: 'text'
-                      }))}
-                      disabled={isLoading || !pdfFile}
-                    />
-                    <span>Text</span>
-                  </label>
-                  <label className={styles.radioOption}>
-                    <input
-                      type="radio"
-                      name="watermarkType"
-                      checked={watermarkOptions.watermarkType === 'image'}
-                      onChange={() => setWatermarkOptions(prev => ({
-                        ...prev,
-                        watermarkType: 'image'
-                      }))}
-                      disabled={isLoading || !pdfFile}
-                    />
-                    <span>Image</span>
-                  </label>
-                </div>
-              </div>
-
-              <div className={styles.optionGroup}>
-                <label>Position</label>
-                <select
-                  value={watermarkOptions.position}
-                  onChange={(e) => setWatermarkOptions(prev => ({
-                    ...prev,
-                    position: e.target.value
-                  }))}
-                  disabled={isLoading || !pdfFile}
-                >
-                  <option value="top-left">Top Left</option>
-                  <option value="top-right">Top Right</option>
-                  <option value="center">Center</option>
-                  <option value="bottom-left">Bottom Left</option>
-                  <option value="bottom-right">Bottom Right</option>
-                </select>
-              </div>
-            </div>
-
-            {watermarkOptions.watermarkType === 'text' ? (
-              <div className={styles.optionRow}>
-                <div className={styles.optionGroup}>
-                  <label>Watermark Text</label>
-                  <input
-                    type="text"
-                    value={watermarkOptions.watermarkText}
-                    onChange={(e) => setWatermarkOptions(prev => ({
-                      ...prev,
-                      watermarkText: e.target.value
-                    }))}
-                    placeholder="Enter text"
-                    disabled={isLoading || !pdfFile}
-                  />
-                </div>
-                <div className={styles.optionGroup}>
-                  <label>Text Color</label>
-                  <div className={styles.colorPicker}>
-                    <input
-                      type="color"
-                      value={watermarkOptions.color}
-                      onChange={(e) => setWatermarkOptions(prev => ({
-                        ...prev,
-                        color: e.target.value
-                      }))}
-                      disabled={isLoading || !pdfFile}
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className={styles.optionGroup}>
-                <label>Watermark Image</label>
-                <div className={styles.imageUpload}>
-                  {watermarkOptions.watermarkImage ? (
-                    <div className={styles.imagePreviewRow}>
-                      <div className={styles.imagePreviewContainer}>
-                        <img
-                          src={URL.createObjectURL(watermarkOptions.watermarkImage)}
-                          alt="Watermark preview"
-                          className={styles.imagePreview}
-                        />
-                      </div>
-                      <button
-                        onClick={() => setWatermarkOptions(prev => ({
-                          ...prev,
-                          watermarkImage: null
-                        }))}
-                        className={styles.removeButton}
-                        disabled={isLoading || !pdfFile}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ) : (
-                    <div className={styles.uploadArea}>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleImageUpload(e.target.files[0])}
-                        disabled={isLoading || !pdfFile}
-                        id="fileupload"
-                        className={styles.fileInput}
-                      />
-                      <label htmlFor="fileupload" className={styles.fileLabel}>
-                        Upload watermark image
-                      </label>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            <div className={styles.optionRow}>
-              <div className={styles.optionGroup}>
-                <label>Opacity: {watermarkOptions.opacity}%</label>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  value={watermarkOptions.opacity}
-                  onChange={(e) => setWatermarkOptions(prev => ({
-                    ...prev,
-                    opacity: Number(e.target.value)
-                  }))}
-                  disabled={isLoading || !pdfFile}
-                />
-              </div>
-
-              <div className={styles.optionGroup}>
-                <label>Rotation: {watermarkOptions.rotation}°</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="360"
-                  value={watermarkOptions.rotation}
-                  onChange={(e) => setWatermarkOptions(prev => ({
-                    ...prev,
-                    rotation: Number(e.target.value)
-                  }))}
-                  disabled={isLoading || !pdfFile}
-                />
-              </div>
-            </div>
-
-            {watermarkOptions.watermarkType === 'text' && (
-
-              <div className={styles.optionRow}>
-                <div className={styles.optionGroup}>
-                  <label>Font Size: {watermarkOptions.fontSize}px</label>
-                  <input
-                    type="range"
-                    min="12"
-                    max="120"
-                    value={watermarkOptions.fontSize}
-                    onChange={(e) => setWatermarkOptions(prev => ({
-                      ...prev,
-                      fontSize: parseInt(e.target.value)
-                    }))}
-                    disabled={isLoading || !pdfFile || watermarkOptions.watermarkType === 'image'}
-                  />
-                </div>
-
-                <div className={styles.optionGroup}>
-                  <label>Size</label>
-                  <select
-                    value={watermarkOptions.size}
-                    onChange={(e) => setWatermarkOptions(prev => ({
-                      ...prev,
-                      size: e.target.value
-                    }))}
-                    disabled={isLoading || !pdfFile}
-                  >
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                    <option value="cover">Cover</option>
-                  </select>
-                </div>
-              </div>
-
-            )}
-          </div>
-
-          <div className={styles.actionRow}>
-            <button
-              className={styles.previewButton}
-              onClick={previewWatermark}
-              disabled={isLoading || !pdfFile ||
-                (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
-            >
-              {isLoading ? (
-                <span className={styles.loading}>
-                  <span className={styles.spinner}></span>
-                  Previewing...
-                </span>
-              ) : (
-                'Preview'
-              )}
-            </button>
-            <button
-              className={styles.downloadButton}
-              onClick={downloadWatermarkedPdf}
-              disabled={isLoading || !pdfFile ||
-                (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
-            >
-              Download
-            </button>
-          </div>
-          {(error || applyError) && <div className={styles.error}>{error || applyError}</div>}
+      
+      {/* Header */}
+      <section className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>
+            <i className="fas fa-shield-alt"></i>
+            PDF Watermark Tool
+          </h1>
+          <p className={styles.subtitle}>
+            Add text or image watermarks to protect your PDFs • 100% Private • Fast & Secure
+          </p>
         </div>
+      </section>
 
-        {/* Right Panel - Preview */}
-        <div className={styles.rightPanel}>
-          {previewPdfUrl ? (
-            <div className={styles.previewContainer}>
-              <iframe
-                src={previewPdfUrl}
-                title="PDF Preview"
-                className={styles.pdfPreview}
-              />
-              <div className={styles.previewOverlay}>
-                <p>Preview of your watermarked PDF</p>
-                {previewPdfUrl !== originalPdfUrl && (
-                  <button
-                    className={styles.resetPreviewButton}
-                    onClick={() => setPreviewPdfUrl(originalPdfUrl)}
-                  >
-                    Reset
-                  </button>
-                )}
+      {/* Main Processing Section */}
+      <section className={styles.main}>
+        <div className={styles.container}>
+          
+          {/* Progress Steps */}
+          <div className={styles.progressIndicator}>
+            <div className={styles.progressSteps}>
+              <div className={`${styles.progressStep} ${currentStep >= 1 ? styles.active : ''} ${currentStep > 1 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 1 ? <i className="fas fa-check"></i> : '1'}
+                </div>
+                <span className={styles.stepLabel}>Upload PDF</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 1 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 2 ? styles.active : ''} ${currentStep > 2 ? styles.completed : ''}`}>
+                <div className={styles.stepNumber}>
+                  {currentStep > 2 ? <i className="fas fa-check"></i> : '2'}
+                </div>
+                <span className={styles.stepLabel}>Design Watermark</span>
+              </div>
+              <div className={`${styles.progressLine} ${currentStep > 2 ? styles.active : ''}`}></div>
+              <div className={`${styles.progressStep} ${currentStep >= 3 ? styles.active : ''}`}>
+                <div className={styles.stepNumber}>3</div>
+                <span className={styles.stepLabel}>Download PDF</span>
               </div>
             </div>
-          ) : (
-            <div className={styles.placeholder}>
-              <div className={styles.placeholderContent}>
-                <svg viewBox="0 0 24 24" className={styles.placeholderIcon}>
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-                <h3>No PDF Selected</h3>
-                <p>Upload a PDF file to preview and add watermark</p>
+            
+            {pdfFile && (
+              <button onClick={resetProcessor} className={styles.resetButton}>
+                <i className="fas fa-redo"></i>
+                Start Over
+              </button>
+            )}
+          </div>
+
+          {/* Alert Messages */}
+          {error && (
+            <div className={styles.alertMessage}>
+              <div className={styles.errorAlert}>
+                <i className="fas fa-exclamation-triangle"></i>
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
               </div>
             </div>
           )}
+
+          {successMessage && (
+            <div className={styles.alertMessage}>
+              <div className={styles.successAlert}>
+                <i className="fas fa-check-circle"></i>
+                <span>{successMessage}</span>
+                <button onClick={() => setSuccessMessage(null)} className={styles.alertClose}>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Upload Step */}
+          {currentStep === 1 && (
+            <div className={styles.uploadStep}>
+              <UploadFileHandling 
+                onFileUpload={handleFileUpload}
+                multiple={false}
+                acceptedFormats={['application/pdf']}
+              />
+              <div className={styles.uploadInfo}>
+                <div className={styles.formatSupport}>
+                  <span>Supported: PDF files only</span>
+                  <span>Max: 25MB per file</span>
+                  <span>🔒 Private & Secure</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Processing Step */}
+          {currentStep >= 2 && pdfFile && (
+            <div className={styles.processingStep}>
+              
+              {/* Watermark Design Section */}
+              <div className={styles.watermarkSection}>
+                <div className={styles.sectionHeader}>
+                  <span className={styles.fileName}>{pdfDetails.name}</span>
+                  <button onClick={resetProcessor} className={styles.changeBtn}>
+                    <i className="fas fa-upload"></i> Change File
+                  </button>
+                </div>
+                
+                <div className={styles.watermarkDesigner}>
+                  {/* Watermark Type */}
+                  <div className={styles.typeSelector}>
+                    <label>Watermark Type:</label>
+                    <div className={styles.typeOptions}>
+                      <button
+                        className={`${styles.typeOption} ${watermarkOptions.watermarkType === 'text' ? styles.active : ''}`}
+                        onClick={() => setWatermarkOptions(prev => ({ ...prev, watermarkType: 'text' }))}
+                      >
+                        <i className="fas fa-font"></i>
+                        Text
+                      </button>
+                      <button
+                        className={`${styles.typeOption} ${watermarkOptions.watermarkType === 'image' ? styles.active : ''}`}
+                        onClick={() => setWatermarkOptions(prev => ({ ...prev, watermarkType: 'image' }))}
+                      >
+                        <i className="fas fa-image"></i>
+                        Image
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Watermark Content */}
+                  <div className={styles.contentSection}>
+                    {watermarkOptions.watermarkType === 'text' ? (
+                      <div className={styles.textWatermark}>
+                        <div className={styles.inputGroup}>
+                          <label>Watermark Text:</label>
+                          <input
+                            type="text"
+                            value={watermarkOptions.watermarkText}
+                            onChange={(e) => setWatermarkOptions(prev => ({
+                              ...prev,
+                              watermarkText: e.target.value
+                            }))}
+                            placeholder="Enter watermark text"
+                            className={styles.textInput}
+                          />
+                        </div>
+                        <div className={styles.inputGroup}>
+                          <label>Text Color:</label>
+                          <div className={styles.colorInput}>
+                            <input
+                              type="color"
+                              value={watermarkOptions.color}
+                              onChange={(e) => setWatermarkOptions(prev => ({
+                                ...prev,
+                                color: e.target.value
+                              }))}
+                            />
+                            <span>{watermarkOptions.color}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.imageWatermark}>
+                        {watermarkOptions.watermarkImage ? (
+                          <div className={styles.imagePreview}>
+                            <img
+                              src={URL.createObjectURL(watermarkOptions.watermarkImage)}
+                              alt="Watermark preview"
+                            />
+                            <button
+                              onClick={() => setWatermarkOptions(prev => ({
+                                ...prev,
+                                watermarkImage: null
+                              }))}
+                              className={styles.removeBtn}
+                            >
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className={styles.imageUpload}>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => handleImageUpload(e.target.files[0])}
+                              id="imageUpload"
+                              style={{ display: 'none' }}
+                            />
+                            <label htmlFor="imageUpload" className={styles.uploadBtn}>
+                              <i className="fas fa-upload"></i>
+                              Upload Image
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Watermark Preview */}
+                  <div className={styles.watermarkPreview}>
+                    <div className={styles.previewTitle}>Preview:</div>
+                    <div className={styles.previewBox}>
+                      {watermarkOptions.watermarkType === 'text' ? (
+                        <span 
+                          style={{ 
+                            color: watermarkOptions.color, 
+                            opacity: watermarkOptions.opacity / 100,
+                            transform: `rotate(${watermarkOptions.rotation}deg)`,
+                            fontSize: `${Math.min(watermarkOptions.fontSize / 4, 16)}px`
+                          }}
+                        >
+                          {watermarkOptions.watermarkText || 'CONFIDENTIAL'}
+                        </span>
+                      ) : watermarkOptions.watermarkImage ? (
+                        <img 
+                          src={URL.createObjectURL(watermarkOptions.watermarkImage)} 
+                          alt="Preview"
+                          style={{ 
+                            opacity: watermarkOptions.opacity / 100,
+                            transform: `rotate(${watermarkOptions.rotation}deg)`,
+                            maxWidth: '80px',
+                            maxHeight: '80px'
+                          }}
+                        />
+                      ) : (
+                        <span className={styles.placeholderText}>Image Preview</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Settings Panel */}
+              <div className={styles.settingsPanel}>
+                
+                {/* File Info */}
+                <div className={styles.fileDetails}>
+                  <div className={styles.detailItem}>
+                    <span>File:</span>
+                    <span>{pdfFile.name}</span>
+                  </div>
+                  <div className={styles.detailItem}>
+                    <span>Size:</span>
+                    <span>{pdfDetails.size}</span>
+                  </div>
+                </div>
+
+                {/* Watermark Settings */}
+                <div className={styles.optionGroup}>
+                  <label>Position:</label>
+                  <select
+                    value={watermarkOptions.position}
+                    onChange={(e) => setWatermarkOptions(prev => ({
+                      ...prev,
+                      position: e.target.value
+                    }))}
+                    className={styles.selectInput}
+                  >
+                    <option value="top-left">Top Left</option>
+                    <option value="top-right">Top Right</option>
+                    <option value="center">Center</option>
+                    <option value="bottom-left">Bottom Left</option>
+                    <option value="bottom-right">Bottom Right</option>
+                  </select>
+                </div>
+
+                <div className={styles.optionGroup}>
+                  <label>Opacity: {watermarkOptions.opacity}%</label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={watermarkOptions.opacity}
+                    onChange={(e) => setWatermarkOptions(prev => ({
+                      ...prev,
+                      opacity: Number(e.target.value)
+                    }))}
+                    className={styles.rangeInput}
+                  />
+                </div>
+
+                <div className={styles.optionGroup}>
+                  <label>Rotation: {watermarkOptions.rotation}°</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="360"
+                    value={watermarkOptions.rotation}
+                    onChange={(e) => setWatermarkOptions(prev => ({
+                      ...prev,
+                      rotation: Number(e.target.value)
+                    }))}
+                    className={styles.rangeInput}
+                  />
+                </div>
+
+                {watermarkOptions.watermarkType === 'text' && (
+                  <div className={styles.optionGroup}>
+                    <label>Font Size: {watermarkOptions.fontSize}px</label>
+                    <input
+                      type="range"
+                      min="12"
+                      max="120"
+                      value={watermarkOptions.fontSize}
+                      onChange={(e) => setWatermarkOptions(prev => ({
+                        ...prev,
+                        fontSize: parseInt(e.target.value)
+                      }))}
+                      className={styles.rangeInput}
+                    />
+                  </div>
+                )}
+
+                {/* Size Comparison */}
+                {originalSize && (
+                  <div className={styles.sizeComparison}>
+                    <div className={styles.sizeInfo}>
+                      <span>Original: {originalSize} KB</span>
+                      <span>→</span>
+                      {watermarkedSize ? (
+                        <>
+                          <span>Watermarked: {watermarkedSize} KB</span>
+                          {sizeReduction && (
+                            <span className={parseFloat(sizeReduction) < 0 ? styles.reduction : styles.increase}>
+                              ({parseFloat(sizeReduction) < 0 ? '' : '+'}{sizeReduction}%)
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <span className={styles.calculating}>Ready to watermark</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Watermark Button */}
+                <button 
+                  onClick={handleWatermarkAndDownload} 
+                  className={styles.watermarkButton}
+                  disabled={isProcessing || !pdfFile || (watermarkOptions.watermarkType === 'image' && !watermarkOptions.watermarkImage)}
+                >
+                  {isProcessing ? (
+                    <>
+                      <div className={styles.spinner}></div>
+                      Adding Watermark...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-shield-alt"></i>
+                      Add Watermark & Download
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+
         </div>
-      </div>
+      </section>
+
+      {/* Useful Links & Quick Tips */}
+      <section className={styles.usefulSection}>
+        <div className={styles.usefulContent}>
+          <UsefulLinks currentTool="watermark-pdf" />
+          <QuickTips currentTool="watermark-pdf" />
+        </div>
+      </section>
     </div>
   );
 };
