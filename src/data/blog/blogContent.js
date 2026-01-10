@@ -633,6 +633,883 @@ document.querySelectorAll('img[data-src]').forEach(img => {
 
       <p>Use our <a href="/image/compression">image optimization tools</a> to implement these recommendations efficiently and improve your website's performance.</p>
     </div>
+  `,
+
+  'pdf-compression-techniques': `
+    <div class="blog-content">
+      <h2>Introduction: Why PDF Compression Matters</h2>
+      <p>PDF files are essential for professional communication, but large file sizes can create significant challenges. Whether you're sharing documents via email, uploading to cloud storage, or distributing to clients, oversized PDFs can slow down workflows and consume unnecessary bandwidth.</p>
+      
+      <p>Effective PDF compression can reduce file sizes by 50-90% while maintaining acceptable quality, making documents easier to share, store, and access. This comprehensive guide will teach you professional compression techniques that balance file size with document quality.</p>
+
+      <h2 id="compression-methods">Understanding PDF Compression Methods</h2>
+      
+      <h3>Lossless Compression</h3>
+      <div class="advantage-box">
+        <p><strong>How it works:</strong> Reduces file size by removing redundant data without losing any information. The compressed PDF is identical to the original.</p>
+        <ul>
+          <li><strong>Best for:</strong> Text documents, forms, documents with vector graphics</li>
+          <li><strong>Compression ratio:</strong> 20-50% size reduction</li>
+          <li><strong>Quality:</strong> 100% perfect reproduction</li>
+          <li><strong>Use when:</strong> Quality is critical, documents contain text or simple graphics</li>
+        </ul>
+      </div>
+
+      <h3>Lossy Compression</h3>
+      <div class="scenario">
+        <p><strong>How it works:</strong> Reduces file size by compressing images within the PDF, potentially reducing image quality slightly.</p>
+        <ul>
+          <li><strong>Best for:</strong> PDFs with many images, scanned documents, photo-heavy documents</li>
+          <li><strong>Compression ratio:</strong> 50-90% size reduction</li>
+          <li><strong>Quality:</strong> Adjustable quality levels</li>
+          <li><strong>Use when:</strong> File size is more important than perfect image quality</li>
+        </ul>
+      </div>
+
+      <h2 id="lossless-vs-lossy">Lossless vs Lossy Compression: When to Use Each</h2>
+      
+      <h3>Choose Lossless Compression When:</h3>
+      <div class="use-case-box">
+        <ul>
+          <li>Document contains primarily text</li>
+          <li>Vector graphics and logos need to remain crisp</li>
+          <li>Document will be printed or used professionally</li>
+          <li>Legal or medical documents requiring exact reproduction</li>
+          <li>Forms that need to remain editable</li>
+        </ul>
+      </div>
+
+      <h3>Choose Lossy Compression When:</h3>
+      <div class="use-case-box">
+        <ul>
+          <li>PDF contains many high-resolution images</li>
+          <li>File size is preventing easy sharing</li>
+          <li>Images are for web viewing, not printing</li>
+          <li>Scanned documents that are too large</li>
+          <li>Archive documents where slight quality loss is acceptable</li>
+        </ul>
+      </div>
+
+      <h2 id="best-practices">Best Practices for PDF Compression</h2>
+      
+      <h3>Pre-Compression Optimization</h3>
+      <div class="conclusion-box">
+        <h4>Before Compressing:</h4>
+        <ul>
+          <li>✅ Remove unnecessary pages or content</li>
+          <li>✅ Optimize source images before embedding</li>
+          <li>✅ Remove embedded fonts not in use</li>
+          <li>✅ Clean up document metadata</li>
+          <li>✅ Remove annotations and comments if not needed</li>
+        </ul>
+      </div>
+
+      <h3>Compression Settings Guide</h3>
+      <div class="quality-guide">
+        <ul>
+          <li><strong>Maximum Quality:</strong> Minimal compression, best for professional documents (10-30% reduction)</li>
+          <li><strong>High Quality:</strong> Good balance for most documents (30-50% reduction)</li>
+          <li><strong>Medium Quality:</strong> Standard compression for web sharing (50-70% reduction)</li>
+          <li><strong>Low Quality:</strong> Maximum compression, use for archives (70-90% reduction)</li>
+        </ul>
+      </div>
+
+      <h2>Real-World Compression Scenarios</h2>
+      
+      <h3>Business Document Scenario</h3>
+      <div class="scenario">
+        <p><strong>Challenge:</strong> 50-page business report with charts and images, 15MB file size</p>
+        <p><strong>Solution:</strong></p>
+        <ul>
+          <li>Use lossless compression for text and charts</li>
+          <li>Apply medium compression to embedded images</li>
+          <li>Remove unused fonts and metadata</li>
+          <li><strong>Result:</strong> Reduced to 3MB (80% reduction) while maintaining professional quality</li>
+        </ul>
+      </div>
+
+      <h3>Scanned Document Scenario</h3>
+      <div class="scenario">
+        <p><strong>Challenge:</strong> 200-page scanned document archive, 500MB total size</p>
+        <p><strong>Solution:</strong></p>
+        <ul>
+          <li>Use lossy compression with medium quality</li>
+          <li>Convert to grayscale if color not needed</li>
+          <li>Reduce DPI for scanned pages</li>
+          <li><strong>Result:</strong> Reduced to 50MB (90% reduction) with readable quality</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <div class="conclusion-box">
+        <h3>Key Takeaways:</h3>
+        <ul>
+          <li>Use lossless compression for text-heavy documents</li>
+          <li>Use lossy compression for image-heavy PDFs</li>
+          <li>Always test compressed files before distribution</li>
+          <li>Keep original files as backups</li>
+          <li>Consider your audience's needs when choosing compression level</li>
+        </ul>
+      </div>
+
+      <p>Effective PDF compression is essential for modern document workflows. Use our <a href="/pdf/merge-pdf">PDF tools</a> to compress and optimize your documents efficiently. Remember, the best compression strategy depends on your specific needs and document type.</p>
+    </div>
+  `,
+
+  'image-formats-comparison-guide': `
+    <div class="blog-content">
+      <h2>Introduction: Navigating the Image Format Landscape</h2>
+      <p>The digital world offers numerous image formats, each designed for specific purposes. Understanding the differences between formats is crucial for web developers, designers, and content creators who want to optimize their work for quality, performance, and compatibility.</p>
+      
+      <p>This comprehensive guide compares all major image formats, from the ubiquitous JPEG to emerging formats like AVIF, helping you make informed decisions for every project.</p>
+
+      <h2 id="raster-formats">Raster Image Formats</h2>
+      
+      <h3>JPEG (Joint Photographic Experts Group)</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Best for:</strong> Photographs, complex images with many colors</li>
+          <li><strong>Compression:</strong> Lossy</li>
+          <li><strong>Transparency:</strong> Not supported</li>
+          <li><strong>File Size:</strong> Medium</li>
+          <li><strong>Browser Support:</strong> Universal (100%)</li>
+        </ul>
+      </div>
+
+      <h3>PNG (Portable Network Graphics)</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Best for:</strong> Graphics with transparency, logos, screenshots</li>
+          <li><strong>Compression:</strong> Lossless</li>
+          <li><strong>Transparency:</strong> Full alpha channel support</li>
+          <li><strong>File Size:</strong> Large</li>
+          <li><strong>Browser Support:</strong> Universal (100%)</li>
+        </ul>
+      </div>
+
+      <h3>WebP (Web Picture Format)</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Best for:</strong> Modern web applications, mobile optimization</li>
+          <li><strong>Compression:</strong> Both lossless and lossy</li>
+          <li><strong>Transparency:</strong> Full support</li>
+          <li><strong>File Size:</strong> Small (25-35% smaller than JPEG)</li>
+          <li><strong>Browser Support:</strong> 95%+ (all modern browsers)</li>
+        </ul>
+      </div>
+
+      <h3>GIF (Graphics Interchange Format)</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Best for:</strong> Simple animations, graphics with few colors</li>
+          <li><strong>Compression:</strong> Lossless</li>
+          <li><strong>Transparency:</strong> Basic (1-bit)</li>
+          <li><strong>File Size:</strong> Medium to large</li>
+          <li><strong>Browser Support:</strong> Universal (100%)</li>
+        </ul>
+      </div>
+
+      <h2 id="vector-formats">Vector Image Formats</h2>
+      
+      <h3>SVG (Scalable Vector Graphics)</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Best for:</strong> Icons, logos, simple graphics, illustrations</li>
+          <li><strong>Type:</strong> Vector (scalable)</li>
+          <li><strong>File Size:</strong> Very small for simple graphics</li>
+          <li><strong>Scalability:</strong> Infinite without quality loss</li>
+          <li><strong>Browser Support:</strong> Universal (100%)</li>
+        </ul>
+      </div>
+
+      <h2 id="comparison-table">Complete Format Comparison Table</h2>
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Type</th>
+              <th>Best Use Case</th>
+              <th>File Size</th>
+              <th>Quality</th>
+              <th>Browser Support</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>JPEG</td>
+              <td>Raster</td>
+              <td>Photographs</td>
+              <td>Medium</td>
+              <td>Good</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>PNG</td>
+              <td>Raster</td>
+              <td>Graphics, Logos</td>
+              <td>Large</td>
+              <td>Perfect</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>WebP</td>
+              <td>Raster</td>
+              <td>Modern Web</td>
+              <td>Small</td>
+              <td>Excellent</td>
+              <td>95%+</td>
+            </tr>
+            <tr>
+              <td>GIF</td>
+              <td>Raster</td>
+              <td>Animations</td>
+              <td>Medium</td>
+              <td>Limited</td>
+              <td>100%</td>
+            </tr>
+            <tr>
+              <td>SVG</td>
+              <td>Vector</td>
+              <td>Icons, Logos</td>
+              <td>Very Small</td>
+              <td>Perfect</td>
+              <td>100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Format Selection Decision Tree</h2>
+      
+      <div class="conclusion-box">
+        <h3>Quick Decision Guide:</h3>
+        <ul>
+          <li><strong>Photograph?</strong> → Use JPEG or WebP</li>
+          <li><strong>Need transparency?</strong> → Use PNG or WebP</li>
+          <li><strong>Simple graphic/icon?</strong> → Use SVG</li>
+          <li><strong>Animation needed?</strong> → Use GIF or WebP</li>
+          <li><strong>Modern website?</strong> → Use WebP with fallbacks</li>
+          <li><strong>Maximum compatibility?</strong> → Use JPEG or PNG</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <p>Choosing the right image format is essential for optimal web performance and user experience. Consider your specific needs: file size requirements, quality expectations, browser compatibility, and use case. Use our <a href="/image/conversion">image conversion tool</a> to experiment with different formats and find the perfect solution for your project.</p>
+    </div>
+  `,
+
+  'responsive-images-implementation': `
+    <div class="blog-content">
+      <h2>Introduction: Why Responsive Images Matter</h2>
+      <p>In today's multi-device world, serving the same image to all users regardless of their screen size, device capabilities, or connection speed is inefficient and wasteful. Responsive images ensure users receive appropriately sized images, improving performance, reducing bandwidth costs, and enhancing user experience.</p>
+      
+      <p>This comprehensive guide will teach you how to implement responsive images correctly using modern HTML5 features like srcset, sizes, and the picture element.</p>
+
+      <h2 id="srcset-attribute">Using the srcset Attribute</h2>
+      
+      <p>The srcset attribute allows you to specify multiple image sources with different resolutions or widths, letting the browser choose the most appropriate one.</p>
+
+      <h3>Resolution-Based srcset</h3>
+      <div class="code-example">
+        <pre><code>&lt;img 
+  src="image-1x.jpg" 
+  srcset="image-1x.jpg 1x, image-2x.jpg 2x, image-3x.jpg 3x"
+  alt="Description"
+&gt;</code></pre>
+      </div>
+      <p>This tells the browser to use different images based on the device's pixel density (1x for standard displays, 2x for Retina, 3x for high-DPI displays).</p>
+
+      <h3>Width-Based srcset</h3>
+      <div class="code-example">
+        <pre><code>&lt;img 
+  src="image-small.jpg"
+  srcset="image-small.jpg 400w, image-medium.jpg 800w, image-large.jpg 1200w"
+  sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  alt="Description"
+&gt;</code></pre>
+      </div>
+      <p>Width descriptors (w) tell the browser the actual width of each image source, allowing it to choose based on the viewport size.</p>
+
+      <h2 id="sizes-attribute">Understanding the sizes Attribute</h2>
+      
+      <p>The sizes attribute tells the browser how much space the image will occupy in the layout, helping it select the appropriate source from srcset.</p>
+
+      <h3>Common sizes Patterns</h3>
+      <div class="code-example">
+        <pre><code>// Full width on mobile, half width on tablet, third on desktop
+sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+
+// Fixed width
+sizes="300px"
+
+// Responsive with breakpoints
+sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 800px"</code></pre>
+      </div>
+
+      <h2 id="picture-element">Picture Element for Art Direction</h2>
+      
+      <p>The picture element allows you to provide completely different images for different scenarios, not just different sizes of the same image.</p>
+
+      <h3>Basic Picture Element</h3>
+      <div class="code-example">
+        <pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 600px)" srcset="mobile-image.jpg"&gt;
+  &lt;source media="(max-width: 1200px)" srcset="tablet-image.jpg"&gt;
+  &lt;img src="desktop-image.jpg" alt="Description"&gt;
+&lt;/picture&gt;</code></pre>
+      </div>
+
+      <h3>Picture Element with Format Selection</h3>
+      <div class="code-example">
+        <pre><code>&lt;picture&gt;
+  &lt;source srcset="image.webp" type="image/webp"&gt;
+  &lt;source srcset="image.jpg" type="image/jpeg"&gt;
+  &lt;img src="image.jpg" alt="Description"&gt;
+&lt;/picture&gt;</code></pre>
+      </div>
+      <p>This provides WebP to browsers that support it, with JPEG as fallback.</p>
+
+      <h2>Best Practices for Responsive Images</h2>
+      
+      <div class="conclusion-box">
+        <h3>Implementation Checklist:</h3>
+        <ul>
+          <li>✅ Always provide a fallback src attribute</li>
+          <li>✅ Use appropriate alt text for accessibility</li>
+          <li>✅ Test on multiple devices and screen sizes</li>
+          <li>✅ Monitor Core Web Vitals for performance impact</li>
+          <li>✅ Use lazy loading for below-the-fold images</li>
+          <li>✅ Optimize all image sources before serving</li>
+        </ul>
+      </div>
+
+      <h2>Performance Impact</h2>
+      
+      <div class="performance-data">
+        <p><strong>Real-world results from implementing responsive images:</strong></p>
+        <ul>
+          <li>40-60% reduction in image data transferred to mobile users</li>
+          <li>2-3 second improvement in page load times on mobile</li>
+          <li>Significant improvement in Largest Contentful Paint (LCP) scores</li>
+          <li>Reduced bandwidth costs for both users and website owners</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <p>Responsive images are essential for modern web development. By implementing srcset, sizes, and the picture element correctly, you can significantly improve performance and user experience across all devices. Use our <a href="/image/resizing">image resizing tool</a> to create multiple image sizes for your responsive implementations.</p>
+    </div>
+  `,
+
+  'pdf-security-best-practices': `
+    <div class="blog-content">
+      <h2>Introduction: Why PDF Security Matters</h2>
+      <p>PDF documents often contain sensitive information, from personal data to confidential business documents. Without proper security measures, these files can be accessed, modified, or distributed by unauthorized parties, leading to data breaches and privacy violations.</p>
+      
+      <p>This comprehensive guide covers essential PDF security practices to protect your documents and sensitive information effectively.</p>
+
+      <h2 id="encryption-methods">PDF Encryption Methods</h2>
+      
+      <h3>Password Protection</h3>
+      <div class="advantage-box">
+        <p><strong>User Password:</strong> Prevents unauthorized opening of the document</p>
+        <p><strong>Owner Password:</strong> Controls permissions like printing, copying, and editing</p>
+        <ul>
+          <li>Use strong, unique passwords</li>
+          <li>Different passwords for user and owner access</li>
+          <li>Store passwords securely</li>
+        </ul>
+      </div>
+
+      <h3>Encryption Levels</h3>
+      <div class="quality-guide">
+        <ul>
+          <li><strong>40-bit RC4:</strong> Basic encryption (legacy, not recommended)</li>
+          <li><strong>128-bit RC4:</strong> Standard encryption (good for most documents)</li>
+          <li><strong>128-bit AES:</strong> Advanced encryption (recommended for sensitive data)</li>
+          <li><strong>256-bit AES:</strong> Maximum security (for highly sensitive documents)</li>
+        </ul>
+      </div>
+
+      <h2 id="password-protection">Password Protection Strategies</h2>
+      
+      <h3>Creating Strong Passwords</h3>
+      <div class="conclusion-box">
+        <h4>Best Practices:</h4>
+        <ul>
+          <li>Use at least 12 characters</li>
+          <li>Combine uppercase, lowercase, numbers, and symbols</li>
+          <li>Avoid dictionary words and personal information</li>
+          <li>Use different passwords for different documents</li>
+          <li>Consider using password managers</li>
+        </ul>
+      </div>
+
+      <h3>Password Distribution</h3>
+      <div class="scenario">
+        <p><strong>Secure Methods:</strong></p>
+        <ul>
+          <li>Share passwords through secure channels (encrypted email, secure messaging)</li>
+          <li>Never send passwords in the same email as the PDF</li>
+          <li>Use temporary passwords that expire</li>
+          <li>Consider two-factor authentication for highly sensitive documents</li>
+        </ul>
+      </div>
+
+      <h2 id="permissions">Setting Document Permissions</h2>
+      
+      <h3>Common Permission Settings</h3>
+      <div class="use-case-box">
+        <ul>
+          <li><strong>Printing:</strong> Allow, restrict, or prohibit printing</li>
+          <li><strong>Copying:</strong> Prevent text and image copying</li>
+          <li><strong>Editing:</strong> Control document modification capabilities</li>
+          <li><strong>Form Filling:</strong> Allow or restrict form field editing</li>
+          <li><strong>Commenting:</strong> Control annotation and commenting</li>
+        </ul>
+      </div>
+
+      <h3>Permission Best Practices</h3>
+      <div class="conclusion-box">
+        <h4>Recommended Settings by Document Type:</h4>
+        <ul>
+          <li><strong>Public Documents:</strong> Allow printing and copying</li>
+          <li><strong>Internal Documents:</strong> Restrict editing, allow printing</li>
+          <li><strong>Confidential Documents:</strong> Restrict all permissions except viewing</li>
+          <li><strong>Forms:</strong> Allow form filling, restrict other editing</li>
+        </ul>
+      </div>
+
+      <h2>Additional Security Measures</h2>
+      
+      <h3>Metadata Protection</h3>
+      <p>Remove or sanitize metadata that might contain sensitive information:</p>
+      <ul>
+        <li>Author names and creation dates</li>
+        <li>Document properties and custom metadata</li>
+        <li>Comments and annotations</li>
+        <li>Hidden text or layers</li>
+      </ul>
+
+      <h3>Digital Signatures</h3>
+      <p>For documents requiring authentication:</p>
+      <ul>
+        <li>Use digital signatures to verify document integrity</li>
+        <li>Prevent tampering and ensure authenticity</li>
+        <li>Provide non-repudiation for legal documents</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      
+      <div class="conclusion-box">
+        <h3>Security Checklist:</h3>
+        <ul>
+          <li>✅ Use strong passwords for sensitive documents</li>
+          <li>✅ Set appropriate permission levels</li>
+          <li>✅ Use AES encryption for maximum security</li>
+          <li>✅ Remove sensitive metadata</li>
+          <li>✅ Regularly review and update security settings</li>
+          <li>✅ Keep security software updated</li>
+        </ul>
+      </div>
+
+      <p>PDF security is essential for protecting sensitive information. Use our <a href="/pdf/edit-meta-data-pdf">PDF metadata editor</a> to manage document properties and ensure your PDFs are properly secured. Remember, security is an ongoing process, not a one-time setup.</p>
+    </div>
+  `,
+
+  'batch-image-processing-guide': `
+    <div class="blog-content">
+      <h2>Introduction: The Power of Batch Processing</h2>
+      <p>Processing images one at a time is time-consuming and inefficient, especially when working with large collections. Batch processing allows you to apply the same operations to multiple images simultaneously, dramatically reducing processing time and ensuring consistency across your image collection.</p>
+      
+      <p>Whether you're optimizing a photo gallery, preparing images for a website, or processing client deliverables, batch processing can save hours of manual work.</p>
+
+      <h2 id="preparation">Preparing Your Images for Batch Processing</h2>
+      
+      <h3>Organization Best Practices</h3>
+      <div class="conclusion-box">
+        <h4>Before Processing:</h4>
+        <ul>
+          <li>✅ Organize images into folders by type or purpose</li>
+          <li>✅ Create backup copies of original files</li>
+          <li>✅ Ensure consistent naming conventions</li>
+          <li>✅ Remove duplicates and unwanted files</li>
+          <li>✅ Group images with similar processing needs</li>
+        </ul>
+      </div>
+
+      <h3>File Naming Strategies</h3>
+      <div class="code-example">
+        <pre><code>// Recommended naming patterns
+original-name_processed_001.jpg
+product-photo_compressed_001.jpg
+gallery-image_resized_001.jpg</code></pre>
+      </div>
+
+      <h2 id="techniques">Batch Processing Techniques</h2>
+      
+      <h3>Common Batch Operations</h3>
+      <div class="use-case-box">
+        <ul>
+          <li><strong>Resizing:</strong> Resize all images to specific dimensions</li>
+          <li><strong>Format Conversion:</strong> Convert multiple images to the same format</li>
+          <li><strong>Compression:</strong> Apply consistent compression settings</li>
+          <li><strong>Watermarking:</strong> Add watermarks to multiple images</li>
+          <li><strong>Renaming:</strong> Batch rename files with consistent patterns</li>
+          <li><strong>Metadata:</strong> Add or remove metadata from multiple files</li>
+        </ul>
+      </div>
+
+      <h3>Quality Control</h3>
+      <div class="scenario">
+        <p><strong>Best Practices:</strong></p>
+        <ul>
+          <li>Process a small test batch first</li>
+          <li>Review results before processing entire collection</li>
+          <li>Maintain original files as backups</li>
+          <li>Document your processing settings</li>
+          <li>Verify output quality and file sizes</li>
+        </ul>
+      </div>
+
+      <h2 id="automation">Automation Strategies</h2>
+      
+      <h3>Workflow Automation</h3>
+      <div class="advantage-box">
+        <p><strong>Benefits of Automation:</strong></p>
+        <ul>
+          <li>Consistent results across all images</li>
+          <li>Time savings for large collections</li>
+          <li>Reduced human error</li>
+          <li>Reproducible processes</li>
+          <li>Scalable workflows</li>
+        </ul>
+      </div>
+
+      <h3>Setting Up Automated Workflows</h3>
+      <div class="conclusion-box">
+        <h4>Workflow Steps:</h4>
+        <ol>
+          <li>Define your processing requirements</li>
+          <li>Test settings on sample images</li>
+          <li>Create processing templates or presets</li>
+          <li>Set up folder monitoring (if needed)</li>
+          <li>Schedule regular batch processing</li>
+        </ol>
+      </div>
+
+      <h2>Real-World Use Cases</h2>
+      
+      <h3>E-commerce Product Images</h3>
+      <div class="scenario">
+        <p><strong>Scenario:</strong> 500 product images need to be optimized for web</p>
+        <p><strong>Batch Process:</strong></p>
+        <ul>
+          <li>Resize to 1200x1200px maximum</li>
+          <li>Convert to WebP format</li>
+          <li>Compress to 80% quality</li>
+          <li>Add consistent watermark</li>
+          <li><strong>Time Saved:</strong> 8+ hours of manual work</li>
+        </ul>
+      </div>
+
+      <h3>Photo Gallery Preparation</h3>
+      <div class="scenario">
+        <p><strong>Scenario:</strong> Wedding photos need processing for online gallery</p>
+        <p><strong>Batch Process:</strong></p>
+        <ul>
+          <li>Resize to 1920px width</li>
+          <li>Apply consistent color correction</li>
+          <li>Convert to JPEG at 85% quality</li>
+          <li>Rename with date and sequence</li>
+          <li><strong>Time Saved:</strong> 12+ hours of manual work</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <div class="conclusion-box">
+        <h3>Key Takeaways:</h3>
+        <ul>
+          <li>Batch processing saves significant time for large image collections</li>
+          <li>Always test settings on sample images first</li>
+          <li>Maintain backups of original files</li>
+          <li>Document your processing workflows</li>
+          <li>Automate repetitive tasks when possible</li>
+        </ul>
+      </div>
+
+      <p>Batch processing is essential for efficient image management. Use our <a href="/image/compression">image tools</a> to process multiple images efficiently. Start with small batches, refine your settings, and scale up to handle large collections with confidence.</p>
+    </div>
+  `,
+
+  'web-performance-image-optimization': `
+    <div class="blog-content">
+      <h2>Introduction: Images and Web Performance</h2>
+      <p>Images are the largest contributors to webpage size, often accounting for 60-80% of total page weight. Unoptimized images can significantly slow down page load times, negatively impacting user experience, SEO rankings, and conversion rates.</p>
+      
+      <p>This guide explores how image optimization directly affects web performance metrics and provides strategies to improve your site's speed and Core Web Vitals scores.</p>
+
+      <h2 id="core-web-vitals">Impact on Core Web Vitals</h2>
+      
+      <h3>Largest Contentful Paint (LCP)</h3>
+      <div class="performance-data">
+        <p><strong>Target:</strong> Under 2.5 seconds</p>
+        <p><strong>How images affect LCP:</strong></p>
+        <ul>
+          <li>Large, unoptimized images delay LCP</li>
+          <li>Proper image sizing and format selection improve LCP</li>
+          <li>Lazy loading below-the-fold images helps LCP</li>
+          <li>Preloading critical images can improve LCP scores</li>
+        </ul>
+      </div>
+
+      <h3>First Input Delay (FID)</h3>
+      <div class="performance-data">
+        <p><strong>Target:</strong> Under 100 milliseconds</p>
+        <p><strong>How images affect FID:</strong></p>
+        <ul>
+          <li>Large image downloads block main thread</li>
+          <li>Deferring non-critical images improves FID</li>
+          <li>Using appropriate image formats reduces processing time</li>
+        </ul>
+      </div>
+
+      <h3>Cumulative Layout Shift (CLS)</h3>
+      <div class="performance-data">
+        <p><strong>Target:</strong> Under 0.1</p>
+        <p><strong>How images affect CLS:</strong></p>
+        <ul>
+          <li>Images without dimensions cause layout shifts</li>
+          <li>Always specify width and height attributes</li>
+          <li>Use aspect-ratio CSS property for responsive images</li>
+          <li>Reserve space for images to prevent shifts</li>
+        </ul>
+      </div>
+
+      <h2 id="optimization-strategies">Optimization Strategies</h2>
+      
+      <h3>Format Selection</h3>
+      <div class="conclusion-box">
+        <h4>Format Recommendations:</h4>
+        <ul>
+          <li><strong>Photographs:</strong> WebP with JPEG fallback</li>
+          <li><strong>Graphics with transparency:</strong> WebP or PNG</li>
+          <li><strong>Simple graphics:</strong> SVG</li>
+          <li><strong>Animations:</strong> WebP or optimized GIF</li>
+        </ul>
+      </div>
+
+      <h3>Compression Techniques</h3>
+      <div class="quality-guide">
+        <ul>
+          <li><strong>JPEG:</strong> 75-85% quality for web</li>
+          <li><strong>PNG:</strong> Use compression tools to reduce size</li>
+          <li><strong>WebP:</strong> 80% quality provides excellent results</li>
+          <li><strong>Remove metadata:</strong> Strip EXIF data to reduce size</li>
+        </ul>
+      </div>
+
+      <h3>Responsive Images</h3>
+      <div class="code-example">
+        <pre><code>&lt;img 
+  src="image-small.jpg"
+  srcset="image-small.jpg 400w, image-medium.jpg 800w, image-large.jpg 1200w"
+  sizes="(max-width: 600px) 100vw, 50vw"
+  alt="Description"
+  loading="lazy"
+&gt;</code></pre>
+      </div>
+
+      <h2 id="measuring-performance">Measuring Performance Impact</h2>
+      
+      <h3>Key Metrics to Monitor</h3>
+      <div class="performance-data">
+        <ul>
+          <li><strong>Total Page Size:</strong> Aim for under 2MB total</li>
+          <li><strong>Image Count:</strong> Minimize number of images per page</li>
+          <li><strong>Image Size:</strong> Individual images under 200KB</li>
+          <li><strong>Load Time:</strong> Target under 3 seconds on 3G</li>
+          <li><strong>LCP Score:</strong> Under 2.5 seconds</li>
+        </ul>
+      </div>
+
+      <h3>Performance Testing Tools</h3>
+      <div class="use-case-box">
+        <ul>
+          <li><strong>Google PageSpeed Insights:</strong> Comprehensive performance analysis</li>
+          <li><strong>Lighthouse:</strong> Built into Chrome DevTools</li>
+          <li><strong>WebPageTest:</strong> Detailed performance testing</li>
+          <li><strong>Chrome DevTools:</strong> Network and performance analysis</li>
+        </ul>
+      </div>
+
+      <h2>Real-World Performance Improvements</h2>
+      
+      <h3>Case Study: E-commerce Site</h3>
+      <div class="scenario">
+        <p><strong>Before Optimization:</strong></p>
+        <ul>
+          <li>Average page size: 8.5MB</li>
+          <li>LCP: 6.2 seconds</li>
+          <li>Bounce rate: 45%</li>
+        </ul>
+        <p><strong>After Optimization:</strong></p>
+        <ul>
+          <li>Average page size: 2.1MB (75% reduction)</li>
+          <li>LCP: 1.8 seconds (71% improvement)</li>
+          <li>Bounce rate: 28% (38% improvement)</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <div class="conclusion-box">
+        <h3>Performance Optimization Checklist:</h3>
+        <ul>
+          <li>✅ Use modern image formats (WebP, AVIF)</li>
+          <li>✅ Compress images appropriately</li>
+          <li>✅ Implement responsive images</li>
+          <li>✅ Lazy load below-the-fold images</li>
+          <li>✅ Specify image dimensions</li>
+          <li>✅ Monitor Core Web Vitals</li>
+          <li>✅ Regular performance audits</li>
+        </ul>
+      </div>
+
+      <p>Image optimization is crucial for web performance. Use our <a href="/image/compression">image optimization tools</a> to improve your site's performance metrics. Remember, even small improvements in image optimization can lead to significant gains in overall page speed and user experience.</p>
+    </div>
+  `,
+
+  'pdf-creation-best-practices': `
+    <div class="blog-content">
+      <h2>Introduction: Professional PDF Creation</h2>
+      <p>Creating professional PDF documents requires attention to detail, proper formatting, and understanding of best practices. Whether you're creating business reports, marketing materials, or technical documentation, following these guidelines will ensure your PDFs are polished, accessible, and professional.</p>
+      
+      <p>This comprehensive guide covers everything from document structure to metadata management, helping you create PDFs that impress and communicate effectively.</p>
+
+      <h2 id="formatting">Formatting Best Practices</h2>
+      
+      <h3>Typography</h3>
+      <div class="conclusion-box">
+        <h4>Font Guidelines:</h4>
+        <ul>
+          <li>Use standard, web-safe fonts for maximum compatibility</li>
+          <li>Limit font families to 2-3 per document</li>
+          <li>Ensure sufficient contrast (minimum 4.5:1 for body text)</li>
+          <li>Use appropriate font sizes (10-12pt for body, 14-18pt for headings)</li>
+          <li>Embed fonts when using custom typography</li>
+        </ul>
+      </div>
+
+      <h3>Layout and Structure</h3>
+      <div class="use-case-box">
+        <ul>
+          <li><strong>Margins:</strong> Use consistent margins (0.5-1 inch)</li>
+          <li><strong>Spacing:</strong> Maintain consistent line and paragraph spacing</li>
+          <li><strong>Alignment:</strong> Use left alignment for body text</li>
+          <li><strong>Columns:</strong> Limit to 2-3 columns for readability</li>
+          <li><strong>White Space:</strong> Use white space effectively for visual breathing room</li>
+        </ul>
+      </div>
+
+      <h2 id="structure">Document Structure</h2>
+      
+      <h3>Organizing Content</h3>
+      <div class="scenario">
+        <p><strong>Best Practices:</strong></p>
+        <ul>
+          <li>Use clear headings and subheadings</li>
+          <li>Create a table of contents for long documents</li>
+          <li>Number pages consistently</li>
+          <li>Use page breaks appropriately</li>
+          <li>Include headers and footers with document information</li>
+        </ul>
+      </div>
+
+      <h3>Navigation Elements</h3>
+      <div class="advantage-box">
+        <ul>
+          <li><strong>Bookmarks:</strong> Create navigation bookmarks for easy access</li>
+          <li><strong>Hyperlinks:</strong> Make links functional and clearly visible</li>
+          <li><strong>Cross-references:</strong> Link to sections and pages within document</li>
+          <li><strong>Table of Contents:</strong> Auto-generate from headings when possible</li>
+        </ul>
+      </div>
+
+      <h2 id="metadata">Metadata and Properties</h2>
+      
+      <h3>Essential Metadata</h3>
+      <div class="conclusion-box">
+        <h4>Document Properties to Include:</h4>
+        <ul>
+          <li><strong>Title:</strong> Descriptive document title</li>
+          <li><strong>Author:</strong> Creator or organization name</li>
+          <li><strong>Subject:</strong> Brief description of document content</li>
+          <li><strong>Keywords:</strong> Relevant search terms</li>
+          <li><strong>Creation Date:</strong> Document creation timestamp</li>
+          <li><strong>Modification Date:</strong> Last update timestamp</li>
+        </ul>
+      </div>
+
+      <h3>Metadata Best Practices</h3>
+      <div class="quality-guide">
+        <ul>
+          <li>Use descriptive, keyword-rich titles</li>
+          <li>Include relevant keywords for searchability</li>
+          <li>Keep metadata consistent across related documents</li>
+          <li>Remove sensitive information from metadata</li>
+          <li>Update modification dates when editing</li>
+        </ul>
+      </div>
+
+      <h2>Image and Graphics</h2>
+      
+      <h3>Image Quality</h3>
+      <div class="use-case-box">
+        <ul>
+          <li>Use high-resolution images (300 DPI for print, 72-150 DPI for screen)</li>
+          <li>Optimize images before embedding</li>
+          <li>Maintain aspect ratios</li>
+          <li>Use appropriate image formats (JPEG for photos, PNG for graphics)</li>
+          <li>Compress images to balance quality and file size</li>
+        </ul>
+      </div>
+
+      <h2>Accessibility</h2>
+      
+      <h3>Making PDFs Accessible</h3>
+      <div class="conclusion-box">
+        <h4>Accessibility Features:</h4>
+        <ul>
+          <li>Add alt text to images</li>
+          <li>Use proper heading structure</li>
+          <li>Ensure proper reading order</li>
+          <li>Use sufficient color contrast</li>
+          <li>Tag content appropriately for screen readers</li>
+        </ul>
+      </div>
+
+      <h2>Conclusion</h2>
+      
+      <div class="conclusion-box">
+        <h3>PDF Creation Checklist:</h3>
+        <ul>
+          <li>✅ Use consistent formatting and typography</li>
+          <li>✅ Organize content with clear structure</li>
+          <li>✅ Include comprehensive metadata</li>
+          <li>✅ Optimize images and graphics</li>
+          <li>✅ Ensure accessibility compliance</li>
+          <li>✅ Test on multiple devices and PDF readers</li>
+          <li>✅ Proofread and review before distribution</li>
+        </ul>
+      </div>
+
+      <p>Professional PDF creation requires attention to detail and following best practices. Use our <a href="/pdf/edit-meta-data-pdf">PDF metadata editor</a> to manage document properties and ensure your PDFs meet professional standards. Remember, a well-crafted PDF reflects professionalism and attention to quality.</p>
+    </div>
   `
 };
 

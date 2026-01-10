@@ -115,6 +115,102 @@ const About = () => {
           </div>
         </section>
 
+        {/* Technology Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Our Technology</h2>
+            <p>Built with cutting-edge web technologies for reliability and performance</p>
+          </div>
+          <div className={styles.techGrid}>
+            <div className={styles.techCard}>
+              <h3>Client-Side Processing</h3>
+              <p>All file processing happens directly in your browser using advanced JavaScript libraries. This ensures maximum privacy, security, and speed without relying on external servers.</p>
+            </div>
+            <div className={styles.techCard}>
+              <h3>Modern Web Standards</h3>
+              <p>Built using React and modern web APIs, ensuring compatibility across all devices and browsers. Our tools work seamlessly on desktop, tablet, and mobile devices.</p>
+            </div>
+            <div className={styles.techCard}>
+              <h3>Continuous Improvement</h3>
+              <p>We regularly update our tools with new features, performance improvements, and bug fixes based on user feedback and technological advancements.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Who Uses Utilix Pro?</h2>
+            <p>Our tools serve professionals, students, and businesses across various industries</p>
+          </div>
+          <div className={styles.useCasesGrid}>
+            <div className={styles.useCaseCard}>
+              <h3>Web Developers</h3>
+              <p>Optimize images for websites, convert formats, and compress files to improve page load times and Core Web Vitals scores. Essential for modern web development workflows.</p>
+            </div>
+            <div className={styles.useCaseCard}>
+              <h3>Content Creators</h3>
+              <p>Resize images for social media, compress photos for faster uploads, and convert between formats to meet platform requirements. Perfect for bloggers, photographers, and social media managers.</p>
+            </div>
+            <div className={styles.useCaseCard}>
+              <h3>Business Professionals</h3>
+              <p>Merge PDF documents, add watermarks, edit metadata, and optimize files for email distribution. Streamline document workflows and improve productivity.</p>
+            </div>
+            <div className={styles.useCaseCard}>
+              <h3>Students & Educators</h3>
+              <p>Compress assignment files, convert images for presentations, and organize PDF documents. Free tools that support academic work without breaking the budget.</p>
+            </div>
+            <div className={styles.useCaseCard}>
+              <h3>Designers</h3>
+              <p>Convert design files, optimize images for portfolios, and prepare assets for client delivery. Professional-grade tools for creative professionals.</p>
+            </div>
+            <div className={styles.useCaseCard}>
+              <h3>Small Businesses</h3>
+              <p>Process invoices, optimize product images, and manage document workflows without expensive software subscriptions. Cost-effective solutions for growing businesses.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2>Our Values</h2>
+            <p>The principles that guide everything we do</p>
+          </div>
+          <div className={styles.valuesGrid}>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>🔓</span>
+              <h3>Free & Accessible</h3>
+              <p>We believe powerful tools should be available to everyone, regardless of budget. Our platform remains completely free, with no premium tiers or hidden costs.</p>
+            </div>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>🔒</span>
+              <h3>Privacy First</h3>
+              <p>Your data never leaves your device. We've built our platform with privacy as a core principle, ensuring your files remain completely private and secure.</p>
+            </div>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>⚡</span>
+              <h3>Performance</h3>
+              <p>We optimize every aspect of our tools for speed and efficiency. Fast processing means you can accomplish more in less time.</p>
+            </div>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>💡</span>
+              <h3>Innovation</h3>
+              <p>We continuously improve our tools based on user feedback and emerging technologies. Innovation drives us to provide better solutions.</p>
+            </div>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>🤝</span>
+              <h3>User-Centric</h3>
+              <p>Every feature we build starts with understanding user needs. We design tools that are intuitive, powerful, and genuinely useful.</p>
+            </div>
+            <div className={styles.valueCard}>
+              <span className={styles.valueIcon}>🌍</span>
+              <h3>Global Reach</h3>
+              <p>Our tools are available worldwide, supporting users in multiple languages and time zones. We're committed to serving a global community.</p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className={styles.ctaSection}>
           <div className={styles.ctaContent}>
@@ -132,7 +228,7 @@ const About = () => {
               </button>
               <button 
                 className={styles.secondaryButton}
-                onClick={() => navigate('/contact')}
+                onClick={() => navigate('/contact-us')}
               >
                 Contact Our Team <i className="fas fa-envelope"></i>
               </button>

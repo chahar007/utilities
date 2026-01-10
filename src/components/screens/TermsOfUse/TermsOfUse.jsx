@@ -1,7 +1,7 @@
 
 import classes from './TermsOfUse.module.scss';
 
-const PrivacyPolicy = () => {
+const TermsOfUse = () => {
     return (
         <div className={classes.PrivacyPolicyPage} >
             <div className={classes.ppcontainer}>
@@ -93,4 +93,4 @@ const PrivacyPolicy = () => {
 }
 
 
-export default PrivacyPolicy
+export default TermsOfUse

@@ -1,100 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+    <!-- Main Pages -->
     <url>
         <loc>https://utilix.pro/</loc>
         <priority>1.0</priority>
         <changefreq>daily</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
-        <loc>https://utilix.pro/image-conversion</loc>
+        <loc>https://utilix.pro/about-us</loc>
         <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
-        <loc>https://utilix.pro/image-compression</loc>
-        <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
-    </url>
-
-    <url>
-        <loc>https://utilix.pro/image-resizer</loc>
-        <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
-    </url>
-
-    <url>
-        <loc>https://utilix.pro/crop-image</loc>
+        <loc>https://utilix.pro/contact-us</loc>
         <priority>0.7</priority>
-        <changefreq>weekly</changefreq>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
-        <loc>https://utilix.pro/rotate-image</loc>
-        <priority>0.7</priority>
+        <loc>https://utilix.pro/all-tools</loc>
+        <priority>0.9</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
-    <url>
-        <loc>https://utilix.pro/image-base64-converter</loc>
-        <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
-    </url>
-
+    <!-- Legal Pages -->
     <url>
         <loc>https://utilix.pro/privacy-policy</loc>
-        <priority>0.5</priority>
+        <priority>0.6</priority>
         <changefreq>monthly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
         <loc>https://utilix.pro/terms-of-service</loc>
-        <priority>0.5</priority>
+        <priority>0.6</priority>
         <changefreq>monthly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
+    <!-- Blog Pages -->
     <url>
-        <loc>https://utilix.pro/pdf/rotate-pdf</loc>
-        <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
-    </url>
-
-    <url>
-        <loc>https://utilix.pro/pdf/reorder-pdf</loc>
-        <priority>0.8</priority>
-        <changefreq>weekly</changefreq>
-    </url>
-
-    <url>
-        <loc>https://utilix.pro/pdf/image-to-pdf</loc>
+        <loc>https://utilix.pro/blog</loc>
         <priority>0.9</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/png-vs-jpg-vs-webp-complete-guide</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/image-compression-best-practices</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-17</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/pdf-management-workflow-guide</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-16</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/web-image-optimization-checklist</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-15</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/pdf-compression-techniques</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-14</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/image-formats-comparison-guide</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/responsive-images-implementation</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-12</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/pdf-security-best-practices</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-11</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/batch-image-processing-guide</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-10</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/web-performance-image-optimization</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-09</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/blog/pdf-creation-best-practices</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-03-08</lastmod>
+    </url>
+
+    <!-- Image Tools -->
+    <url>
+        <loc>https://utilix.pro/image/conversion</loc>
+        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/compression</loc>
+        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/resizing</loc>
+        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/base64-converter</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/crop-image</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/rotate-image</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/filters</loc>
+        <priority>0.7</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/watermark</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/merger</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/background-tools</loc>
+        <priority>0.7</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/image/color-palette</loc>
+        <priority>0.7</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <!-- PDF Tools -->
+    <url>
+        <loc>https://utilix.pro/pdf/merge-pdf</loc>
+        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
         <loc>https://utilix.pro/pdf/split-pdf</loc>
         <priority>0.9</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/pdf/image-to-pdf</loc>
+        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
         <loc>https://utilix.pro/pdf/watermark-pdf</loc>
         <priority>0.8</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
         <loc>https://utilix.pro/pdf/edit-meta-data-pdf</loc>
         <priority>0.8</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
     <url>
-        <loc>https://utilix.pro/pdf/merge-pdf</loc>
-        <priority>0.9</priority>
+        <loc>https://utilix.pro/pdf/reorder-pdf</loc>
+        <priority>0.8</priority>
         <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
+    </url>
+
+    <url>
+        <loc>https://utilix.pro/pdf/rotate-pdf</loc>
+        <priority>0.8</priority>
+        <changefreq>weekly</changefreq>
+        <lastmod>2024-03-18</lastmod>
     </url>
 
 </urlset>
+

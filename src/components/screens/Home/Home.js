@@ -307,6 +307,98 @@ const Home = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className={styles.faqSection}>
+        <div className={styles.faqContainer}>
+          <div className={styles.sectionHeader}>
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about our tools and services</p>
+          </div>
+          
+          <div className={styles.faqGrid}>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-question-circle"></i>
+                Are your tools really free to use?
+              </h3>
+              <p className={styles.faqAnswer}>
+                Yes, absolutely! All our image and PDF processing tools are completely free to use. There are no hidden fees, subscriptions, or premium tiers. You can use all features without any limitations or registration requirements.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-shield-alt"></i>
+                Is my data safe and private?
+              </h3>
+              <p className={styles.faqAnswer}>
+                Your privacy is our top priority. All file processing happens entirely in your browser using client-side technology. Your files never leave your device—we don't upload, store, or access your files. Everything is processed locally for maximum security.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-file-alt"></i>
+                What file formats do you support?
+              </h3>
+              <p className={styles.faqAnswer}>
+                We support a wide range of formats. For images: JPEG, PNG, WebP, GIF, BMP, and more. For PDFs: All standard PDF formats including encrypted and password-protected files. You can convert between formats and process files of various types.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-weight"></i>
+                Are there file size limits?
+              </h3>
+              <p className={styles.faqAnswer}>
+                No, there are no file size limits! Our browser-based processing technology can handle files of any size, from small thumbnails to large high-resolution images and multi-page PDF documents. Process as many files as you need.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-mobile-alt"></i>
+                Do your tools work on mobile devices?
+              </h3>
+              <p className={styles.faqAnswer}>
+                Yes! Our tools are fully responsive and work seamlessly on all devices including smartphones, tablets, and desktops. Access our tools from any modern browser on iOS, Android, Windows, or Mac without any installation required.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-download"></i>
+                How do I download my processed files?
+              </h3>
+              <p className={styles.faqAnswer}>
+                After processing, you'll see a download button for each processed file. Simply click to download directly to your device. All processing happens instantly, so you can download your files immediately after conversion or optimization.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-cogs"></i>
+                Can I process multiple files at once?
+              </h3>
+              <p className={styles.faqAnswer}>
+                Yes! Many of our tools support batch processing, allowing you to upload and process multiple files simultaneously. This saves time when working with large collections of images or multiple PDF documents.
+              </p>
+            </div>
+            
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>
+                <i className="fas fa-question"></i>
+                What if I need help or have questions?
+              </h3>
+              <p className={styles.faqAnswer}>
+                We're here to help! Visit our <a href="/contact-us" onClick={(e) => { e.preventDefault(); navigate('/contact-us'); }}>Contact Us</a> page to reach out, or check out our <a href="/blog" onClick={(e) => { e.preventDefault(); navigate('/blog'); }}>Blog</a> for detailed guides and tutorials on using our tools effectively.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaContainer}>
